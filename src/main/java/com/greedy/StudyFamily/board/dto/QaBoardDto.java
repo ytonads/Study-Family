@@ -1,7 +1,8 @@
-package com.greedy.StudyFamily.lecture.dto;
+package com.greedy.StudyFamily.board.dto;
 
 import java.sql.Date;
 
+import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.student.dto.StudentDto;
 
 import lombok.Data;

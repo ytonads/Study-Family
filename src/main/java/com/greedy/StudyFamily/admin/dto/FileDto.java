@@ -1,7 +1,8 @@
 package com.greedy.StudyFamily.admin.dto;
 
+import com.greedy.StudyFamily.board.dto.SchoolNoticeDto;
+import com.greedy.StudyFamily.board.dto.SubnoticeDto;
 import com.greedy.StudyFamily.lecture.dto.LectureWeekDto;
-import com.greedy.StudyFamily.lecture.dto.SubnoticeDto;
 import com.greedy.StudyFamily.lecture.dto.TaskDto;
 
 import lombok.Data;
