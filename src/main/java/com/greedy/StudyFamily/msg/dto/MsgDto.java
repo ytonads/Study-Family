@@ -2,6 +2,7 @@ package com.greedy.StudyFamily.msg.dto;
 
 import java.sql.Date;
 
+import com.greedy.StudyFamily.admin.dto.LoginDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 
 import lombok.Data;
@@ -17,8 +18,8 @@ public class MsgDto {
 	private LectureDto lectureCode;
 	private String msgStatus;
 	private String deleteStatus;
-	private LoginDTO sender;
-	private LoginDTO receiver;
+	private LoginDto sender;
+	private LoginDto receiver;
 	
 
 }

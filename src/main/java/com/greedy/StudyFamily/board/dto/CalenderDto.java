@@ -1,4 +1,4 @@
-package com.greedy.StudyFamily.admin.dto;
+package com.greedy.StudyFamily.board.dto;
 
 import java.sql.Date;
 

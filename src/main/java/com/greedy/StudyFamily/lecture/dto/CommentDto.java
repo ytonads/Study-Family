@@ -2,6 +2,7 @@ package com.greedy.StudyFamily.lecture.dto;
 
 import java.sql.Date;
 
+import com.greedy.StudyFamily.board.dto.QaBoardDto;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
 
 import lombok.Data;
