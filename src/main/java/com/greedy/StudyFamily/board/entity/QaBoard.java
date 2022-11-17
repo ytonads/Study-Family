@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -24,6 +25,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
+@SequenceGenerator(name = "QABOARD_SEQ_GENERATOR", sequenceName = "SEQ_QA_CODE", initialValue = 1, allocationSize = 1)
 @Table(name = "TBL_QABOARD")
 @DynamicInsert
 public class QaBoard {

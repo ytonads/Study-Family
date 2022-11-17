@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class CourseHistoryDto {
 
-	private StudentDto studentCode;
+	private StudentDto studentNo;
 	private Long courseTime;
 	private Long courseCode;
 	private LectureWeekDto lectureWeekCode;

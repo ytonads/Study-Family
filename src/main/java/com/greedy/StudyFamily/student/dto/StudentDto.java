@@ -5,7 +5,8 @@ import lombok.Data;
 @Data
 public class StudentDto {
 	
-	private Long studentCode;
+	private Long studentNo;
+	private String studentCode;
 	private String studentName;
 	private String admissionsDay;
 	private DepartmentDto departmentCode;

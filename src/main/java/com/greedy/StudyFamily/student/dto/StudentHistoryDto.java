@@ -9,7 +9,7 @@ public class StudentHistoryDto {
 
 	private Long studentModifyCode;
 	private Date studentModifyDate;
-	private StudentDto studentCode;
+	private StudentDto studentNo;
 	private SchoolStatusDto schoolStatusCode;
 	
 }

@@ -25,8 +25,8 @@ import lombok.ToString;
 public class AppClass {
 
 	@ManyToOne
-	@JoinColumn(name = "STUDENT_CODE")
-	private Student studentCode;
+	@JoinColumn(name = "STUDENT_NO")
+	private Student studentNo;
 	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")

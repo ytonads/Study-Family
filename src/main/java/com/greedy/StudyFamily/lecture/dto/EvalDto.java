@@ -8,7 +8,7 @@ import lombok.Data;
 public class EvalDto {
 
 	private EvalStandardDto evalStandardCode;
-	private StudentDto studentCode;
+	private StudentDto studentNo;
 	private LectureDto lectureCode;
 	private Long evalGrade;
 	
