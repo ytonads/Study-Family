@@ -1,15 +1,10 @@
 package com.greedy.StudyFamily.lecture.entity;
 
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -24,27 +19,22 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "TBL_LECTURE_WEEK")
+@Table(name = "TBL_EVAL_STANDARD")
 @DynamicInsert
-public class LectureWeek {
+public class EvalStandard {
 
 	@Id
-	@Column(name = "LECTURE_WEEK_CODE")
-	private Long lectureWeekCode;
+	@Column(name = "EVAL_STANDARD_CODE")
+	private Long evalStandardCode;
 	
-	@Column(name = "WEEK")
-	private String week;
+	@Column(name = "WIGHTED")
+	private Long weighted;
 	
-	@Column(name = "FILE_DIVISION")
-	private String fileDivision;
+	@Column(name = "EVAL_STANDARD")
+	private String evalStandard;
 	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
 	private Lecture lectureCode;
 	
-	@Column(name = "START_DATE")
-	private Date startDate;
-	
-	@Column(name = "END_DATE")
-	private Date endDate;
 }
