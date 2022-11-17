@@ -1,10 +1,6 @@
 package com.greedy.StudyFamily.lecture.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
@@ -24,26 +20,16 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "TBL_COURSE_HISTORY")
+@Table(name = "TBL_APPCLASS")
 @DynamicInsert
-public class CourseHistory {
+public class AppClass {
 
-	@Id
-	@Column(name = "COURSE_CODE")
-	private Long courseCode;
-	
-	@Column(name = "STUDENT_CODE")
+	@ManyToOne
+	@JoinColumn(name = "STUDENT_CODE")
 	private Student studentCode;
 	
-	@Column(name = "COURSE_TIME")
-	private int courseTime;
-	
 	@ManyToOne
-	@JoinColumn(name = "LECTURE_WEEK_CODE")
-	private LectureWeek lectureWeekCode;
-	
-	@Column(name = "COURSE_STATUS")
-	private String courseStatus;	
-	
+	@JoinColumn(name = "LECTURE_CODE")
+	private Lecture lectureCode;
 	
 }

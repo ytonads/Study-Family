@@ -26,12 +26,10 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "TBL_LECTURE")
-@SequenceGenerator(name = "LECTURE_SEQ_GENERATOR", sequenceName = "SEQ_LECTURE_CODE", initialValue = 1, allocationSize = 1)
 @DynamicInsert
 public class Lecture {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LECTURE_SEQ_GENERATOR")
 	@Column(name = "LECTURE_CODE")
 	private Long lectureCode;
 	
