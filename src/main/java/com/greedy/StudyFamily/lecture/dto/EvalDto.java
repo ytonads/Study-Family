@@ -5,12 +5,11 @@ import com.greedy.StudyFamily.student.dto.StudentDto;
 import lombok.Data;
 
 @Data
-public class CourseHistoryDto {
+public class EvalDto {
 
+	private EvalStandardDto evalStandardCode;
 	private StudentDto studentCode;
-	private Long courseTime;
-	private Long courseCode;
-	private LectureWeekDto lectureWeekCode;
-	private String courseStatus;
+	private LectureDto lectureCode;
+	private Long evalGrade;
 	
 }
