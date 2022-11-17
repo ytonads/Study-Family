@@ -11,6 +11,6 @@ public class LoginDto {
 	private String loginId;
 	private String loginPassword;
 	private ProfessorDto professorCode;
-	private StudentDto studentCode;
+	private StudentDto studentNo;
 	
 }

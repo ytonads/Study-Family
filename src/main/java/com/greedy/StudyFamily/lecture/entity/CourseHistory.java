@@ -32,8 +32,8 @@ public class CourseHistory {
 	@Column(name = "COURSE_CODE")
 	private Long courseCode;
 	
-	@Column(name = "STUDENT_CODE")
-	private Student studentCode;
+	@Column(name = "STUDENT_NO")
+	private Student studentNo;
 	
 	@Column(name = "COURSE_TIME")
 	private int courseTime;

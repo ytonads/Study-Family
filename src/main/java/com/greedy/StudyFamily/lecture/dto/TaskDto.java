@@ -9,6 +9,6 @@ public class TaskDto {
 
 	private Long taskCode;
 	private LectureDto lectureCode;
-	private StudentDto studentCode;
+	private StudentDto studentNo;
 	
 }

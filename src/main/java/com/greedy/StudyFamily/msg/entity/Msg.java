@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.greedy.StudyFamily.admin.entity.Login;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
 
 import lombok.Getter;

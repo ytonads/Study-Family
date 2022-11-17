@@ -18,6 +18,6 @@ public class QaBoardDto {
 	private Date qaDeledate;
 	private String qaStatus;
 	private LectureDto lectureCode;
-	private StudentDto studentCode;
+	private StudentDto studentNo;
 	
 }

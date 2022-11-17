@@ -30,8 +30,8 @@ public class Eval {
 	private EvalStandard evalStandardCode;
 	
 	@ManyToOne
-	@JoinColumn(name = "STUDENT_CODE")
-	private StudentDto studentCode;
+	@JoinColumn(name = "STUDENT_No")
+	private StudentDto studentNo;
 	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")

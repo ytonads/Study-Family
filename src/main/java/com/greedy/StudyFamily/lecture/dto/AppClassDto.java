@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class AppClassDto {
 
-	private StudentDto studentCode;
+	private StudentDto studentNo;
 	private LectureDto lectureCode;
 	
 }
