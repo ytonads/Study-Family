@@ -41,7 +41,7 @@ public class Lecture {
 	private int capacity;
 	
 	@Column(name = "PROFESSOR_CODE")
-	private Professor professorCode;
+	private Professor professor;
 	
 	@Column(name = "LECTURE_NAME")
 	private String lectureName;
