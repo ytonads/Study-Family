@@ -25,10 +25,10 @@ public class LectureService {
 	}
 	
 	
-	@Value("${image.image-dir}")
-	private String IMAGE_DIR;
-	@Value("${image.image-url}")
-	private String IMAGE_URL;
+//	@Value("${image.image-dir}")
+//	private String IMAGE_DIR;
+//	@Value("${image.image-url}")
+//	private String IMAGE_URL;
 
 	
 

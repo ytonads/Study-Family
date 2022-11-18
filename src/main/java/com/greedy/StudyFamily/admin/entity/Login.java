@@ -1,5 +1,7 @@
 package com.greedy.StudyFamily.admin.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,7 +24,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "TBL_LOGIN")
 @DynamicInsert
-public class Login {
+public class Login implements Serializable{
 	
 	@Id
 	@Column(name="LOGIN_ID")
