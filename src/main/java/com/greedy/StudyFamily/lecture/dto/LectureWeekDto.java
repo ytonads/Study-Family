@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
 import com.greedy.StudyFamily.admin.dto.FileDto;
 
 import lombok.Data;
@@ -21,4 +22,5 @@ public class LectureWeekDto {
 	
 	//파일 업로드시 추가로 사용할 로직
 	private MultipartFile lectureFiles;
+
 }

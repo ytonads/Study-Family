@@ -39,7 +39,7 @@ public class Lecture {
 	
 	@Column(name = "CAPACITY")
 	private int capacity;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "PROFESSOR_CODE")
 	private Professor professor;

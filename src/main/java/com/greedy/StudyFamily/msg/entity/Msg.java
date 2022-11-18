@@ -62,5 +62,13 @@ public class Msg {
 	@OneToOne
 	@JoinColumn(name = "SENDER, RECEIVER")
 	private Msg msg;
+
+	@JoinColumn(name = "LOGIN_ID")
+	private Login sender;
+	
+	@OneToOne
+	@JoinColumn(name = "LOGIN_ID")
+	private Login receiver;
+
 	
 }
