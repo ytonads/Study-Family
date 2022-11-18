@@ -15,7 +15,7 @@ spring:
       max-request-size: 10MB
   web:
     resources:
-      static-locations: classpath:/productimgs/
+      static-locations: classpath:/files/
 
 # jpa config
   jpa:
@@ -29,11 +29,11 @@ spring:
 # 이미지 저장할 위치와 응답 시 이미지 주소 설정
 image:
   # WebConfig에 세팅
-  add-resource-locations: classpath:/static/productimgs/
-  add-resource-handler: /productimgs/**
+  add-resource-locations: classpath:/static/files/
+  add-resource-handler: /files/**
   # ProductService에 세팅
-  image-dir: src/main/resources/static/productimgs
-  image-url: http://localhost:8001/productimgs/
+  image-dir: src/main/resources/static/files
+  image-url: http://localhost:8001/files/
 
 # HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
 # Secret 값은 특정 문자열을 Base64 로 인코딩한 값 사용
