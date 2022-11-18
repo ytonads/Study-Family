@@ -40,7 +40,7 @@ public class LectureWeek {
 	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
-	private Lecture lectureCode;
+	private Lecture lecture;
 	
 	@Column(name = "START_DATE")
 	private Date startDate;

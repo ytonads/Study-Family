@@ -2,7 +2,7 @@ package com.greedy.StudyFamily.board.dto;
 
 import java.sql.Date;
 
-import com.greedy.StudyFamily.student.dto.DepartmentDto;
+import com.greedy.StudyFamily.subject.dto.DepartmentDto;
 
 import lombok.Data;
 
@@ -17,6 +17,6 @@ public class SchoolNoticeDto {
 	private Date schoolNoticeDelDate;
 	private String schoolNoticeState;
 	private String schoolNoticeCategory;
-	private DepartmentDto departmentCode;
+	private DepartmentDto department;
 	
 }

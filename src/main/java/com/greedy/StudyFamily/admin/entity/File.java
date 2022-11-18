@@ -56,9 +56,9 @@ public class File {
 	private SchoolNotice schoolNoticeCode;
 	
 	@JoinColumn(name="TASK_CODE")
-	private Task taskCode;
+	private Task task;
 	
 	@JoinColumn(name="LECTURE_WEEK_CODE")
-	private LectureWeek lectureWeekCode;
+	private LectureWeek lectureWeek;
 
 }

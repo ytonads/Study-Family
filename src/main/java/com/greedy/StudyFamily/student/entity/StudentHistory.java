@@ -39,7 +39,7 @@ public class StudentHistory {
 	
 	@ManyToOne
 	@JoinColumn(name = "SCHOOL_STATUS_CODE")
-	private SchoolStatus schoolStatusCode;
+	private SchoolStatus schoolStatus;
 	
 
 }

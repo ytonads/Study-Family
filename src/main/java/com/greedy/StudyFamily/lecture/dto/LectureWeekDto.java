@@ -10,7 +10,7 @@ public class LectureWeekDto {
 	private Long lectureWeekCode;
 	private String week;
 	private String fileDivision;
-	private LectureDto lectureCode;
+	private LectureDto lecture;
 	private Date startDate;
 	private Date endDate;
 	

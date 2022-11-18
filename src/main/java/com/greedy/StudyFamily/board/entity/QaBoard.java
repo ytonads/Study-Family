@@ -54,10 +54,10 @@ public class QaBoard {
 	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
-	private LectureDto lectureCode;
+	private LectureDto lecture;
 	
 	@ManyToOne
 	@JoinColumn(name = "STUDENT_NO")
-	private Student studentNo;
+	private Student student;
 	
 }

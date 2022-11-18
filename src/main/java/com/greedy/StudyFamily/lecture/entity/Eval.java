@@ -2,6 +2,7 @@ package com.greedy.StudyFamily.lecture.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -25,17 +26,20 @@ import lombok.ToString;
 @DynamicInsert
 public class Eval {
 
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "EVAL_STANDARD_CODE")
-	private EvalStandard evalStandardCode;
+	private EvalStandard evalStandard;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "STUDENT_No")
-	private StudentDto studentNo;
+	private StudentDto student;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
-	private LectureDto lectureCode;
+	private LectureDto lecture;
 	
 	@Column(name = "EVAL_GRADE")
 	private Long evalGrade;

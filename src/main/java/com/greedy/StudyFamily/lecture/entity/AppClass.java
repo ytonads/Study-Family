@@ -1,9 +1,9 @@
 package com.greedy.StudyFamily.lecture.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -24,12 +24,14 @@ import lombok.ToString;
 @DynamicInsert
 public class AppClass {
 
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "STUDENT_NO")
-	private Student studentNo;
+	private Student student;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
-	private Lecture lectureCode;
+	private Lecture lecture;
 	
 }

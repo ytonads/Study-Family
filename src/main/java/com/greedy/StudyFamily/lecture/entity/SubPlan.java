@@ -32,10 +32,10 @@ public class SubPlan {
 	private String purpose;
 	
 	@JoinColumn(name = "PROFESSOR_CODE")
-	private Professor professorCode;
+	private Professor professor;
 	
 	@JoinColumn(name = "LECTURE_CODE")
-	private Lecture lectureCode;
+	private Lecture lecture;
 	
 	@Column(name = "PLAN_NAME")
 	private String planName;	

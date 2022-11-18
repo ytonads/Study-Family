@@ -8,7 +8,7 @@ import lombok.Data;
 public class TaskDto {
 
 	private Long taskCode;
-	private LectureDto lectureCode;
-	private StudentDto studentNo;
+	private LectureDto lecture;
+	private StudentDto student;
 	
 }

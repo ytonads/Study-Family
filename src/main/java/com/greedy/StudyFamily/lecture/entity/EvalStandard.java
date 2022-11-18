@@ -35,6 +35,6 @@ public class EvalStandard {
 	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
-	private Lecture lectureCode;
+	private Lecture lecture;
 	
 }

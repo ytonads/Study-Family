@@ -38,6 +38,6 @@ public class ProfessorHistory {
 	
 	@ManyToOne
 	@JoinColumn(name = "PROFESSOR_POSITION")
-	private ProfessorPosition professorPositionCode;
+	private ProfessorPosition professorPosition;
 
 }

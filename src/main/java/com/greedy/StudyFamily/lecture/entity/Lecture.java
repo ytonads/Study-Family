@@ -35,7 +35,7 @@ public class Lecture {
 	
 	@ManyToOne
 	@JoinColumn(name = "SUB_CODE")
-	private Subject subCode;
+	private Subject subject;
 	
 	@Column(name = "CAPACITY")
 	private int capacity;

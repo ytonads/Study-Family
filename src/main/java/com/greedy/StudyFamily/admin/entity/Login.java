@@ -9,6 +9,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.greedy.StudyFamily.professor.entity.Professor;
 import com.greedy.StudyFamily.student.entity.Student;
 
 import lombok.Getter;
@@ -32,9 +33,9 @@ public class Login {
 	
 	@JoinColumn(name="PROFESSOR_CODE")
 	@OneToOne
-	private int professorCode;
+	private Professor professor;
 	
 	@JoinColumn(name="STUDENT_NO")
 	@OneToOne
-	private Student studentNo;
+	private Student student;
 }

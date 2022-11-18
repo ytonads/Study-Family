@@ -40,7 +40,7 @@ public class CourseHistory {
 	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_WEEK_CODE")
-	private LectureWeek lectureWeekCode;
+	private LectureWeek lectureWeek;
 	
 	@Column(name = "COURSE_STATUS")
 	private String courseStatus;	

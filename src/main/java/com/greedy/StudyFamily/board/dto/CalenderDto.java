@@ -2,7 +2,8 @@ package com.greedy.StudyFamily.board.dto;
 
 import java.sql.Date;
 
-import com.greedy.StudyFamily.student.dto.DepartmentDto;
+import com.greedy.StudyFamily.subject.dto.DepartmentDto;
+import com.greedy.StudyFamily.subject.entity.Department;
 
 import lombok.Data;
 
@@ -14,6 +15,6 @@ public class CalenderDto {
 	private String calenderContent;
 	private String calenderStatus;
 	private String calenderType;
-	private DepartmentDto departmentCode;
+	private Department department;
 	
 }
