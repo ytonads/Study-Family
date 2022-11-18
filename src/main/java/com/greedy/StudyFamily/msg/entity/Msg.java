@@ -10,14 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
-import com.greedy.StudyFamily.admin.entity.Login;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
 
 import lombok.Getter;
@@ -54,7 +51,7 @@ public class Msg {
 	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
-	private Lecture lectureCode;
+	private Lecture lecture;
 	
 	@Column(name = "MSG_STATUS")
 	private String msgStatus;
@@ -63,11 +60,7 @@ public class Msg {
 	private String deleteStatus;
 	
 	@OneToOne
-	@JoinColumn(name = "LOGIN_ID")
-	private Login sender;
-	
-	@OneToOne
-	@JoinColumn(name = "LOGIN_ID")
-	private Login receiver;
+	@JoinColumn(name = "SENDER, RECEIVER")
+	private Msg msg;
 	
 }

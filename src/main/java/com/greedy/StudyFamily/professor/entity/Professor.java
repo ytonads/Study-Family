@@ -53,7 +53,7 @@ public class Professor {
 	
 	@ManyToOne
 	@JoinColumn(name="DEPARTMENT_CODE")
-	private Department departmentCode;
+	private Department department;
 }
 
 

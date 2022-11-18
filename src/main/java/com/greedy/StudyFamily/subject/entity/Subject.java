@@ -33,7 +33,7 @@ public class Subject {
 	
 	@JoinColumn(name="DEPARTMENT_CODE")
 	@ManyToOne
-	private Department departmentCode;   
+	private Department department;   
 	
 	
 	

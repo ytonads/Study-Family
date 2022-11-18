@@ -1,5 +1,7 @@
 package com.greedy.StudyFamily.lecture.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -22,7 +24,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "TBL_APPCLASS")
 @DynamicInsert
-public class AppClass {
+public class AppClass implements Serializable {
 
 	@Id
 	@ManyToOne

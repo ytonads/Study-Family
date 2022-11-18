@@ -40,7 +40,7 @@ public class Student {
 	
 	@ManyToOne
 	@JoinColumn(name = "DEPARTMENT_CODE")
-	private Department departmentCode;
+	private Department department;
 	
 	@Column(name = "STUDENT_REGIST_NUM")
 	private String studentRegistNum;

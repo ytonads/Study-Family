@@ -2,17 +2,19 @@ package com.greedy.StudyFamily.lecture.entity;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
+
+import com.greedy.StudyFamily.admin.entity.File;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,4 +49,14 @@ public class LectureWeek {
 	
 	@Column(name = "END_DATE")
 	private Date endDate;
+	
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name = "FILE_CODE")
+	private File file;
+	
+	
+	//수업자료 파일 수정 용도의 메소드
+	public void update(File file) {
+		this.file = file;
+	}
 }
