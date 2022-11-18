@@ -18,9 +18,9 @@ public class FileDto {
 	private String thumbnailRoute;
 	private String thumbnailName;
 	private String fileCategory;
-	private SubnoticeDto subnoticeCode;
-	private SchoolNoticeDto schoolNoticeCode;
-	private TaskDto taskCode;
-	private LectureWeekDto lectureWeekCode;
+	private SubnoticeDto subnotice;
+	private SchoolNoticeDto schoolNotice;
+	private TaskDto task;
+	private LectureWeekDto lectureWeek;
 	
 }

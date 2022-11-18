@@ -1,8 +1,11 @@
 package com.greedy.StudyFamily.admin.entity;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -17,14 +20,16 @@ import lombok.Setter;
 @Entity
 @Table(name="TBL_MEMBER_AUTHORITY")
 @DynamicInsert
-public class MemberAuthority {
+public class MemberAuthority implements Serializable {
 	
 	@Id
-	@Column(name="LOGIN_ID")
-	private String loginId;
+	@ManyToOne
+	@JoinColumn(name="LOGIN_ID")
+	private Login login;
 	
 	@Id
-	@Column(name="AUTHORITY_CODE")
-	private Long authorityCode;
+	@ManyToOne
+	@JoinColumn(name="AUTHORITY_CODE")
+	private Authority authority;
 
 }

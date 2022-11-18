@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -49,8 +50,8 @@ public class LectureWeek {
 	
 	@Column(name = "END_DATE")
 	private Date endDate;
-	
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name = "FILE_CODE")
 	private File file;
 	
@@ -59,6 +60,4 @@ public class LectureWeek {
 	public void update(File file) {
 		this.file = file;
 	}
-	
-	
 }

@@ -16,7 +16,7 @@ public class CommentDto {
 	private Date deleteDate;
 	private Date modifiedDate;
 	private String commentState;
-	private QaBoardDto qaCode;
-	private ProfessorDto professorCode;
+	private QaBoardDto qaBoard;
+	private ProfessorDto professor;
 	
 }

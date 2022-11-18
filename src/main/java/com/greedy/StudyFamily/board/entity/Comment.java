@@ -49,11 +49,11 @@ public class Comment {
 	
 	@OneToOne
 	@JoinColumn(name = "QA_CODE")
-	private QaBoard qaCode;
+	private QaBoard qaBoard;
 	
 	@ManyToOne
 	@JoinColumn(name = "PROFESSOR_CODE")
-	private Professor professorCode;
+	private Professor professor;
 	
 	
 }

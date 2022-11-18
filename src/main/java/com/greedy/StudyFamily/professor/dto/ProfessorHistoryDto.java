@@ -9,7 +9,7 @@ public class ProfessorHistoryDto {
 
 	private Long professorModifyCode;
 	private Date professorModifyDate;
-	private ProfessorDto professorCode;
-	private ProfessorPositionDto professorPositionCode;
+	private ProfessorDto professor;
+	private ProfessorPositionDto professorPosition;
 	
 }

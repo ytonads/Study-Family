@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -31,11 +33,13 @@ public class SubPlan {
 	@Column(name = "PURPOSE")
 	private String purpose;
 	
+	@ManyToOne
 	@JoinColumn(name = "PROFESSOR_CODE")
-	private Professor professorCode;
+	private Professor professor;
 	
+	@OneToOne
 	@JoinColumn(name = "LECTURE_CODE")
-	private Lecture lectureCode;
+	private Lecture lecture;
 	
 	@Column(name = "PLAN_NAME")
 	private String planName;	

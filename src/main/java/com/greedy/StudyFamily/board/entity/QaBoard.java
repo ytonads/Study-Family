@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
-import com.greedy.StudyFamily.lecture.dto.LectureDto;
+import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.student.entity.Student;
 
 import lombok.Getter;
@@ -54,10 +54,10 @@ public class QaBoard {
 	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
-	private LectureDto lectureCode;
+	private Lecture lecture;
 	
 	@ManyToOne
 	@JoinColumn(name = "STUDENT_NO")
-	private Student studentNo;
+	private Student student;
 	
 }

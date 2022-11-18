@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
-import com.greedy.StudyFamily.student.entity.Department;
+import com.greedy.StudyFamily.subject.entity.Department;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,6 +45,6 @@ public class Calender {
 	
 	@ManyToOne
 	@JoinColumn(name = "DEPARTMENT_CODE")
-	private Department departmentCode;
+	private Department department;
 	
 }

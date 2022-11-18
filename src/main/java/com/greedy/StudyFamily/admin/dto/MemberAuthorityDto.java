@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class MemberAuthorityDto {
 
-	private LoginDto loginId;
-	private AuthorityDto authorityCode;
+	private LoginDto login;
+	private AuthorityDto authority;
 	
 }

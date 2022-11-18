@@ -11,9 +11,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
-import com.greedy.StudyFamily.professor.dto.ProfessorDto;
-import com.greedy.StudyFamily.professor.dto.ProfessorPositionDto;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,11 +30,12 @@ public class ProfessorHistory {
 	@Column(name = "PROFESSOR_MODIFY_DATE")
 	private Date professorModifyDate;
 	
-	@Column(name = "PROFESSOR_CODE")
-	private ProfessorDto professorCode;
+	@ManyToOne
+	@JoinColumn(name = "PROFESSOR_CODE")
+	private Professor professor;
 	
 	@ManyToOne
 	@JoinColumn(name = "PROFESSOR_POSITION")
-	private ProfessorPosition professorPositionCode;
+	private ProfessorPosition professorPosition;
 
 }

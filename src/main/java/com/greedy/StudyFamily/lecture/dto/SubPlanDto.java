@@ -9,7 +9,7 @@ public class SubPlanDto {
 
 	private Long planCode;
 	private String purpose;
-	private ProfessorDto professorCode;
-	private LectureDto lectureCode;
+	private ProfessorDto professor;
+	private LectureDto lecture;
 	private String planName;
 }

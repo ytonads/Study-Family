@@ -2,7 +2,7 @@ package com.greedy.StudyFamily.professor.dto;
 
 import java.sql.Date;
 
-import com.greedy.StudyFamily.student.dto.DepartmentDto;
+import com.greedy.StudyFamily.subject.dto.DepartmentDto;
 
 import lombok.Data;
 
@@ -18,6 +18,6 @@ public class ProfessorDto {
 	private String professorAddress;
 	private String professorStatus;
 	private String professorEmail;
-	private DepartmentDto departmentCode;
+	private DepartmentDto department;
 	
 }

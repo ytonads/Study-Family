@@ -1,15 +1,17 @@
 package com.greedy.StudyFamily.lecture.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
-import com.greedy.StudyFamily.lecture.dto.LectureDto;
-import com.greedy.StudyFamily.student.dto.StudentDto;
+import com.greedy.StudyFamily.student.entity.Student;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,19 +25,22 @@ import lombok.ToString;
 @Entity
 @Table(name = "TBL_EVAL")
 @DynamicInsert
-public class Eval {
+public class Eval implements Serializable {
 
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "EVAL_STANDARD_CODE")
-	private EvalStandard evalStandardCode;
+	private EvalStandard evalStandard;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "STUDENT_No")
-	private StudentDto studentNo;
+	private Student student;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
-	private LectureDto lectureCode;
+	private Lecture lecture;
 	
 	@Column(name = "EVAL_GRADE")
 	private Long evalGrade;

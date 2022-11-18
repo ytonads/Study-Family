@@ -4,11 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
 import com.greedy.StudyFamily.board.entity.SchoolNotice;
+import com.greedy.StudyFamily.board.entity.Subnotice;
 import com.greedy.StudyFamily.lecture.entity.LectureWeek;
 import com.greedy.StudyFamily.lecture.entity.Task;
 
@@ -49,16 +52,20 @@ public class File {
 	@Column(name="FILE_CATEGORY")
 	private String fileCategory;
 	
+	@ManyToOne
 	@JoinColumn(name="SUBNOTICE_CODE")
-	private int subnoticeCode;
+	private Subnotice subnotice;
 	
+	@ManyToOne
 	@JoinColumn(name="SCHOOL_NOTICE_CODE")
 	private SchoolNotice schoolNoticeCode;
 	
+	@ManyToOne
 	@JoinColumn(name="TASK_CODE")
-	private Task taskCode;
+	private Task task;
 	
+	@OneToOne
 	@JoinColumn(name="LECTURE_WEEK_CODE")
-	private LectureWeek lectureWeekCode;
+	private LectureWeek lectureWeek;
 
 }

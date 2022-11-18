@@ -5,10 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import com.greedy.StudyFamily.student.dto.DepartmentDto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,7 +33,7 @@ public class Subject {
 	
 	@JoinColumn(name="DEPARTMENT_CODE")
 	@ManyToOne
-	private DepartmentDto departmentCode;   
+	private Department department;   
 	
 	
 	

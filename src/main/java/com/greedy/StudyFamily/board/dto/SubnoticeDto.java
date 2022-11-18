@@ -15,6 +15,6 @@ public class SubnoticeDto {
 	private Date registrationDate;
 	private Date modifiedDate;
 	private Date deleteDate;
-	private LectureDto lectureCode;
+	private LectureDto lecture;
 	
 }

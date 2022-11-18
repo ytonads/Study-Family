@@ -1,9 +1,11 @@
 package com.greedy.StudyFamily.lecture.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -22,14 +24,16 @@ import lombok.ToString;
 @Entity
 @Table(name = "TBL_APPCLASS")
 @DynamicInsert
-public class AppClass {
+public class AppClass implements Serializable {
 
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "STUDENT_NO")
-	private Student studentNo;
+	private Student student;
 	
+	@Id
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
-	private Lecture lectureCode;
+	private Lecture lecture;
 	
 }

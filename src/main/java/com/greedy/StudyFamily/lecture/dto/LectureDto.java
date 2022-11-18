@@ -9,9 +9,9 @@ import lombok.Data;
 public class LectureDto {
 
 	private Long lectureCode;
-	private SubjectDto subCode;
+	private SubjectDto subject;
 	private Long capacity;
-	private ProfessorDto professorCode;
+	private ProfessorDto professor;
 	private String lectureName;
 	private Long lecturePersonnel;
 	private String openingDate;

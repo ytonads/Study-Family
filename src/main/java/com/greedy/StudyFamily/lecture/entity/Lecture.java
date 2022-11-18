@@ -35,12 +35,13 @@ public class Lecture {
 	
 	@ManyToOne
 	@JoinColumn(name = "SUB_CODE")
-	private Subject subCode;
+	private Subject subject;
 	
 	@Column(name = "CAPACITY")
 	private int capacity;
-	
-	@Column(name = "PROFESSOR_CODE")
+
+	@ManyToOne
+	@JoinColumn(name = "PROFESSOR_CODE")
 	private Professor professor;
 	
 	@Column(name = "LECTURE_NAME")

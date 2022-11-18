@@ -15,11 +15,10 @@ public class MsgDto {
 	private Date receiveDate;
 	private String msgTitle;
 	private String msgContent;
-	private LectureDto lectureCode;
+	private LectureDto lecture;
 	private String msgStatus;
 	private String deleteStatus;
-	private LoginDto sender;
-	private LoginDto receiver;
-	
+	private LoginDto login;
+	private MsgDto msg;
 
 }
