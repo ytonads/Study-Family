@@ -15,11 +15,12 @@ public interface LectureRepository extends JpaRepository<Lecture, Long>{
 
 	
 	//강의실 조회 - 교수
+	@EntityGraph(attributePaths= {"subject", "professor"})
 	Page<Lecture> findByProfessor(Pageable pageable, Professor findProfessor);
 
 	
 	//강의실 조회 - 학생
-//	@EntityGraph(attributePaths= {"subject", "professor", "lecture"})
+	@EntityGraph(attributePaths= {"subject", "professor", "lecture"})
 	@Query("SELECT l " +
 			"FROM Lecture l, AppClass a, Student s " +
 			"WHERE l.lectureCode = a.lecture.lectureCode " +

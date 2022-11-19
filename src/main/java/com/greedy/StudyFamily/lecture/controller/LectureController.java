@@ -13,7 +13,6 @@ import com.greedy.StudyFamily.common.ResponseDto;
 import com.greedy.StudyFamily.common.paging.Pagenation;
 import com.greedy.StudyFamily.common.paging.PagingButtonInfo;
 import com.greedy.StudyFamily.common.paging.ResponseDtoWithPaging;
-import com.greedy.StudyFamily.lecture.dto.AppClassDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.service.LectureService;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
@@ -37,8 +36,8 @@ public class LectureController {
 	@GetMapping("/lecture/{studentNo}")
 	public ResponseEntity<ResponseDto> selectLectureStuList(@PathVariable Long studentNo, @RequestParam(name = "page", defaultValue="1") int page){
 		
-		AppClassDto appClassDto = new AppClassDto();
-		appClassDto.setAppClassCode(studentNo);
+		log.info("[LectureController] selectLectureStuList Start =======================================");
+		log.info("[LectureController] page : {}", page);
 		
 		StudentDto studentDto = new StudentDto();
 		studentDto.setStudentNo(studentNo);
@@ -47,9 +46,13 @@ public class LectureController {
 		
 		PagingButtonInfo pageInfo = Pagenation.getPagingButtonInfo(lectureDtoStuList);
 		
+		log.info("[ProductController] pageInfo : {}", pageInfo);
+		
 		ResponseDtoWithPaging responseDtoWithPaging = new ResponseDtoWithPaging();
 		responseDtoWithPaging.setPageInfo(pageInfo);
 		responseDtoWithPaging.setData(lectureDtoStuList.getContent());
+		
+		log.info("[LectureController] selectLectureStuList End =======================================");
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "학생 강좌 목록 조회 성공", responseDtoWithPaging));
 	}
@@ -60,9 +63,12 @@ public class LectureController {
 	@GetMapping("/lectures/{professorCode}")
 	public ResponseEntity<ResponseDto> selectLectureProList(@PathVariable Long professorCode, @RequestParam(name="page", defaultValue="1") int page){
 		
+		log.info("[LectureController] selectLectureProList Start =======================================");
+		log.info("[LectureController] page : {}", page);
+		
+		
 		ProfessorDto professorDto = new ProfessorDto();
 		professorDto.setProfessorCode(professorCode);
-		
 		
 		Page<LectureDto> lectureDtoProList = lectureService.selectLectureProList(page, professorDto);
 		
@@ -74,6 +80,7 @@ public class LectureController {
 		responseDtoWithPaging.setPageInfo(pageInfo);
 		responseDtoWithPaging.setData(lectureDtoProList.getContent());
 		
+		log.info("[LectureController] selectLectureProList End =======================================");
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "교수 강좌 목록 조회 성공", responseDtoWithPaging));
 		
