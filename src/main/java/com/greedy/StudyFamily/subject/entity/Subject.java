@@ -7,15 +7,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name="TBL_REVIEW")
+@Table(name="TBL_SUBJECT")
+@DynamicInsert
 public class Subject {
 	
 	@Id

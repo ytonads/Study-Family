@@ -18,7 +18,8 @@ public class MsgDto {
 	private LectureDto lecture;
 	private String msgStatus;
 	private String deleteStatus;
-	private LoginDto login;
+	private LoginDto sender;
+	private LoginDto receiver;
 	private MsgDto msg;
 
 }

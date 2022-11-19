@@ -51,7 +51,7 @@ public class LectureWeek {
 	@Column(name = "END_DATE")
 	private Date endDate;
 
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	/*@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name = "FILE_CODE")
 	private File file;
 	
@@ -59,5 +59,5 @@ public class LectureWeek {
 	//수업자료 파일 수정 용도의 메소드
 	public void update(File file) {
 		this.file = file;
-	}
+	}*/
 }

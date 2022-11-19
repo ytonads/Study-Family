@@ -14,7 +14,9 @@ import org.hibernate.annotations.DynamicInsert;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString
 @NoArgsConstructor
 @Getter
 @Setter
@@ -35,7 +37,7 @@ public class ProfessorHistory {
 	private Professor professor;
 	
 	@ManyToOne
-	@JoinColumn(name = "PROFESSOR_POSITION")
+	@JoinColumn(name = "PROFESSOR_POSITION_CODE")
 	private ProfessorPosition professorPosition;
 
 }

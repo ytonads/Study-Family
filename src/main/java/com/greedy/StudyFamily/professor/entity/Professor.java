@@ -15,6 +15,9 @@ import com.greedy.StudyFamily.subject.entity.Department;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
+@ToString
 @NoArgsConstructor
 @Getter
 @Setter

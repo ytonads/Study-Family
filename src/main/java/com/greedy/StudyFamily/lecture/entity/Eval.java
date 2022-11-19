@@ -34,7 +34,7 @@ public class Eval implements Serializable {
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "STUDENT_No")
+	@JoinColumn(name = "STUDENT_NO")
 	private Student student;
 	
 	@Id

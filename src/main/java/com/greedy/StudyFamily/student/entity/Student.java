@@ -15,7 +15,9 @@ import com.greedy.StudyFamily.subject.entity.Department;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString
 @NoArgsConstructor
 @Getter
 @Setter
@@ -63,8 +65,8 @@ public class Student {
 	@Column(name = "NATIONALITY")
 	private String nationality;
 
-	public void update(String studentEmail2, String studentPhone2, String studentAddress2) {
-		
-	}
+//	public void update(String studentEmail2, String studentPhone2, String studentAddress2) {
+//		
+//	}
 	
 }

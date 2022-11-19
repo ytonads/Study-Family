@@ -39,7 +39,7 @@ public class Task {
 	private Lecture lecture;
 	
 	@ManyToOne
-	@JoinColumn(name = "STUDENT_No")
+	@JoinColumn(name = "STUDENT_NO")
 	private Student student;	
 
 }
