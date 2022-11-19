@@ -1,6 +1,8 @@
 package com.greedy.StudyFamily.lecture.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -51,13 +53,12 @@ public class LectureWeek {
 	@Column(name = "END_DATE")
 	private Date endDate;
 
-	/*@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name = "FILE_CODE")
-	private File file;
+//	@OneToMany(mappedBy = "lectureWeek", cascade = CascadeType.ALL)
+//	private List<File> Files = new ArrayList<>();
 	
 	
 	//수업자료 파일 수정 용도의 메소드
-	public void update(File file) {
-		this.file = file;
-	}*/
+//	public void update(File file) {
+//		this.file = file;
+//	}*/
 }

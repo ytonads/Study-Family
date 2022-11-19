@@ -85,8 +85,7 @@ public class LectureController {
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "교수 강좌 목록 조회 성공", responseDtoWithPaging));
 		
 	}
-	
-	
+
 	
 	
 	

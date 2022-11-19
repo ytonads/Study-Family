@@ -1,6 +1,8 @@
 package com.greedy.StudyFamily.lecture.repository;
 
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -20,12 +22,16 @@ public interface LectureRepository extends JpaRepository<Lecture, Long>{
 
 	
 	//강의실 조회 - 학생
-	@EntityGraph(attributePaths= {"subject", "professor", "lecture"})
+	@EntityGraph(attributePaths= {"subject", "professor"})
 	@Query("SELECT l " +
 			"FROM Lecture l, AppClass a, Student s " +
 			"WHERE l.lectureCode = a.lecture.lectureCode " +
 			"AND a.student.studentNo = s.studentNo")
 	Page<Lecture> findByStudent(Pageable pageable, Student findStudent);
+
+	
+
+	
 
 	
 
