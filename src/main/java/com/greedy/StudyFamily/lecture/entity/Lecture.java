@@ -54,8 +54,6 @@ public class Lecture {
 	@Column(name = "OPENING_DATE")
 	private String openingDate;
 	
-//	@OneToMany(mappedBy= "LECTURE_CODE")
-//	private List<AppClass> appClass = new ArrayList<AppClass>();
 	
 	
 

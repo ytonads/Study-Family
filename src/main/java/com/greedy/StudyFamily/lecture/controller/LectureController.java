@@ -15,6 +15,7 @@ import com.greedy.StudyFamily.common.paging.PagingButtonInfo;
 import com.greedy.StudyFamily.common.paging.ResponseDtoWithPaging;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.service.LectureService;
+import com.greedy.StudyFamily.professor.dto.ProfessorDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,57 +30,33 @@ public class LectureController {
 		this.lectureService = lectureService;
 	}
 	
-	//강좌 목록 조회
-	@GetMapping("/lectures")
-	public ResponseEntity<ResponseDto> selectLectureList(@RequestParam(name = "page", defaultValue="1") int page){
-		log.info("[LectureController] selectAllLecture start =======================================");
-		log.info("[LectureController] page : {}", page);
+	
+	//강좌 목록 조회 - 교수
+	@GetMapping("/lectures/{professorCode}")
+	public ResponseEntity<ResponseDto> selectLectureProList(@PathVariable Long professorCode, @RequestParam(name="page", defaultValue="1") int page){
 		
-		Page<LectureDto> lectureDtoList = lectureService.selectLectureList(page);
+		ProfessorDto professorDto = new ProfessorDto();
+		professorDto.setProfessorCode(professorCode);
 		
-		PagingButtonInfo pageInfo = Pagenation.getPagingButtonInfo(lectureDtoList);
 		
-		log.info("[LectureController] pageInfo : {}", pageInfo);
+		Page<LectureDto> lectureDtoProList = lectureService.selectLectureProList(page, professorDto);
+		
+		PagingButtonInfo pageInfo = Pagenation.getPagingButtonInfo(lectureDtoProList);
+		
+		log.info("[ProductController] pageInfo : {}", pageInfo);
 		
 		ResponseDtoWithPaging responseDtoWithPaging = new ResponseDtoWithPaging();
 		responseDtoWithPaging.setPageInfo(pageInfo);
-		responseDtoWithPaging.setData(lectureDtoList.getContent());
+		responseDtoWithPaging.setData(lectureDtoProList.getContent());
 		
-		log.info("[LectureController] selectAllLecture End =========================================");
 		
-		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "조회 성공", responseDtoWithPaging));
-
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "교수 강좌 목록 조회 성공", responseDtoWithPaging));
+		
 	}
 	
 	
 	
-	//강좌 코드 기준으로 강의실 상세 조회(학생)
-	@GetMapping("/lecture/{lectureCode}")
-	public ResponseEntity<ResponseDto> selectLectureDetail(@PathVariable Long lectureCode){
-		
-		return ResponseEntity
-				.ok()
-				.body(new ResponseDto(HttpStatus.OK, "강의실 상세 조회 성공", lectureService.selectLecture(lectureCode)));
-	}
 	
 	
-	//강좌 코드 기준으로 강의실 상세 조회(교수)
-//	@GetMapping("/lectures-detail-professor/{lectureCode}")
-//	public ResponseEntity<ResponseDto> selectLectureDetailForProfessor(@PathVariable Long lectureCode){
-//			
-//		return ResponseEntity
-//				.ok()
-//				.body(new ResponseDto(HttpStatus.OK, "강의실 상세 조회 성공", lectureService.selectLectureForProfessor(lectureCode)));
-//	}
 	
-	
-	//수업 자료 등록(교수)
-	/*@PostMapping("/files")
-	public ResponseEntity<ResponseDto> insertFiles(@ModelAttribute LectureDto lectureDto){
-		
-		return ResponseEntity
-				.ok()
-				.body(new ResponseDto(HttpStatus.OK, "수업 자료 등록이 완료되었습니다.", lectureService.insertFile(lectureDto)));
-	}*/
-
 }
