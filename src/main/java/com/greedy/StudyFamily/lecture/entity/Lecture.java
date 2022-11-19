@@ -3,6 +3,7 @@ package com.greedy.StudyFamily.lecture.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -54,7 +55,8 @@ public class Lecture {
 	@Column(name = "OPENING_DATE")
 	private String openingDate;
 	
-	
+	@OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL)
+	private List<AppClass> AppClasses = new ArrayList<>();
 	
 
 }

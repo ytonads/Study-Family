@@ -13,9 +13,11 @@ import com.greedy.StudyFamily.common.ResponseDto;
 import com.greedy.StudyFamily.common.paging.Pagenation;
 import com.greedy.StudyFamily.common.paging.PagingButtonInfo;
 import com.greedy.StudyFamily.common.paging.ResponseDtoWithPaging;
+import com.greedy.StudyFamily.lecture.dto.AppClassDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.service.LectureService;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
+import com.greedy.StudyFamily.student.dto.StudentDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +31,29 @@ public class LectureController {
 	public LectureController(LectureService lectureService) {
 		this.lectureService = lectureService;
 	}
+	
+	
+	//강좌 목록 조회 - 학생
+	@GetMapping("/lecture/{studentNo}")
+	public ResponseEntity<ResponseDto> selectLectureStuList(@PathVariable Long studentNo, @RequestParam(name = "page", defaultValue="1") int page){
+		
+		AppClassDto appClassDto = new AppClassDto();
+		appClassDto.setAppClassCode(studentNo);
+		
+		StudentDto studentDto = new StudentDto();
+		studentDto.setStudentNo(studentNo);
+		
+		Page<LectureDto> lectureDtoStuList = lectureService.selectLectureStuList(page, studentDto);
+		
+		PagingButtonInfo pageInfo = Pagenation.getPagingButtonInfo(lectureDtoStuList);
+		
+		ResponseDtoWithPaging responseDtoWithPaging = new ResponseDtoWithPaging();
+		responseDtoWithPaging.setPageInfo(pageInfo);
+		responseDtoWithPaging.setData(lectureDtoStuList.getContent());
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "학생 강좌 목록 조회 성공", responseDtoWithPaging));
+	}
+	
 	
 	
 	//강좌 목록 조회 - 교수

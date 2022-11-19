@@ -14,6 +14,8 @@ import com.greedy.StudyFamily.lecture.repository.LectureRepository;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
 import com.greedy.StudyFamily.professor.entity.Professor;
 import com.greedy.StudyFamily.professor.repository.ProfessorRepository;
+import com.greedy.StudyFamily.student.dto.StudentDto;
+import com.greedy.StudyFamily.student.entity.Student;
 import com.greedy.StudyFamily.student.repository.StudentRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +40,23 @@ public class LectureService {
 	}
 
 	
+	
+	//강좌 목록 조회 - 학생
+	public Page<LectureDto> selectLectureStuList(int page, StudentDto student) {
+		
+		Pageable pageable = PageRequest.of(page -1, 10, Sort.by("lectureCode").descending());
+		
+		//appClass 엔티티에서 studentNo 조회
+		Student findStudent = studentRepository.findById(student.getStudentNo())
+				.orElseThrow(() -> new IllegalArgumentException("해당 강좌가 없습니다. studentNo= " + student.getStudentNo()));
+		
+		Page<Lecture> lectureStuList = lectureRepository.findByStudent(pageable, findStudent);
+		Page<LectureDto> lectureDtoStuList = lectureStuList.map(lecture -> modelMapper.map(lecture, LectureDto.class));
+		
+		return lectureDtoStuList;
+	}
+	
+	
 
 	//강좌 목록 조회 - 교수
 	public Page<LectureDto> selectLectureProList(int page, ProfessorDto professor) {
@@ -46,7 +65,7 @@ public class LectureService {
 		
 		/* 교수 엔티티 조회 */
 		Professor findProfessor = professorRepository.findById(professor.getProfessorCode())
-				.orElseThrow(() -> new IllegalArgumentException("해당 카테고리가 없습니다. professorCode = " + professor.getProfessorCode()));
+				.orElseThrow(() -> new IllegalArgumentException("해당 강좌가 없습니다. professorCode = " + professor.getProfessorCode()));
 		
 
 		Page<Lecture> lectureProList = lectureRepository.findByProfessor(pageable, findProfessor);
@@ -55,6 +74,10 @@ public class LectureService {
 		
 		return lectureDtoProList;
 	}
+
+
+
+	
 
 	
 	
