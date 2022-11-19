@@ -60,22 +60,4 @@ public class AdminService {
 
 
 
-	//회원가입
-//	public Object signup(LoginDto loginDto) {
-//		
-//		/* 이메일 중복 확인 */
-//		if(adminRepository.findByTraficrId(loginDto.getLoginId()) != null) {
-//			log.info("[AuthService] 이메일이 중복 됩니다.");
-//			throw new DuplicatedUsernameException("이메일이 중복됩니다.");
-//		}
-//		
-//		/* password 암호화 처리 */
-//		//passwordEncoing(암호화) 처리를 하려면 꼭 Bean등록 필수!!!! - SecurityConfig.class
-//		loginDto.setLoginPassword(passwordEncoder.encode(loginDto.getLoginPassword()));
-//		adminRepository.save(modelMapper.map(loginDto, Login.class));
-//		
-//		
-//		return loginDto;
-//	}
-
 }

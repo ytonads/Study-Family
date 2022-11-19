@@ -20,15 +20,7 @@ public class AdminController {
 	public AdminController(AdminService adminService) {
 		this.adminService = adminService;
 	}
-	
-	/* 1. 회원 가입 */		//Postman으로 확인할 때 Body -> raw -> JSON 선택 후 확인!!
-	/*@PostMapping("/signup")
-	public ResponseEntity<ResponseDto> signup(@RequestBody LoginDto loginDto){
-		
-			//ResponseDTO IN (status , message, data)
-		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.CREATED, "회원 가입 성공", adminService.signup(loginDto)));
-	
-	}*/
+
 	
 	
 	/* 2. 로그인 */
