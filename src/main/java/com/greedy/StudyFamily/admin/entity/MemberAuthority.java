@@ -13,7 +13,9 @@ import org.hibernate.annotations.DynamicInsert;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString
 @NoArgsConstructor
 @Getter
 @Setter
@@ -24,7 +26,7 @@ public class MemberAuthority implements Serializable {
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="LOGIN_ID")
+	@JoinColumn(name="LOGIN_CODE")
 	private Login login;
 	
 	@Id

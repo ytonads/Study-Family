@@ -1,13 +1,14 @@
 package com.greedy.StudyFamily.lecture.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -38,7 +39,7 @@ public class Lecture {
 	private Subject subject;
 	
 	@Column(name = "CAPACITY")
-	private int capacity;
+	private Long capacity;
 
 	@ManyToOne
 	@JoinColumn(name = "PROFESSOR_CODE")
@@ -48,11 +49,13 @@ public class Lecture {
 	private String lectureName;
 	
 	@Column(name = "LECTURE_PERSONNEL")
-	private int lecturePersonnel;
+	private Long lecturePersonnel;
 	
 	@Column(name = "OPENING_DATE")
 	private String openingDate;
 	
+//	@OneToMany(mappedBy= "LECTURE_CODE")
+//	private List<AppClass> appClass = new ArrayList<AppClass>();
 	
 	
 

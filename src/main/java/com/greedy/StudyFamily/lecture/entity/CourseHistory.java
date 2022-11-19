@@ -34,7 +34,7 @@ public class CourseHistory {
 	private Student student;
 	
 	@Column(name = "COURSE_TIME")
-	private int courseTime;
+	private Long courseTime;
 	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_WEEK_CODE")

@@ -1,9 +1,10 @@
 package com.greedy.StudyFamily.lecture.service;
 
-import java.util.UUID;
-
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
@@ -30,6 +31,28 @@ public class LectureService {
 //	@Value("${image.image-url}")
 //	private String IMAGE_URL;
 
+	
+	
+	//강좌 목록 조회
+	public Page<LectureDto> selectLectureList(int page) {
+		
+		log.info("[ProductService] selectLectureList Start =====================" );
+		
+		Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("lectureCode").descending());
+		
+		Page<Lecture> lectureList = lectureRepository.findAll(pageable);
+		Page<LectureDto> lectureDtoList = lectureList.map(lecture -> modelMapper.map(lecture, LectureDto.class));
+		/* 클라이언트 측에서 서버에 저장 된 이미지 요청 시 필요한 주소로 가공 */
+		//productDtoList.forEach(product -> product.setProductImageUrl(IMAGE_URL + product.getProductImageUrl()));
+		
+		log.info("[ProductService] lectureDtoList : {}", lectureDtoList.getContent());
+		
+		log.info("[ProductService] selectLectureList End =====================" );
+		
+		return lectureDtoList;
+	}
+	
+	
 	
 
 	//강좌 코드 기준으로 강의실 상세 조회(학생)
@@ -68,13 +91,16 @@ public class LectureService {
 		log.info("[LectureService] lectureDto : {}", lectureDto);
 		
 		log.info("[LectureService] selectLectureForProfessor End ===========");
-		return null;
+		return lectureDto;
 	}
+
+
+
 
 	
 	
 	//수업 자료 등록(교수)
-	public Object insertFile(LectureDto lectureDto) {
+	/*public Object insertFile(LectureDto lectureDto) {
 		
 		log.info("[LectureService] insertFile Start ===========");
 		log.info("[LectureService] lectureDto : {}", lectureDto);
@@ -87,6 +113,6 @@ public class LectureService {
 		
 		log.info("[LectureService] insertFile End ===========");
 		return null;
-	}
+	}*/
 
 }

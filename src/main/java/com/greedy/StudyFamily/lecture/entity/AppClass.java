@@ -22,7 +22,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "TBL_APPCLASS")
+@Table(name = "TBL_APP_CLASS")
 @DynamicInsert
 public class AppClass implements Serializable {
 
