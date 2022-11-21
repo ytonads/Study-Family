@@ -27,7 +27,7 @@ public class StudentService {
 	}
 	
 	/* [학생] 내 정보 조회 */
-	public StudentDto selectMyInfo(String studentNo) {
+	public StudentDto selectMyInfo(Long studentNo) {
 		
 		log.info("[StudentService] selectMyInfo Start ===========================");
 		log.info("[StudentService] studentNo : {}", studentNo);
@@ -43,24 +43,24 @@ public class StudentService {
 	}
 	
 	/* [학생] 내 정보 조회 - 개인정보 수정 */
-//	@Transactional
-//	public StudentDto updateStudent(StudentDto studentDto) {
-//		
-//		log.info("[StudentService] updateStudent Start ===================================");
-//		log.info("[StudentService] studentDto : {}", studentDto);
-//		
-//		Student oriStudent = studentRepository.findByStudentNo(studentDto.getStudentNo())
-//				.orElseThrow(() -> new IllegalArgumentException("해당 학생이 없습니다. studentNo = " + studentDto.getStudentNo()));
-//
-//		oriStudent.update(studentDto.getStudentEmail()
-//				        , studentDto.getStudentPhone()
-//				        , studentDto.getStudentAddress());
-//		
-//		studentRepository.save(oriStudent);
-//		
-//		log.info("[StudentService] updateStudent End =====================================");
-//		
-//		return studentDto;
-//	}
+	@Transactional
+	public StudentDto updateStudent(StudentDto studentDto) {
+		
+		log.info("[StudentService] updateStudent Start ===================================");
+		log.info("[StudentService] studentDto : {}", studentDto);
+		
+		Student oriStudent = studentRepository.findByStudentNo(studentDto.getStudentNo())
+				.orElseThrow(() -> new IllegalArgumentException("해당 학생이 없습니다. studentNo = " + studentDto.getStudentNo()));
+
+		oriStudent.update(studentDto.getStudentEmail()
+				        , studentDto.getStudentPhone()
+				        , studentDto.getStudentAddress());
+		
+		studentRepository.save(oriStudent);
+		
+		log.info("[StudentService] updateStudent End =====================================");
+		
+		return studentDto;
+	}
 
 }

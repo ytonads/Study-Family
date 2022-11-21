@@ -29,7 +29,7 @@ public class ProfessorService {
 	} 
 	
 	/* [교수] 내 정보 조회 */
-	public ProfessorDto selectMyInfo(String professorCode) {
+	public ProfessorDto selectMyInfo(Long professorCode) {
 		
 		log.info("[ProfessorService] selectMyInfo Start ===========================");
 		log.info("[ProfessorService] professorCode : {}", professorCode);
@@ -53,12 +53,13 @@ public class ProfessorService {
 		Professor oriProfessor = professorRepository.findByProfessorCode(professorDto.getProfessorCode())
 				.orElseThrow(() -> new IllegalArgumentException("해당 교수가 없습니다. professorCode = " + professorDto.getProfessorCode()));
 		
+		oriProfessor.update(professorDto.getProfessorEmail()
+				          , professorDto.getProfessorPhone()
+				          , professorDto.getProfessorAddress());
+		
+		professorRepository.save(oriProfessor);
+		
 		return professorDto;
 	}
-
-	public Page<StudentDto> selectStudentListByStudentNo(int page, String studentNo) {
-		
-		return null;
-	}
-
+	
 }

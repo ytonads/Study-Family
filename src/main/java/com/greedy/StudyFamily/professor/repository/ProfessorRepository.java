@@ -9,8 +9,8 @@ import com.greedy.StudyFamily.professor.entity.Professor;
 public interface ProfessorRepository extends JpaRepository<Professor, Long>{
 
 	/* professorCode로 조회 */
-	Optional<Professor> findByProfessorCode(String professorCode);
-
 	Optional<Professor> findByProfessorCode(Long professorCode);
+
+//	Optional<Professor> findByProfessorCode(Long professorCode);
 
 }
