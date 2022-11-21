@@ -57,6 +57,10 @@ public class Professor {
 	@ManyToOne
 	@JoinColumn(name="DEPARTMENT_CODE")
 	private Department department;
+
+	public void update(String professorEmail2, String professorPhone2, String professorAddress2) {
+		
+	}
 }
 
 

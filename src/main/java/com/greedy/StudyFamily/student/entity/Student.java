@@ -65,8 +65,9 @@ public class Student {
 	@Column(name = "NATIONALITY")
 	private String nationality;
 
-//	public void update(String studentEmail2, String studentPhone2, String studentAddress2) {
-//		
-//	}
+	public void update(String studentEmail2, String studentPhone2, String studentAddress2) {
+		
+		
+	}
 	
 }
