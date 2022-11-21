@@ -1,22 +1,23 @@
 package com.greedy.StudyFamily.lecture.controller;
 
-import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.greedy.StudyFamily.admin.dto.FileDto;
 import com.greedy.StudyFamily.common.ResponseDto;
 import com.greedy.StudyFamily.common.paging.Pagenation;
 import com.greedy.StudyFamily.common.paging.PagingButtonInfo;
 import com.greedy.StudyFamily.common.paging.ResponseDtoWithPaging;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
-import com.greedy.StudyFamily.lecture.dto.LectureWeekDto;
 import com.greedy.StudyFamily.lecture.service.LectureService;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
 import com.greedy.StudyFamily.student.dto.StudentDto;
@@ -125,6 +126,16 @@ public class LectureController {
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "교수 강좌 상세 조회 성공", lectureDtoDeProList));
 	}
+	
+	
+	//수업 자료 등록 - 교수
+	@PostMapping("/lectures")
+	public ResponseEntity<ResponseDto> insertLectureFile(@ModelAttribute FileDto fileDto){
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "파일 등록 성공", lectureService.insertLectureFile(fileDto)));
+	}
+	
+	
 	
 	
 	

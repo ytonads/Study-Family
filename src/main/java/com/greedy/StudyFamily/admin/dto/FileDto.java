@@ -1,5 +1,7 @@
 package com.greedy.StudyFamily.admin.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.greedy.StudyFamily.board.dto.SchoolNoticeDto;
 import com.greedy.StudyFamily.board.dto.SubnoticeDto;
 import com.greedy.StudyFamily.lecture.dto.LectureWeekDto;
@@ -23,4 +25,6 @@ public class FileDto {
 	private TaskDto task;
 	private LectureWeekDto lectureWeek;
 	
+	//파일 업로드시 추가로 사용할 로직
+	private MultipartFile lectureFiles;
 }
