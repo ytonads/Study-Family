@@ -1,6 +1,8 @@
 package com.greedy.StudyFamily.lecture.service;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -10,7 +12,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
+import com.greedy.StudyFamily.lecture.dto.LectureWeekDto;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
+import com.greedy.StudyFamily.lecture.entity.LectureWeek;
 import com.greedy.StudyFamily.lecture.repository.LectureRepository;
 import com.greedy.StudyFamily.lecture.repository.LectureWeekRepository;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
@@ -89,23 +93,36 @@ public class LectureService {
 
 
 	//강좌 상세 조회 - 학생
-	public LectureDto selectLectureDetailStu(Long lectureCode, StudentDto student) {
+	public LectureDto selectLectureDetailStu(Long lectureCode, Long studentNo) {
 		
 		log.info("[LectureService] selectLectureDetailStu Start =====================" );
 		log.info("[LectureService] lectureCode : {}", lectureCode );
+		log.info("[LectureService] studentNo : {}", studentNo );
 		
-	
-		/* 학생 엔티티 조회 */
-		Student findStudent = studentRepository.findById(student.getStudentNo())
-				.orElseThrow(() -> new IllegalArgumentException("해당 학생이 없습니다. studentNo= " + student.getStudentNo()));
+		LectureDto lectureDto = modelMapper.map(lectureRepository.findByLectureCode(lectureCode), LectureDto.class);
 		
-		Lecture lecture = lectureRepository.findByLectureCodeAndStudent(lectureCode, findStudent);
-		LectureDto lectureDtoStuList = modelMapper.map(lecture, LectureDto.class);
-		
-		
+		log.info("[LectureService] lectureCode : {}", lectureCode );
 		log.info("[LectureService] selectLectureDetailStu End =====================" );
 		
-		return lectureDtoStuList;
+		return lectureDto;
+	}
+
+	
+
+	//강좌 상세 조회 - 교수
+	public LectureDto selectLectureDetailPro(Long lectureCode, Long professorCode) {
+		
+		log.info("[LectureService] selectLectureDetailPro Start =====================" );
+		log.info("[LectureService] lectureCode : {}", lectureCode );
+		log.info("[LectureService] professorCode : {}", professorCode );
+		
+		LectureDto lectureDto = modelMapper.map(lectureRepository.findByLectureCode(lectureCode), LectureDto.class);
+		
+		log.info("[LectureService] lectureCode : {}", lectureCode );
+		log.info("[LectureService] selectLectureDetailPro End =====================" );
+		
+		
+		return lectureDto;
 	}
 
 	

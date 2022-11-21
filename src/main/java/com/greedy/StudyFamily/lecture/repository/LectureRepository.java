@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.greedy.StudyFamily.lecture.entity.Lecture;
+import com.greedy.StudyFamily.lecture.entity.LectureWeek;
 import com.greedy.StudyFamily.professor.entity.Professor;
 import com.greedy.StudyFamily.student.entity.Student;
 
@@ -21,6 +22,7 @@ public interface LectureRepository extends JpaRepository<Lecture, Long>{
 	Page<Lecture> findByProfessor(Pageable pageable, Professor findProfessor);
 
 	
+	
 	//강의실 조회 - 학생
 	@EntityGraph(attributePaths= {"subject", "professor"})
 	@Query("SELECT l " +
@@ -31,11 +33,8 @@ public interface LectureRepository extends JpaRepository<Lecture, Long>{
 
 
 
-	//강좌 상세 조회 - 학생
-	@Query("SELECT l, w " +
-			"FROM Lecture l, LectureWeek w " +
-			"WHERE l.lectureCode = w.lectures.lectureCode")
-	Lecture findByLectureCodeAndStudent(Long lectureCode, Student findStudent);
+	//강좌 상세 조회
+	Lecture findByLectureCode(Long lectureCode);
 
 	
 	
