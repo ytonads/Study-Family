@@ -2,6 +2,8 @@ package com.greedy.StudyFamily.student.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,7 +17,6 @@ import com.greedy.StudyFamily.subject.entity.Department;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 //@ToString
 @NoArgsConstructor
@@ -28,6 +29,7 @@ import lombok.ToString;
 public class Student {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STUDENT_SEQ_GENERATOR")
 	@Column(name = "STUDENT_NO")
 	private Long studentNo;
 	
@@ -65,9 +67,29 @@ public class Student {
 	@Column(name = "NATIONALITY")
 	private String nationality;
 
-	public void update(String studentEmail2, String studentPhone2, String studentAddress2) {
-		
-		
-	}
+
+	/* 학생정보 수정 용도 메소드 정의 */
+	public void update(String studentCode, String studentName, String admissionsDay, Department department, String studentRegistNum,
+			String grade, String gender, String studentEmail, String studentPhone, String studentAddress, String nationality) {
+
+		this.studentCode = studentCode;
+		this.studentName = studentName;
+		this.admissionsDay = admissionsDay;
+		this.department = department;
+		this.studentRegistNum = studentRegistNum;
+		this.grade = grade;
+		this.gender = gender;
+		this.studentEmail = studentEmail;
+		this.studentPhone = studentPhone;
+		this.studentAddress = studentAddress;
+		this.nationality = nationality;
+	
+}
+
+
+
+
+	
+	
 	
 }
