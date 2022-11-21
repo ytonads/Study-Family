@@ -23,7 +23,5 @@ public class LectureDto {
 	private String openingDate;
 	private List<LectureWeekDto> LectureWeeks;
 	
-	//파일 업로드 로직 작성 시 활용할 필드
-//	private MultipartFile lectureFile;
 	
 }
