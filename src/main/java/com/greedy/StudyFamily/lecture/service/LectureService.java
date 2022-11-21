@@ -1,5 +1,7 @@
 package com.greedy.StudyFamily.lecture.service;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,109 +12,110 @@ import org.springframework.stereotype.Service;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.lecture.repository.LectureRepository;
+import com.greedy.StudyFamily.lecture.repository.LectureWeekRepository;
+import com.greedy.StudyFamily.professor.dto.ProfessorDto;
+import com.greedy.StudyFamily.professor.entity.Professor;
+import com.greedy.StudyFamily.professor.repository.ProfessorRepository;
+import com.greedy.StudyFamily.student.dto.StudentDto;
+import com.greedy.StudyFamily.student.entity.Student;
+import com.greedy.StudyFamily.student.repository.StudentRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
 public class LectureService {
-	
+
+	private final ProfessorRepository professorRepository;
 	private final LectureRepository lectureRepository;
+	private final StudentRepository studentRepository;
+	private final LectureWeekRepository lectureWeekRepository;
 	private final ModelMapper modelMapper;
 	
-	public LectureService(LectureRepository lectureRepository, ModelMapper modelMapper) {
+	public LectureService
+			(LectureWeekRepository lectureWeekRepository, ProfessorRepository professorRepository,LectureRepository lectureRepository, StudentRepository studentRepository, ModelMapper modelMapper) {
+		this.professorRepository = professorRepository;
 		this.lectureRepository = lectureRepository;
+		this.studentRepository = studentRepository;
+		this.lectureWeekRepository = lectureWeekRepository;
 		this.modelMapper = modelMapper;
 	}
-	
-	
-//	@Value("${image.image-dir}")
-//	private String IMAGE_DIR;
-//	@Value("${image.image-url}")
-//	private String IMAGE_URL;
 
 	
 	
-	//강좌 목록 조회
-	public Page<LectureDto> selectLectureList(int page) {
+	//강좌 목록 조회 - 학생
+	public Page<LectureDto> selectLectureStuList(int page, StudentDto student) {
 		
-		log.info("[ProductService] selectLectureList Start =====================" );
+		log.info("[LectureService] selectLectureStuList Start =====================" );
+		
+		Pageable pageable = PageRequest.of(page -1, 10, Sort.by("lectureCode").descending());
+		
+		/* 학생 엔티티 조회 */
+		Student findStudent = studentRepository.findById(student.getStudentNo())
+				.orElseThrow(() -> new IllegalArgumentException("해당 학생이 없습니다. studentNo= " + student.getStudentNo()));
+		
+		Page<Lecture> lectureStuList = lectureRepository.findByStudent(pageable, findStudent);
+		Page<LectureDto> lectureDtoStuList = lectureStuList.map(lecture -> modelMapper.map(lecture, LectureDto.class));
+		
+		log.info("[ProductService] lectureDtoStuList : {}", lectureDtoStuList.getContent());
+		log.info("[LectureService] selectLectureStuList End =====================" );
+		
+		return lectureDtoStuList;
+	}
+	
+	
+
+	//강좌 목록 조회 - 교수
+	public Page<LectureDto> selectLectureProList(int page, ProfessorDto professor) {
+		
+		log.info("[LectureService] selectLectureProList Start =====================" );
 		
 		Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("lectureCode").descending());
 		
-		Page<Lecture> lectureList = lectureRepository.findAll(pageable);
-		Page<LectureDto> lectureDtoList = lectureList.map(lecture -> modelMapper.map(lecture, LectureDto.class));
-		/* 클라이언트 측에서 서버에 저장 된 이미지 요청 시 필요한 주소로 가공 */
-		//productDtoList.forEach(product -> product.setProductImageUrl(IMAGE_URL + product.getProductImageUrl()));
+		/* 교수 엔티티 조회 */
+		Professor findProfessor = professorRepository.findById(professor.getProfessorCode())
+				.orElseThrow(() -> new IllegalArgumentException("해당 교수가 없습니다. professorCode = " + professor.getProfessorCode()));
 		
-		log.info("[ProductService] lectureDtoList : {}", lectureDtoList.getContent());
-		
-		log.info("[ProductService] selectLectureList End =====================" );
-		
-		return lectureDtoList;
-	}
-	
-	
-	
 
-	//강좌 코드 기준으로 강의실 상세 조회(학생)
-	public Object selectLecture(Long lectureCode) {
+		Page<Lecture> lectureProList = lectureRepository.findByProfessor(pageable, findProfessor);
+		Page<LectureDto> lectureDtoProList = lectureProList.map(lecture -> modelMapper.map(lecture, LectureDto.class));
 		
-		log.info("[LectureService] selectLecture Start ===========");
-		log.info("[LectureService] lectureCode : {}", lectureCode);
+		log.info("[ProductService] lectureDtoProList : {}", lectureDtoProList.getContent());
+		log.info("[LectureService] selectLectureProList End =====================" );
 		
-		Lecture lecture = lectureRepository.findByLectureCode(lectureCode)
-				.orElseThrow(() -> new IllegalArgumentException("해당 강의실이 존재하지 않습니다. lectureCode=" + lectureCode));
-		LectureDto lectureDto = modelMapper.map(lecture, LectureDto.class);
-		/* 파일 다뤄주는 코드 - 작업 진행 중 (file 테이블에서 OneToMany로 댕겨 올듯?)*/
-		//lectureDto.setLectureFileUrl( + lectureDto.getLectureFileUrl());
-		
-		log.info("[LectureService] lectureDto : {}", lectureDto);
-		
-		log.info("[LectureService] selectLecture End ===========");
-		
-		return lectureDto;
-	}
-	
-	
-
-	//강좌 코드 기준으로 강의실 상세 조회(교수)
-	public Object selectLectureForProfessor(Long lectureCode) {
-		
-		log.info("[LectureService] selectLectureForProfessor Start ===========");
-		log.info("[LectureService] lectureCode : {}", lectureCode);
-		
-		Lecture lecture = lectureRepository.findById(lectureCode)
-				.orElseThrow(() -> new IllegalArgumentException("해당 강의실이 존재하지 않습니다. lectureCode=" + lectureCode));
-		LectureDto lectureDto = modelMapper.map(lecture, LectureDto.class);
-		/* 파일 다뤄주는 코드 - 작업 진행 중 (file 테이블에서 OneToMany로 댕겨 올듯?)*/
-		//lectureDto.setLectureFileUrl( + lectureDto.getLectureFileUrl());
-		
-		log.info("[LectureService] lectureDto : {}", lectureDto);
-		
-		log.info("[LectureService] selectLectureForProfessor End ===========");
-		return lectureDto;
+		return lectureDtoProList;
 	}
 
 
 
+	//강좌 상세 조회 - 학생
+	public LectureDto selectLectureDetailStu(Long lectureCode, StudentDto student) {
+		
+		log.info("[LectureService] selectLectureDetailStu Start =====================" );
+		log.info("[LectureService] lectureCode : {}", lectureCode );
+		
+	
+		/* 학생 엔티티 조회 */
+		Student findStudent = studentRepository.findById(student.getStudentNo())
+				.orElseThrow(() -> new IllegalArgumentException("해당 학생이 없습니다. studentNo= " + student.getStudentNo()));
+		
+		Lecture lecture = lectureRepository.findByLectureCodeAndStudent(lectureCode, findStudent);
+		LectureDto lectureDtoStuList = modelMapper.map(lecture, LectureDto.class);
+		
+		
+		log.info("[LectureService] selectLectureDetailStu End =====================" );
+		
+		return lectureDtoStuList;
+	}
 
 	
 	
-	//수업 자료 등록(교수)
-	/*public Object insertFile(LectureDto lectureDto) {
-		
-		log.info("[LectureService] insertFile Start ===========");
-		log.info("[LectureService] lectureDto : {}", lectureDto);
-		
-		String imageName = UUID.randomUUID().toString().replace("-", "");
-		String replaceFileName = null;
-		
-		//replaceFileName = FileUploadUtils.saveFile(IMAGE_DIR, imageName, lectureDto.getLectureImage());
-		
-		
-		log.info("[LectureService] insertFile End ===========");
-		return null;
-	}*/
 
+
+
+	
+	
+
+	
+	
 }

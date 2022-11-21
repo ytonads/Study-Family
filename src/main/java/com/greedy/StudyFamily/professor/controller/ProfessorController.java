@@ -48,26 +48,26 @@ public class ProfessorController {
 	}
 	
 	/* [교수] 해당 과목 학생 전체 조회 */
-	@GetMapping("/professors/studentList")
-	public ResponseEntity<ResponseDto> selectStudentList(@RequestParam(name="page", defaultValue="1") int page, @RequestParam(name="search") String studentNo) {
-		
-		log.info("[ProfessorController] selectStudentList Start ================================");
-		log.info("[ProfessorController] page : {}", page);
-		log.info("[ProfessorController] studentNo : {}", studentNo);
-
-		Page<StudentDto> studentDtoList = professorService.selectStudentListByStudentNo(page, subCode);
-		
-		PagingButtonInfo pageInfo = Pagenation.getPagingButtonInfo(studentDtoList);
-		
-		log.info("[ProfessorController] pageInfo : {}", pageInfo);
-		
-		ResponseDtoWithPaging responseDtoWithPaging = new ResponseDtoWithPaging();
-		responseDtoWithPaging.setPageInfo(pageInfo);
-		responseDtoWithPaging.setData(studentDtoList.getContent());
-		
-		log.info("[ProfessorController] selectStudentList End ==================================");
-		
-		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "해당 과목 학생 조회 성공", responseDtoWithPaging));
-	}
+//	@GetMapping("/professors/studentList")
+//	public ResponseEntity<ResponseDto> selectStudentList(@RequestParam(name="page", defaultValue="1") int page, @RequestParam(name="search") String studentNo) {
+//		
+//		log.info("[ProfessorController] selectStudentList Start ================================");
+//		log.info("[ProfessorController] page : {}", page);
+//		log.info("[ProfessorController] studentNo : {}", studentNo);
+//
+//		Page<StudentDto> studentDtoList = professorService.selectStudentListByStudentNo(page, subCode);
+//		
+//		PagingButtonInfo pageInfo = Pagenation.getPagingButtonInfo(studentDtoList);
+//		
+//		log.info("[ProfessorController] pageInfo : {}", pageInfo);
+//		
+//		ResponseDtoWithPaging responseDtoWithPaging = new ResponseDtoWithPaging();
+//		responseDtoWithPaging.setPageInfo(pageInfo);
+//		responseDtoWithPaging.setData(studentDtoList.getContent());
+//		
+//		log.info("[ProfessorController] selectStudentList End ==================================");
+//		
+//		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "해당 과목 학생 조회 성공", responseDtoWithPaging));
+//	}
 
 }

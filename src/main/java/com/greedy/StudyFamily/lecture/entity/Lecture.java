@@ -3,6 +3,7 @@ package com.greedy.StudyFamily.lecture.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+//@ToString
 @Entity
 @Table(name = "TBL_LECTURE")
 @DynamicInsert
@@ -54,9 +55,11 @@ public class Lecture {
 	@Column(name = "OPENING_DATE")
 	private String openingDate;
 	
-//	@OneToMany(mappedBy= "LECTURE_CODE")
-//	private List<AppClass> appClass = new ArrayList<AppClass>();
+	@OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL)
+	private List<AppClass> AppClasses = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "lectures", cascade = CascadeType.ALL)
+	private List<LectureWeek> LectureWeeks = new ArrayList<>();
 	
 
 }
