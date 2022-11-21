@@ -35,10 +35,10 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class LectureService {
 
+	private final FileRepository fileRepository;
 	private final ProfessorRepository professorRepository;
 	private final LectureRepository lectureRepository;
 	private final StudentRepository studentRepository;
-	private final LectureWeekRepository lectureWeekRepository;
 	private final ModelMapper modelMapper;
 	
 	
@@ -51,11 +51,11 @@ public class LectureService {
 	
 	
 	public LectureService
-			(LectureWeekRepository lectureWeekRepository, ProfessorRepository professorRepository,LectureRepository lectureRepository, StudentRepository studentRepository, ModelMapper modelMapper) {
+			(FileRepository fileRepository, ProfessorRepository professorRepository,LectureRepository lectureRepository, StudentRepository studentRepository, ModelMapper modelMapper) {
 		this.professorRepository = professorRepository;
 		this.lectureRepository = lectureRepository;
 		this.studentRepository = studentRepository;
-		this.lectureWeekRepository = lectureWeekRepository;
+		this.fileRepository = fileRepository;
 		this.modelMapper = modelMapper;
 	}
 
@@ -143,6 +143,7 @@ public class LectureService {
 	//수업 자료 등록 - 교수
 	@Transactional
 	public FileDto insertLectureFile(FileDto fileDto) {
+		
 		log.info("[LectureService] insertLectureFile Start =====================" );
 		log.info("[LectureService] fileDto : {}", fileDto );
 		
@@ -155,8 +156,7 @@ public class LectureService {
 		
 			log.info("[ProductService] replaceFileName : {}", replaceFileName);
 			
-			//save를 사용하면 전체적으로 호출되어 DB에 저장된다.
-//			FileRepository.save(modelMapper.map(fileDto, File.class));
+			fileRepository.save(modelMapper.map(fileDto, File.class));
 		
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -169,6 +169,7 @@ public class LectureService {
 		}
 		
 		log.info("[LectureService] insertLectureFile End =====================" );
+		
 		return fileDto;
 	}
 

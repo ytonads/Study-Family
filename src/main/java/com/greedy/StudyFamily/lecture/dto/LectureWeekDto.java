@@ -19,10 +19,8 @@ public class LectureWeekDto {
 	private LectureDto lecture;
 	private Date startDate;
 	private Date endDate;
-	private FileDto file;
+//	private FileDto file;
 	
-	
-
-	private List<File> Files;
+//	private List<File> Files;
 
 }
