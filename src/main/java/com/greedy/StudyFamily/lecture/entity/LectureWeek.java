@@ -53,8 +53,8 @@ public class LectureWeek {
 	@Column(name = "END_DATE")
 	private Date endDate;
 
-	@OneToMany(mappedBy = "lectureWeek", cascade = CascadeType.ALL)
-	private List<File> Files = new ArrayList<>();
+//	@OneToOne(mappedBy = "lectureWeek", cascade = CascadeType.ALL)
+//	private List<File> Files = new ArrayList<>();
 	
 	
 	//수업자료 파일 수정 용도의 메소드
