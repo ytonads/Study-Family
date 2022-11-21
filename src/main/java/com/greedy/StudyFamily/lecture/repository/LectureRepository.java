@@ -1,7 +1,7 @@
 package com.greedy.StudyFamily.lecture.repository;
 
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,8 +29,15 @@ public interface LectureRepository extends JpaRepository<Lecture, Long>{
 			"AND a.student.studentNo = s.studentNo")
 	Page<Lecture> findByStudent(Pageable pageable, Student findStudent);
 
-	
 
+
+	//강좌 상세 조회 - 학생
+	@Query("SELECT l, w " +
+			"FROM Lecture l, LectureWeek w " +
+			"WHERE l.lectureCode = w.lectures.lectureCode")
+	Lecture findByLectureCodeAndStudent(Long lectureCode, Student findStudent);
+
+	
 	
 
 	

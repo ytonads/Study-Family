@@ -1,5 +1,7 @@
 package com.greedy.StudyFamily.lecture.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -87,6 +89,17 @@ public class LectureController {
 	}
 
 	
+	
+	//강좌 상세 조회 - 학생
+	@GetMapping("/lecture/{studentNo}/lectureWeek/{lectureCode}")
+	public ResponseEntity<ResponseDto> selectLectureDetailStu(@PathVariable Long lectureCode, @PathVariable Long studentNo){
+		
+		StudentDto studentDto = new StudentDto();
+		studentDto.setStudentNo(studentNo);
+		
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "학생 강좌 상세 조회 성공", lectureService.selectLectureDetailStu(lectureCode, studentDto)));
+	}	
 	
 	
 	

@@ -19,7 +19,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+//@ToString
 @Entity
 @Table(name = "TBL_APP_CLASS")
 @DynamicInsert

@@ -1,5 +1,7 @@
 package com.greedy.StudyFamily.lecture.service;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,9 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
-import com.greedy.StudyFamily.lecture.dto.LectureWeekDto;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
-import com.greedy.StudyFamily.lecture.entity.LectureWeek;
 import com.greedy.StudyFamily.lecture.repository.LectureRepository;
 import com.greedy.StudyFamily.lecture.repository.LectureWeekRepository;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
@@ -88,8 +88,25 @@ public class LectureService {
 
 
 
-
+	//강좌 상세 조회 - 학생
+	public LectureDto selectLectureDetailStu(Long lectureCode, StudentDto student) {
+		
+		log.info("[LectureService] selectLectureDetailStu Start =====================" );
+		log.info("[LectureService] lectureCode : {}", lectureCode );
+		
 	
+		/* 학생 엔티티 조회 */
+		Student findStudent = studentRepository.findById(student.getStudentNo())
+				.orElseThrow(() -> new IllegalArgumentException("해당 학생이 없습니다. studentNo= " + student.getStudentNo()));
+		
+		Lecture lecture = lectureRepository.findByLectureCodeAndStudent(lectureCode, findStudent);
+		LectureDto lectureDtoStuList = modelMapper.map(lecture, LectureDto.class);
+		
+		
+		log.info("[LectureService] selectLectureDetailStu End =====================" );
+		
+		return lectureDtoStuList;
+	}
 
 	
 	
