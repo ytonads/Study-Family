@@ -1,5 +1,7 @@
 package com.greedy.StudyFamily.admin.entity;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -54,6 +56,12 @@ public class File {
 	@Column(name="FILE_CATEGORY")
 	private String fileCategory;
 	
+	@Column(name = "START_DATE")
+	private Date startDate;
+	
+	@Column(name = "END_DATE")
+	private Date endDate;
+	
 	@ManyToOne
 	@JoinColumn(name="SUBNOTICE_CODE")
 	private Subnotice subnotice;
@@ -69,5 +77,20 @@ public class File {
 	@OneToOne
 	@JoinColumn(name="LECTURE_WEEK_CODE")
 	private LectureWeek lectureWeek;
+	
+	//강좌 수업자료 수정 용도의 메소드 정의
+	public void lectureUpdate(String originName, String savedRoute, LectureWeek lectureWeek, Date startDate, Date endDate,
+			String fileType) {
+		
+		this.originName = originName;
+		this.savedRoute = savedRoute;
+		this.lectureWeek = lectureWeek;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.fileType = fileType;
+	}
+	
+	
+	
 
 }

@@ -20,7 +20,6 @@ import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.lecture.entity.LectureWeek;
 import com.greedy.StudyFamily.lecture.repository.LectureRepository;
-import com.greedy.StudyFamily.lecture.repository.LectureWeekRepository;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
 import com.greedy.StudyFamily.professor.entity.Professor;
 import com.greedy.StudyFamily.professor.repository.ProfessorRepository;
@@ -48,10 +47,8 @@ public class LectureService {
 	private String FILE_URL;
 	
 	
-	
-	
-	public LectureService
-			(FileRepository fileRepository, ProfessorRepository professorRepository,LectureRepository lectureRepository, StudentRepository studentRepository, ModelMapper modelMapper) {
+	public LectureService(FileRepository fileRepository, ProfessorRepository professorRepository, 
+			LectureRepository lectureRepository, StudentRepository studentRepository, ModelMapper modelMapper) {
 		this.professorRepository = professorRepository;
 		this.lectureRepository = lectureRepository;
 		this.studentRepository = studentRepository;
@@ -156,6 +153,7 @@ public class LectureService {
 		
 			log.info("[ProductService] replaceFileName : {}", replaceFileName);
 			
+			//DB 저장
 			fileRepository.save(modelMapper.map(fileDto, File.class));
 		
 		} catch (IOException e) {
@@ -169,6 +167,70 @@ public class LectureService {
 		}
 		
 		log.info("[LectureService] insertLectureFile End =====================" );
+		
+		return fileDto;
+	}
+
+
+	
+
+	//수업 자료 수정 - 교수
+	@Transactional
+	public FileDto updateLectureFile(FileDto fileDto) {
+		
+		log.info("[LectureService] updateLectureFile Start =====================" );
+		log.info("[LectureService] fileDto : {}", fileDto );
+		
+		String replaceFileName = null;
+		
+		try {
+			
+			File oriFiles = fileRepository.findById(fileDto.getFileCode())
+					.orElseThrow(() -> new IllegalArgumentException("해당 자료가 존재하지 않습니다. fileCode=" + fileDto.getFileCode()));
+			String oriFile = oriFiles.getSavedRoute();
+			
+			log.info("[LectureService] oriFileCode : {}", oriFiles);
+			
+			//이미지 변경 
+			if(fileDto.getLectureFiles() != null) {
+				
+				String fileName = UUID.randomUUID().toString().replace("_", "");
+				
+				replaceFileName = FileUploadUtils.saveFile(FILE_DIR, fileName, fileDto.getLectureFiles());
+				fileDto.setSavedRoute(replaceFileName);
+				
+				//기존 파일 삭제
+				FileUploadUtils.deleteFile(FILE_DIR, oriFile);
+			
+				//미 변경 시
+			} else {
+				fileDto.setSavedRoute(oriFile);
+			}
+			
+			//파일 외 내용 수정
+			oriFiles.lectureUpdate(
+					fileDto.getOriginName(),
+					fileDto.getSavedRoute(),
+					modelMapper.map(fileDto.getLectureWeek(), LectureWeek.class),
+					fileDto.getStartDate(),
+					fileDto.getEndDate(),
+					fileDto.getFileType()
+			);
+			
+			fileRepository.save(oriFiles);
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			 try {
+				 FileUploadUtils.deleteFile(FILE_DIR, replaceFileName);
+			 } catch (IOException e1) {
+				 e1.printStackTrace();
+			
+			}
+		}
+		
+		log.info("[LectureService] updateLectureFile End ===========================");
 		
 		return fileDto;
 	}

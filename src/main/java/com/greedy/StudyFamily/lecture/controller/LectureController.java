@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -133,6 +134,15 @@ public class LectureController {
 	public ResponseEntity<ResponseDto> insertLectureFile(@ModelAttribute FileDto fileDto){
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "파일 등록 성공", lectureService.insertLectureFile(fileDto)));
+	}
+	
+	
+	
+	//수업 자료 수정 - 교수
+	@PutMapping("/lectures")
+	public ResponseEntity<ResponseDto> updateLectureFile(@ModelAttribute FileDto fileDto){
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "파일 수정 성공", lectureService.updateLectureFile(fileDto)));
 	}
 	
 	
