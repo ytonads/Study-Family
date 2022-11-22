@@ -19,6 +19,7 @@ import com.greedy.StudyFamily.admin.repository.FileRepository;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.lecture.entity.LectureWeek;
+import com.greedy.StudyFamily.lecture.entity.Task;
 import com.greedy.StudyFamily.lecture.repository.LectureRepository;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
 import com.greedy.StudyFamily.professor.entity.Professor;
@@ -127,6 +128,9 @@ public class LectureService {
 		log.info("[LectureService] lectureCode : {}", lectureCode );
 		log.info("[LectureService] professorCode : {}", professorCode );
 		
+//		Lecture lecture = lectureRepository.findByLectureCode(lectureCode);
+//		log.info("[LectureService] lecture : {}", lecture );
+		
 		LectureDto lectureDto = modelMapper.map(lectureRepository.findByLectureCode(lectureCode), LectureDto.class);
 		
 		log.info("[LectureService] lectureCode : {}", lectureCode );
@@ -209,12 +213,14 @@ public class LectureService {
 			
 			//파일 외 내용 수정
 			oriFiles.lectureUpdate(
+					fileDto.getFileCode(),
 					fileDto.getOriginName(),
 					fileDto.getSavedRoute(),
-					modelMapper.map(fileDto.getLectureWeek(), LectureWeek.class),
 					fileDto.getStartDate(),
 					fileDto.getEndDate(),
-					fileDto.getFileType()
+					fileDto.getFileType(),
+					fileDto.getLectureWeekCode(),
+					fileDto.getFileCategory()
 			);
 			
 			fileRepository.save(oriFiles);
@@ -231,6 +237,104 @@ public class LectureService {
 		}
 		
 		log.info("[LectureService] updateLectureFile End ===========================");
+		
+		return fileDto;
+	}
+
+
+	
+	//과제 파일 등록 - 학생
+	@Transactional
+	public FileDto insertTaskFile(FileDto fileDto) {
+		
+		log.info("[LectureService] insertTaskFile Start =====================" );
+		log.info("[LectureService] fileDto : {}", fileDto );
+		
+		String fileName = UUID.randomUUID().toString().replace("-", "");
+		String replaceFileName = null;
+		
+		try {
+			replaceFileName = FileUploadUtils.saveFile(FILE_DIR, fileName, fileDto.getLectureFiles());
+			fileDto.setSavedRoute(replaceFileName);
+		
+			log.info("[ProductService] replaceFileName : {}", replaceFileName);
+			
+			//DB 저장
+			fileRepository.save(modelMapper.map(fileDto, File.class));
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+			try {					
+				FileUploadUtils.deleteFile(FILE_DIR, replaceFileName);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+		}
+		
+		log.info("[LectureService] insertTaskFile End =====================" );
+		
+		return fileDto;
+	}
+
+
+	//과제 파일 수정 - 학생
+	@Transactional
+	public FileDto updateTaskFile(FileDto fileDto) {
+		
+		log.info("[LectureService] updateTaskFile Start =====================" );
+		log.info("[LectureService] fileDto : {}", fileDto );
+		
+		String replaceFileName = null;
+		
+		try {
+			
+			File oriFiles = fileRepository.findById(fileDto.getFileCode())
+					.orElseThrow(() -> new IllegalArgumentException("해당 자료가 존재하지 않습니다. fileCode=" + fileDto.getFileCode()));
+			String oriFile = oriFiles.getSavedRoute();
+			
+			log.info("[LectureService] oriFileCode : {}", oriFiles);
+			
+			//이미지 변경 
+			if(fileDto.getLectureFiles() != null) {
+				
+				String fileName = UUID.randomUUID().toString().replace("_", "");
+				
+				replaceFileName = FileUploadUtils.saveFile(FILE_DIR, fileName, fileDto.getLectureFiles());
+				fileDto.setSavedRoute(replaceFileName);
+				
+				//기존 파일 삭제
+				FileUploadUtils.deleteFile(FILE_DIR, oriFile);
+			
+				//미 변경 시
+			} else {
+				fileDto.setSavedRoute(oriFile);
+			}
+			
+			//파일 외 내용 수정
+			oriFiles.taskUpdate(
+					fileDto.getFileCode(),
+					fileDto.getOriginName(),
+					fileDto.getSavedRoute(),
+					fileDto.getTaskCode(),
+					fileDto.getFileType(),
+					fileDto.getFileCategory()
+			);
+			
+			fileRepository.save(oriFiles);
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			 try {
+				 FileUploadUtils.deleteFile(FILE_DIR, replaceFileName);
+			 } catch (IOException e1) {
+				 e1.printStackTrace();
+			
+			}
+		}
+		
+		log.info("[LectureService] updateTaskFile End ===========================");
 		
 		return fileDto;
 	}

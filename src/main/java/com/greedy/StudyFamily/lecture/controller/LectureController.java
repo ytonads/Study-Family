@@ -147,7 +147,20 @@ public class LectureController {
 	
 	
 	
+	//과제 파일 등록 - 학생
+	@PostMapping("/tasks")
+	public ResponseEntity<ResponseDto> insertTaskFile(@ModelAttribute FileDto fileDto){
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "과제 등록 성공", lectureService.insertTaskFile(fileDto)));
+	}
 	
+	
+	//과제 파일 수정 - 학생
+	@PutMapping("/tasks")
+	public ResponseEntity<ResponseDto> updateTaskFile(@ModelAttribute FileDto fileDto){
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "과제 수정 성공", lectureService.updateTaskFile(fileDto)));
+	}
 	
 	
 }
