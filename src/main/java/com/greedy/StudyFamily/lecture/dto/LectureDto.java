@@ -1,17 +1,26 @@
 package com.greedy.StudyFamily.lecture.dto;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import com.greedy.StudyFamily.lecture.entity.LectureWeek;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
 import com.greedy.StudyFamily.subject.dto.SubjectDto;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-@Data
+//@Data
+@Getter
+@Setter
+//@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class LectureDto {
 
 	private Long lectureCode;
@@ -21,7 +30,26 @@ public class LectureDto {
 	private String lectureName;
 	private Long lecturePersonnel;
 	private String openingDate;
-	private List<LectureWeekDto> LectureWeeks;
+	
+	@JsonIgnore
+	private List<LectureWeekDto> lectureWeeks;
+	
+	 @JsonProperty("lectureWeeks")
+	 public List<Map<String, Object>> getLectureWeeks() {
+	    return lectureWeeks.stream().map(lectureWeek -> dtoToMap(lectureWeek)).toList();
+	 }
+	 
+	 public Map<String, Object> dtoToMap(LectureWeekDto lectureWeek){
+		 
+		 Map<String, Object> map = new HashMap<>();
+		 map.put("lectureWeekCode", lectureWeek.getLectureWeekCode());
+		 map.put("week", lectureWeek.getWeek());
+		 map.put("fileDivision", lectureWeek.getFileDivision());
+//		 map.put("startDate", lectureWeek.getStartDate());
+//		 map.put("endDate", lectureWeek.getEndDate());
+		 
+		 return map;
+	 }
 	
 	
 }

@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.greedy.StudyFamily.professor.entity.Professor;
 import com.greedy.StudyFamily.subject.entity.Subject;
 
@@ -25,7 +26,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-//@ToString
+@ToString
 @Entity
 @Table(name = "TBL_LECTURE")
 @DynamicInsert
@@ -59,7 +60,9 @@ public class Lecture {
 	private List<AppClass> AppClasses = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "lectures", cascade = CascadeType.ALL)
-	private List<LectureWeek> LectureWeeks = new ArrayList<>();
+	private List<LectureWeek> lectureWeeks = new ArrayList<>();
+	
+	
 	
 
 }

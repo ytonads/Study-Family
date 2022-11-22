@@ -1,5 +1,7 @@
 package com.greedy.StudyFamily.admin.dto;
 
+import java.sql.Date;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.greedy.StudyFamily.board.dto.SchoolNoticeDto;
@@ -20,6 +22,8 @@ public class FileDto {
 	private String thumbnailRoute;
 	private String thumbnailName;
 	private String fileCategory;
+	private Date startDate;
+	private Date endDate;
 	private SubnoticeDto subnotice;
 	private SchoolNoticeDto schoolNotice;
 	private TaskDto task;
