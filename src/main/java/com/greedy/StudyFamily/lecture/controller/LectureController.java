@@ -136,8 +136,28 @@ public class LectureController {
 	}
 	
 	
+	//수강신청 강좌 목록 조회 
+	@GetMapping("/appClass/list")
+	public ResponseEntity<ResponseDto> selectLectureList(@RequestParam(name="page", defaultValue="1") int page) {
+		
+		log.info("[LectureController] selectAppClassList Start ================================");
+		log.info("[LectureController] page : {}", page);
+		
+		Page<LectureDto> lectureDtoList = lectureService.selectLectureList(page);
+		
+		PagingButtonInfo pageInfo = Pagenation.getPagingButtonInfo(lectureDtoList);
+		 
+		log.info("[LectureController] pageInfo : {}", pageInfo);
+		
+		ResponseDtoWithPaging responseDtoWithPaging = new ResponseDtoWithPaging();
+		responseDtoWithPaging.setPageInfo(pageInfo);
+		responseDtoWithPaging.setData(lectureDtoList.getContent());
+		
+		log.info("[LectureController] selectAppClassList End ================================");
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "조회 성공", responseDtoWithPaging));
+	}
 	
-	
-	
+
 	
 }

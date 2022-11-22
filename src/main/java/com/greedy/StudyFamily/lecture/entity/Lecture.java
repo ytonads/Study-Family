@@ -60,6 +60,5 @@ public class Lecture {
 	
 	@OneToMany(mappedBy = "lectures", cascade = CascadeType.ALL)
 	private List<LectureWeek> LectureWeeks = new ArrayList<>();
-	
 
 }

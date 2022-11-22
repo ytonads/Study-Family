@@ -18,9 +18,7 @@ import com.greedy.StudyFamily.admin.entity.File;
 import com.greedy.StudyFamily.admin.repository.FileRepository;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
-import com.greedy.StudyFamily.lecture.entity.LectureWeek;
 import com.greedy.StudyFamily.lecture.repository.LectureRepository;
-import com.greedy.StudyFamily.lecture.repository.LectureWeekRepository;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
 import com.greedy.StudyFamily.professor.entity.Professor;
 import com.greedy.StudyFamily.professor.repository.ProfessorRepository;
@@ -175,7 +173,22 @@ public class LectureService {
 
 	
 	
-
+	// 수강신청 리스트 조회
+	public Page<LectureDto> selectLectureList(int page) {
+		
+		log.info("[LectureService] selectLectureList Start =====================" );
+		
+		Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("lectureCode").descending());
+	
+		Page<Lecture> lectureList = lectureRepository.findAll(pageable);
+		Page<LectureDto> lectureDtoList = lectureList.map(lecture -> modelMapper.map(lecture, LectureDto.class));
+		
+		log.info("[LectureService] lectureDtoList : {}", lectureDtoList.getContent());
+		
+		log.info("[LectureService] selectLectureList End =====================" );
+		
+		return lectureDtoList;
+	}
 
 
 	
