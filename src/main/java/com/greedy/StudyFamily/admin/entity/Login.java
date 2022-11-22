@@ -5,14 +5,12 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
-import com.greedy.StudyFamily.msg.entity.Msg;
 import com.greedy.StudyFamily.professor.entity.Professor;
 import com.greedy.StudyFamily.student.entity.Student;
 
@@ -31,17 +29,11 @@ import lombok.ToString;
 public class Login implements Serializable{
 	
 	@Id
-	@Column(name = "LOGIN_CODE")
-	private Long loginCode;
-	
 	@Column(name="LOGIN_ID")
 	private String loginId;
 	
 	@Column(name="LOGIN_PASSWORD")
 	private String loginPassword;
-	
-	@Column(name = "MEMBER_ROLE")
-	private String memberRole;
 	
 	@JoinColumn(name="PROFESSOR_CODE")
 	@OneToOne
@@ -50,4 +42,9 @@ public class Login implements Serializable{
 	@JoinColumn(name="STUDENT_NO")
 	@OneToOne
 	private Student student;
+	
+	@JoinColumn(name="AUTHORITY_CODE")
+	@OneToOne
+	private Authority authority;
+
 }
