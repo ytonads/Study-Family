@@ -15,10 +15,8 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-//@Data
 @Getter
 @Setter
-//@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 public class LectureDto {
@@ -45,8 +43,13 @@ public class LectureDto {
 		 map.put("lectureWeekCode", lectureWeek.getLectureWeekCode());
 		 map.put("week", lectureWeek.getWeek());
 		 map.put("fileDivision", lectureWeek.getFileDivision());
-//		 map.put("startDate", lectureWeek.getStartDate());
-//		 map.put("endDate", lectureWeek.getEndDate());
+		 map.put("fileCode", lectureWeek.getFiles().getFileCode());
+		 map.put("originName", lectureWeek.getFiles().getOriginName());
+		 map.put("savedRoute", lectureWeek.getFiles().getSavedRoute());
+		 map.put("fileCategory", lectureWeek.getFiles().getFileCategory());
+		 map.put("startDate", lectureWeek.getFiles().getStartDate());
+		 map.put("endDate", lectureWeek.getFiles().getEndDate());
+		 map.put("lectureWeekCode", lectureWeek.getFiles().getLectureWeekCode());
 		 
 		 return map;
 	 }
