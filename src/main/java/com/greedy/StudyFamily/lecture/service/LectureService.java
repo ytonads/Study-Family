@@ -1,7 +1,9 @@
 package com.greedy.StudyFamily.lecture.service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -16,10 +18,14 @@ import org.springframework.stereotype.Service;
 import com.greedy.StudyFamily.admin.dto.FileDto;
 import com.greedy.StudyFamily.admin.entity.File;
 import com.greedy.StudyFamily.admin.repository.FileRepository;
+import com.greedy.StudyFamily.exception.UserNotFoundException;
+import com.greedy.StudyFamily.lecture.dto.AppClassDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
+
 import com.greedy.StudyFamily.lecture.entity.LectureWeek;
 import com.greedy.StudyFamily.lecture.entity.Task;
+
 import com.greedy.StudyFamily.lecture.repository.LectureRepository;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
 import com.greedy.StudyFamily.professor.entity.Professor;
@@ -341,10 +347,24 @@ public class LectureService {
 
 	
 	
-
-
-
+	// 수강신청 리스트 조회
+	public Page<LectureDto> selectLectureList(int page) {
+		
+		log.info("[LectureService] selectLectureList Start =====================" );
+		
+		Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("lectureCode").descending());
 	
+		Page<Lecture> lectureList = lectureRepository.findAll(pageable);
+		Page<LectureDto> lectureDtoList = lectureList.map(lecture -> modelMapper.map(lecture, LectureDto.class));
+		
+		log.info("[LectureService] lectureDtoList : {}", lectureDtoList.getContent());
+		
+		log.info("[LectureService] selectLectureList End =====================" );
+		
+		return lectureDtoList;
+	}
+
+
 	
 
 	
