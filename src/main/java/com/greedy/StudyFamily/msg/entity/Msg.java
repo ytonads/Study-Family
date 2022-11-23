@@ -1,6 +1,5 @@
 package com.greedy.StudyFamily.msg.entity;
 
-import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -8,14 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.greedy.StudyFamily.admin.entity.Login;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
@@ -33,7 +32,7 @@ import lombok.ToString;
 @Table(name = "TBL_MSG")
 @SequenceGenerator(name = "MSG_SEQ_GENERATOR", sequenceName = "SEQ_MSG_CODE", initialValue = 1, allocationSize = 1)
 @DynamicInsert
-public class Msg implements Serializable {
+public class Msg /*implements Serializable*/ {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MSG_SEQ_GENERATOR")
@@ -61,18 +60,14 @@ public class Msg implements Serializable {
 	
 	@Column(name = "DELETE_STATUS")
 	private String deleteStatus;
-	
-	/*@ManyToOne
-	@JoinColumn(name = "SENDER, RECEIVER")
-	private Msg msg;
 
-	@OneToOne
-	@JoinColumn(name = "LOGIN_ID")
+	@ManyToOne
+	@JoinColumn(name = "SENDER_ID")
 	private Login sender;
 	
-	@OneToOne
-	@JoinColumn(name = "LOGIN_ID")
-	private Login receiver;*/
+	@ManyToOne
+	@JoinColumn(name = "RECEIVER_ID")
+	private Login receiver;
 
 	
 }

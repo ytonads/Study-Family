@@ -58,9 +58,6 @@ public class File {
 	@Column(name="THUMBNAIL_NAME")
 	private String thumbnailName;
 	
-	@Column(name="FILE_CATEGORY")
-	private String fileCategory;
-	
 	@Column(name = "START_DATE")
 	private Date startDate;
 	
@@ -81,7 +78,7 @@ public class File {
 	
 	//강좌 수업자료 수정 용도의 메소드 정의
 	public void lectureUpdate(Long fileCode, String originName, String savedRoute, Date startDate, Date endDate,
-			String fileType, Long lectureWeekCode, String fileCategory) {
+			String fileType, Long lectureWeekCode) {
 		
 		this.fileCode = fileCode;
 		this.originName = originName;
@@ -90,19 +87,17 @@ public class File {
 		this.endDate = endDate;
 		this.fileType = fileType;
 		this.lectureWeekCode = lectureWeekCode;
-		this.fileCategory = fileCategory;
 	}
 	
 	
 	//과제 파일 수정 용도의 메소드 정의
-	public void taskUpdate(Long fileCode, String originName, String savedRoute, Long taskCode, String fileType, String fileCategory) {
+	public void taskUpdate(Long fileCode, String originName, String savedRoute, Long taskCode, String fileType) {
 		
 		this.fileCode = fileCode;
 		this.originName = originName;
 		this.savedRoute = savedRoute;
 		this.taskCode = taskCode;
 		this.fileType = fileType;
-		this.fileCategory = fileCategory;
 		
 	}
 	
