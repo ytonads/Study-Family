@@ -48,7 +48,7 @@ public class MsgService {
 	
 	
 	
-	//강좌코드로 수강 학생 리스트 조회 - AppClass 엔티티 기준
+	//수강생 리스트 조회
 	public Page<AppClassDto> selectStudentListByLectureCode(int page, LectureDto lecture) {
 		log.info("[MsgService] selectStudentListByLectureCode Start =======================");
 		
@@ -73,50 +73,49 @@ public class MsgService {
 	
 	//쪽지 발송
 	@Transactional
-	public MsgDto write(MsgDto msgDto) {
+	public MsgDto write(MsgDto msgDto, LoginDto senderDto) {
 		log.info("[MsgService] write Start =======================");
 		log.info("[MsgService] msgDto : {}", msgDto);
 		
+		//수신자 조회
+		Login receiver = loginRepository.findByLoginId(msgDto.getReceiver().getLoginId())
+				.orElseThrow(() -> new IllegalArgumentException("해당 학생이 존재하지 않습니다."));
+		//강좌 조회
+		Lecture lecture = lectureRepository.findById(msgDto.getLecture().getLectureCode())
+				.orElseThrow(() -> new IllegalArgumentException("해당 강좌가 존재하지 않습니다."));
 		
-		Login receiver = loginRepository.findByLoginId(msgDto.getReceiverId());
-		Login sender = loginRepository.findByLoginId(msgDto.getSenderId());
+		//DB 저장
+		Msg newMsg = new Msg();
+		newMsg.setReceiver(receiver);
+		newMsg.setSender(modelMapper.map(senderDto, Login.class));
+		newMsg.setMsgTitle(msgDto.getMsgTitle());
+		newMsg.setMsgContent(msgDto.getMsgContent());
+		newMsg.setMsgStatus(msgDto.getMsgStatus());
+		newMsg.setLecture(lecture);
+		msgRepository.save(newMsg);
 		
 		
-		Msg msg = new Msg();
-		msg.setSender(sender);
-		msg.setReceiver(receiver);
-		
-		msg.setMsgTitle(msgDto.getMsgTitle());
-		msg.setMsgContent(msgDto.getMsgContent());
-		msg.setShipDate(msgDto.getShipDate());
-//		msg.setReceiveDate(msgDto.getReceiveDate());
-		msgRepository.save(msg);
-		
-		log.info("[MsgService] msg : {}", msg);
+		log.info("[MsgService] newMsg : {}", newMsg);
 		log.info("[MsgService] write End =======================");
-		return null;
+		return modelMapper.map(newMsg, MsgDto.class);
+	}
+
+
+
+	//쪽지 수신함 조회
+	public Page<MsgDto> selectReceivedBox(int page, LoginDto receiver) {
+		
+		Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("msgCode").descending());
+		
+		Page<Msg> receivedMsgs = msgRepository.findReceivedMsgs(pageable, modelMapper.map(receiver, Login.class));
+		Page<MsgDto> receivedMsgDtoList = receivedMsgs.map(msg -> modelMapper.map(msg, MsgDto.class));
+		
+		return receivedMsgDtoList;
 	}
 
 	
 	
-	//받은 편지함
-	public List<MsgDto> receivedMessage(LoginDto login) {
-		log.info("[MsgService] receivedMessage Start =======================");
-		log.info("[MsgService] loginId : {}", login);
-		
-//		Login login = loginRepository.findByLoginId(loginId)
-//				.orElseThrow(() -> new UserNotFoundException("해당 유저가 존재하지 않습니다."));
-//		
-//		List<MsgDto> msgList = msgRepository.findByReceiver(login, Sort.by(Sort.Direction.DESC, "msgCode"))
-//				.stream().map(msg -> modelMapper.map(msg, MsgDto.class)).collect(Collectors.toList()); 
-		
-		
-		List<Msg> msgs = msgRepository.findAllByReceiver(login);
-		List<MsgDto> msgDtos = new ArrayList<>();
-		
-		log.info("[MsgService] receivedMessage End =======================");
-		return msgDtos;
-	}
+	
 
 	
 	

@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -20,9 +18,8 @@ import com.greedy.StudyFamily.student.entity.Student;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
-@ToString
+//@ToString
 @Getter
 @Setter
 @NoArgsConstructor
@@ -34,9 +31,6 @@ public class Login implements Serializable{
 	
 	@Id
 	@Column(name="LOGIN_CODE")
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE, generator = "LOGIN_SEQ_GENERATOR"
-	)
 	private Long loginCode;
 	
 	@Column(name="LOGIN_ID")
