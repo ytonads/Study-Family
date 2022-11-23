@@ -29,12 +29,12 @@ public class Department {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_DEPARTMENT_GENERATOR")
 	@Column(name="DEPARTMENT_CODE")
-	private Long DepartmentCode;
+	private Long departmentCode;
 	
 	@Column(name="DEPARTMENT_NAME")
-	private String DepartmentName;
+	private String departmentName;
 	
 	@Column(name="DEPARTMENT_ABOLISH")
-	private String DepartmentAbolish;
+	private String departmentAbolish;
 	
 }
