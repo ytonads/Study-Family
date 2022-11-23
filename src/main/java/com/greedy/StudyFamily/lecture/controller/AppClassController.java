@@ -1,18 +1,21 @@
 package com.greedy.StudyFamily.lecture.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.greedy.StudyFamily.admin.dto.LoginDto;
 import com.greedy.StudyFamily.common.ResponseDto;
 import com.greedy.StudyFamily.lecture.dto.AppClassDto;
 import com.greedy.StudyFamily.lecture.service.AppClassService;
-import com.greedy.StudyFamily.student.dto.StudentDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,30 +25,63 @@ import lombok.extern.slf4j.Slf4j;
 public class AppClassController {
 
 	private final AppClassService appClassService;
-	
+	private List<AppClassDto> appClass;
+
 	public AppClassController(AppClassService appClassService) {
 		this.appClassService = appClassService;
 	}
-	
+
 	/* 수강신청 */
 	@PostMapping("/appClass")
-	public ResponseEntity<ResponseDto> insertAppClass(@RequestBody AppClassDto appClassDto /*, 
-			@AuthenticationPrincipal LoginDto loginUser*/){
-		
-		//나중에 삭제할 코드
-		StudentDto student = new StudentDto();
-		student.setStudentNo(3L);
-		
-		//appClassDto.setStudent(loginUser.getStudentCode());
-		appClassDto.setStudent(student);
-		
+	public ResponseEntity<ResponseDto> insertAppClass(@RequestBody AppClassDto appClassDto,
+			@AuthenticationPrincipal LoginDto loginUser) {
+
+		appClassDto.setStudent(loginUser.getStudent());
+
 		log.info("appClassDto : {}", appClassDto);
-		
-		return ResponseEntity
-				.ok()
+
+		return ResponseEntity.ok()
 				.body(new ResponseDto(HttpStatus.OK, "수강신청 완료", appClassService.insertAppClass(appClassDto)));
-		
+
 	}
+
+	//수강취소2
+	  
+	  @DeleteMapping("/appClass/delete/{appClassCode}") public String
+	  courseCancel(@PathVariable("appClassCode") Long appClassCode) {
+	  appClassService.delete(appClassCode);
+	  
+	  return "redirect:/appClass/list"; 
+	  }
 	
+	// 수강취소 test2
 	
+	/*
+	 * @DeleteMapping("/appClass/delete/test/{appClassCode}") public
+	 * ResponseEntity<ResponseDto> deleteAppClass(@RequestBody AppClassDto
+	 * appClassDto ,
+	 * 
+	 * @AuthenticationPrincipal LoginDto loginUser){
+	 * 
+	 * appClassDto.setStudent(loginUser.getStudent());
+	 * 
+	 * 
+	 * log.info("appClassDto : {}", appClassDto);
+	 * 
+	 * return ResponseEntity .ok() .body(new ResponseDto(HttpStatus.OK, "수강취소 완료",
+	 * appClassService.deleteAppClass(appClassDto)));
+	 * 
+	 * }
+	 */
+	  
+	 
+
+	/* 수강신청한 리스트 목록 */
+	/*
+	 * @GetMapping("/appClass/{studentNo}") public ResponseEntity<ResponseDto>
+	 * getAppClass(@PathVariable Long studentNo) {
+	 * 
+	 * return ResponseEntity .ok() .body(new ResponseDto(HttpStatus.OK,
+	 * "수강 신청한 리스트 조회 완료", appClassService.selectAppClassList(studentNo))); }
+	 */
 }

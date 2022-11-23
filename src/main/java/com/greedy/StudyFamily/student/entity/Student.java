@@ -71,8 +71,8 @@ public class Student {
 	@Column(name = "NATIONALITY")
 	private String nationality;
 
-	@OneToMany
-	@JoinColumn(name = "APP_CLASS_CODE")
+	@OneToMany(mappedBy = "student")
+	//@JoinColumn(name = "APP_CLASS_CODE")
 	 private List<AppClass> appClasses;
 	 
 
@@ -97,7 +97,10 @@ public class Student {
 
 
 
-
+	//== 수강 취소 ==//
+    public void cancel(AppClass appClass) {
+        this.appClasses.remove(appClass);
+    }
 	
 	
 	
