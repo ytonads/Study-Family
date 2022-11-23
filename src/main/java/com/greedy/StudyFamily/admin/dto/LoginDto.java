@@ -22,7 +22,7 @@ public class LoginDto implements UserDetails {
 	private ProfessorDto professor;
 	private StudentDto student;
 	private Long loginCode;
-
+	
 	// security 인증, 인가 코드
 	
 	private Collection<? extends GrantedAuthority> authorities;
