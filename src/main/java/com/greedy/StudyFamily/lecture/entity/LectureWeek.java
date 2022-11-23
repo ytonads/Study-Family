@@ -1,6 +1,5 @@
 package com.greedy.StudyFamily.lecture.entity;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,7 +25,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+//@ToString
 @Entity
 @Table(name = "TBL_LECTURE_WEEK")
 @DynamicInsert
@@ -47,12 +45,8 @@ public class LectureWeek {
 	@JoinColumn(name = "LECTURE_CODE")
 	private Lecture lectures;
 	
-	@Column(name = "START_DATE")
-	private Date startDate;
-	
-	@Column(name = "END_DATE")
-	private Date endDate;
-	
-	
+	@ManyToOne
+	@JoinColumn(name = "FILE_CODE")
+	private File files;
 	
 }

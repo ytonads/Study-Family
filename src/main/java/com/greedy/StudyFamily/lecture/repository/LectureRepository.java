@@ -33,7 +33,7 @@ public interface LectureRepository extends JpaRepository<Lecture, Long>{
 
 
 
-	//강좌 상세 조회
+	//강좌 상세 조회 - 학생!!&교수
 	Lecture findByLectureCode(Long lectureCode);
 
 	//수강신청 리스트 조회
