@@ -9,6 +9,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.greedy.StudyFamily.subject.dto.DepartmentDto;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,6 +41,16 @@ public class Subject {
 	@JoinColumn(name="DEPARTMENT_CODE")
 	@ManyToOne
 	private Department department;   
+	
+	
+	/* 수정용 메서드 */
+	public void modify(String subTitle, String majorType, Long subGrade, Department department) {
+		this.subTitle = subTitle;
+		this.majorType =majorType;
+		this.subGrade = subGrade;
+		this.department = department;
+	}
+	
 	
 	
 	

@@ -79,9 +79,12 @@ public class SecurityConfig {
 		              * 이 때 OPTIONS 메서드로 서버에 사전 요청을 보내 요청 권한이 있는지 확인 */
 		             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 		             .antMatchers("/auth/**").permitAll()
-		             .antMatchers("/api/v1/lecturels/**").permitAll()
-
-		             .antMatchers("/api/v1/reviews/**").permitAll()
+		             .antMatchers("/api/v1/lectures/**").permitAll()
+		             .antMatchers("/api/v1/**").permitAll()
+		             .antMatchers("/api/v1/student/**").permitAll()
+		             .antMatchers("/api/v1/professor/**").permitAll()
+		             .antMatchers("/api/v1/tasks/**").permitAll()
+		             .antMatchers("/api/v1/message/**").permitAll()
 
 		             /* SpringSecurity를 사용하려면 여기서 사용하는것이 맞다. */
 		             //.antMatchers(HttpMethod.GET, "/api/v1/reviews/**").permitAll()	//GET방식 외에는 AthenticationPrincipal이 필요하다.

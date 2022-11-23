@@ -23,7 +23,6 @@ public class FileDto {
 	private String fileType;
 	private String thumbnailRoute;
 	private String thumbnailName;
-	private String fileCategory;
 	private Date startDate;
 	private Date endDate;
 	private Long subnotice;
