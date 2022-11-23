@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.greedy.StudyFamily.professor.entity.Professor;
 import com.greedy.StudyFamily.student.entity.Student;
 
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@ToString
+//@ToString
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,6 +30,9 @@ import lombok.ToString;
 public class Login implements Serializable{
 	
 	@Id
+	@Column(name="LOGIN_CODE")
+	private Long loginCode;
+	
 	@Column(name="LOGIN_ID")
 	private String loginId;
 	

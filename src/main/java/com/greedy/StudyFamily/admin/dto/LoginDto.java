@@ -8,14 +8,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
 import com.greedy.StudyFamily.student.dto.StudentDto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class LoginDto implements UserDetails {
 
 	// 엔티티에서 조회해온 정보를 저장 하는 값
 	
-	//private Long loginCode;
+	private Long loginCode;
 	private String loginId;
 	private String loginPassword;
 	private String memberRole;
