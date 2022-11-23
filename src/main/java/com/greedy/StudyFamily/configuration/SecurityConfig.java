@@ -31,7 +31,9 @@ public class SecurityConfig {
 	private final TokenProvider tokenProvider;
 	
 	//인증, 인가, 토큰 핸들러 의존성 주입
-	public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, JwtAccessDeniedHandler jwtAccessDeniedHandler, TokenProvider tokenProvider) {
+	public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint
+			, JwtAccessDeniedHandler jwtAccessDeniedHandler
+			, TokenProvider tokenProvider) {
 		this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
 		this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
 		this.tokenProvider = tokenProvider;
@@ -60,11 +62,14 @@ public class SecurityConfig {
 		         	.disable()
 		         // exception handling 설정 - 인증/인가 실패 핸들링~
 		         	.exceptionHandling()
+		         	// FilterChain에 직접 추가
 		         		.authenticationEntryPoint(jwtAuthenticationEntryPoint)	//CustomFilter를 사용한다.(정의된 필터가 아닌 개발자가 직접 정의하는 필터)
 		         		.accessDeniedHandler(jwtAccessDeniedHandler)			//CustomFilter를 사용한다.(정의된 필터가 아닌 개발자가 직접 정의하는 필터)
+		        // .and()를 쓰기전에는 HttpSecurity 라는 설정 용도의 객체로 반환되지 않고 실패시의 exception handling 형태로 남아있음. 그래서 .and()를 통해 Http 형식으로 변환함
 		        //exception 핸들링 설정 후 다른 설정을 위해서는 .and()로 바꿔줘야 다음 설정이 오류나지 않음!!중요!!!
-		         	.and()
+		         .and()
 		         // 시큐리티는 기본적으로 세션을 사용하지만 API 서버에선 세션을 사용하지 않기 때문에 세션 설정을 Stateless 로 설정
+		         // 세션대신 토큰을 이용할 것이기 때문에 세션을 사용하지 않겠다 설정한 것이다. 
 		         .sessionManagement()
 		             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		         .and()
@@ -75,8 +80,9 @@ public class SecurityConfig {
 		             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 		             .antMatchers("/auth/**").permitAll()
 		             .antMatchers("/api/v1/lecturels/**").permitAll()
-		             .antMatchers("/api/v1/**").permitAll()
-//		             .antMatchers("/api/v1/reviews/**").permitAll()
+
+		             .antMatchers("/api/v1/reviews/**").permitAll()
+
 		             /* SpringSecurity를 사용하려면 여기서 사용하는것이 맞다. */
 		             //.antMatchers(HttpMethod.GET, "/api/v1/reviews/**").permitAll()	//GET방식 외에는 AthenticationPrincipal이 필요하다.
 		             //.antMatchers("/api/**").hasAnyRole("STUDENT", "ADMIN", "PROFESSOR")  // 나머지 API 는 전부 인증 필요

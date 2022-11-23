@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class AuthorityDto {
 
-	private Long authorityCode;
+	//private Long authorityCode;
 	private String authorityName;
 	private String authorityExplain;
 	

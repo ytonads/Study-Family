@@ -23,7 +23,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @Table(name="TBL_PROFESSOR")
-@DynamicInsert
+@DynamicInsert	// 기본 역할에 대한 설정
 public class Professor {
 	
 	@Id
