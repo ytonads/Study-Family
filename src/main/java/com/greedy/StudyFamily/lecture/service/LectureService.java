@@ -225,8 +225,7 @@ public class LectureService {
 					fileDto.getStartDate(),
 					fileDto.getEndDate(),
 					fileDto.getFileType(),
-					fileDto.getLectureWeekCode(),
-					fileDto.getFileCategory()
+					fileDto.getLectureWeekCode()
 			);
 			
 			fileRepository.save(oriFiles);
@@ -323,8 +322,7 @@ public class LectureService {
 					fileDto.getOriginName(),
 					fileDto.getSavedRoute(),
 					fileDto.getTaskCode(),
-					fileDto.getFileType(),
-					fileDto.getFileCategory()
+					fileDto.getFileType()
 			);
 			
 			fileRepository.save(oriFiles);
