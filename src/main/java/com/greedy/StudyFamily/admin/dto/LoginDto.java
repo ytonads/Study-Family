@@ -21,6 +21,7 @@ public class LoginDto implements UserDetails {
 	private String memberRole;
 	private ProfessorDto professor;
 	private StudentDto student;
+	private Long loginCode;
 
 	// security 인증, 인가 코드
 	
