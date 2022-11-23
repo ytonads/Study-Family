@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -25,10 +28,17 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Table(name = "TBL_LOGIN")
+@SequenceGenerator(name = "LOGIN_SEQ_GENERATOR", sequenceName = "SEQ_LOGIN_CODE", initialValue = 1, allocationSize = 1)
 @DynamicInsert
 public class Login implements Serializable{
 	
 	@Id
+	@Column(name="LOGIN_CODE")
+	@GeneratedValue(
+			strategy = GenerationType.SEQUENCE, generator = "LOGIN_SEQ_GENERATOR"
+	)
+	private Long loginCode;
+	
 	@Column(name="LOGIN_ID")
 	private String loginId;
 	
