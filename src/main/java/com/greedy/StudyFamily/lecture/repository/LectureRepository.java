@@ -36,13 +36,12 @@ public interface LectureRepository extends JpaRepository<Lecture, Long>{
 
 
 	//강좌 상세 조회 - 학생!!&교수
-	@Query("SELECT l " +
-	         "FROM Lecture l " +
-			"WHERE l.lectureCode = :lectureCode ")
-	Optional<Lecture> findByLectureCode(@Param("lectureCode") Long lectureCode);
-	
-	
-	//원래 코드 Lecture findByLectureCode(Long lectureCode);
+	/* 이거 써야 orElseThrow 동작함
+	 * @Query("SELECT l " + "FROM Lecture l " +
+	 * "WHERE l.lectureCode = :lectureCode ") Optional<Lecture>
+	 * findByLectureCode(@Param("lectureCode") Long lectureCode);
+	 */
+	Lecture findByLectureCode(Long lectureCode);
 
 	//수강신청 리스트 조회
 	Page<Lecture> findAll(Pageable pageable);
