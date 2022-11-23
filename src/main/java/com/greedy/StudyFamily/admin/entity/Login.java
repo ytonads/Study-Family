@@ -7,18 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.greedy.StudyFamily.professor.entity.Professor;
 import com.greedy.StudyFamily.student.entity.Student;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 //@ToString
 @Getter
@@ -26,6 +25,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Table(name = "TBL_LOGIN")
+@SequenceGenerator(name = "LOGIN_SEQ_GENERATOR", sequenceName = "SEQ_LOGIN_CODE", initialValue = 1, allocationSize = 1)
 @DynamicInsert
 public class Login implements Serializable{
 	

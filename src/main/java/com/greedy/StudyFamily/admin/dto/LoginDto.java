@@ -12,8 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class LoginDto implements UserDetails {
 
@@ -25,7 +23,7 @@ public class LoginDto implements UserDetails {
 	private String memberRole;
 	private ProfessorDto professor;
 	private StudentDto student;
-
+	
 	// security 인증, 인가 코드
 	
 	private Collection<? extends GrantedAuthority> authorities;
