@@ -65,7 +65,7 @@ public class LectureService {
 
 	
 	
-	//강좌 목록 조회 - 학생
+	/* 강좌 목록 조회(학생) - 완료!!! */
 	public Page<LectureDto> selectLectureStuList(int page, StudentDto student) {
 		
 		log.info("[LectureService] selectLectureStuList Start =====================" );
@@ -87,7 +87,7 @@ public class LectureService {
 	
 	
 
-	//강좌 목록 조회 - 교수
+	/* 강좌 목록 조회(교수) - 완료!!! */
 	public Page<LectureDto> selectLectureProList(int page, ProfessorDto professor) {
 		
 		log.info("[LectureService] selectLectureProList Start =====================" );
@@ -110,7 +110,7 @@ public class LectureService {
 
 
 
-	//강좌 상세 조회 - 학생
+	/* 강좌 상세 조회(학생) - 완료!!! */
 	public LectureDto selectLectureDetailStu(Long lectureCode, Long studentNo) {
 		
 		log.info("[LectureService] selectLectureDetailStu Start =====================" );
@@ -127,15 +127,12 @@ public class LectureService {
 
 	
 
-	//강좌 상세 조회 - 교수
+	/* 강좌 상세 조회 - (교수) - 완료!!! */
 	public LectureDto selectLectureDetailPro(Long lectureCode, Long professorCode) {
 		
 		log.info("[LectureService] selectLectureDetailPro Start =====================" );
 		log.info("[LectureService] lectureCode : {}", lectureCode );
 		log.info("[LectureService] professorCode : {}", professorCode );
-		
-//		Lecture lecture = lectureRepository.findByLectureCode(lectureCode);
-//		log.info("[LectureService] lecture : {}", lecture );
 		
 		LectureDto lectureDto = modelMapper.map(lectureRepository.findByLectureCode(lectureCode), LectureDto.class);
 		
@@ -147,7 +144,7 @@ public class LectureService {
 	}
 
 
-	//수업 자료 등록 - 교수
+	/* 수업 자료 등록(교수) - 완료!!! */
 	@Transactional
 	public FileDto insertLectureFile(FileDto fileDto) {
 		
@@ -184,7 +181,7 @@ public class LectureService {
 
 	
 
-	//수업 자료 수정 - 교수
+	/* 수업 자료 수정(교수) - 완료!!! */
 	@Transactional
 	public FileDto updateLectureFile(FileDto fileDto) {
 		
@@ -248,7 +245,7 @@ public class LectureService {
 
 
 	
-	//과제 파일 등록 - 학생
+	/* 과제 파일 등록(학생) - 완료!!! */
 	@Transactional
 	public FileDto insertTaskFile(FileDto fileDto) {
 		
@@ -283,7 +280,7 @@ public class LectureService {
 	}
 
 
-	//과제 파일 수정 - 학생
+	/* 과제 파일 수정(학생) - 완료!!! */
 	@Transactional
 	public FileDto updateTaskFile(FileDto fileDto) {
 		

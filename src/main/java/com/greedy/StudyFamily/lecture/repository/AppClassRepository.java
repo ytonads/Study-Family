@@ -3,8 +3,8 @@ package com.greedy.StudyFamily.lecture.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import com.greedy.StudyFamily.lecture.entity.AppClass;
 import com.greedy.StudyFamily.lecture.entity.AppClassWrite;
@@ -29,11 +29,8 @@ public interface AppClassRepository extends JpaRepository<AppClass, Long> {
 	 */
 
 	
-	//메세지 발송 시 보여줄 친구목록
-	@Query("SELECT a, s " +
-			"FROM AppClass a, Student s, Lecture l " +
-			"WHERE a.student.studentNo = s.studentNo " +
-			"AND a.lecture.lectureCode = l.lectureCode")
+	/* 수강생 리스트 조회(쪽지) - 완료!!! */
+	@EntityGraph(attributePaths= {"lecture", "student"})
 	Page<AppClass> findByLecture(Pageable pageable, Lecture findLecture);
 
 
