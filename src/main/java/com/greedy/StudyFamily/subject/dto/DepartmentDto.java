@@ -8,5 +8,5 @@ public class DepartmentDto {
 	private Long DepartmentCode;
 	private String DepartmentName;
 	private String DepartmentAbolish;
-	
+		
 }
