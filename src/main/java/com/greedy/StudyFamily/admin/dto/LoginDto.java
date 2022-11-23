@@ -5,7 +5,6 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.greedy.StudyFamily.admin.entity.Authority;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
 import com.greedy.StudyFamily.student.dto.StudentDto;
 
@@ -16,13 +15,12 @@ public class LoginDto implements UserDetails {
 
 	// 엔티티에서 조회해온 정보를 저장 하는 값
 	
-	private Long loginCode;
+	//private Long loginCode;
 	private String loginId;
 	private String loginPassword;
 	private String memberRole;
 	private ProfessorDto professor;
 	private StudentDto student;
-	private AuthorityDto authority;
 
 	// security 인증, 인가 코드
 	

@@ -10,6 +10,7 @@ import com.greedy.StudyFamily.admin.dto.LoginDto;
 import com.greedy.StudyFamily.admin.dto.TokenDto;
 import com.greedy.StudyFamily.admin.entity.Login;
 import com.greedy.StudyFamily.admin.repository.AdminRepository;
+import com.greedy.StudyFamily.exception.DuplicatedLoginIdException;
 import com.greedy.StudyFamily.exception.LoginFailedException;
 import com.greedy.StudyFamily.jwt.TokenProvider;
 
@@ -31,26 +32,26 @@ public class AdminService {
 		this.tokenProvider = tokenProvider;
 	}
 	
-//	/* 1. 관리자 포함 회원가입 */
-//	@Transactional
-//	public LoginDto regist(LoginDto loginDto) {
-//		
-//		log.info("[AuthService] regist Start ====================");
-//		log.info("[AuthService] loginDto : {}", loginDto);
-//		
-//		if(adminRepository.findByLoginId(loginDto.getLoginId()) != null) {
-//			log.info("[AuthService] 아이디 중복입니다.");
-//			throw new DuplicatedLoginIdException("아이디 중복됩니다.");
-//		}
-//		
-//		// 암호화하는 메서드로 암호화하고 저장함. save 통해 우리가 전달받은 dto 값을 Member 타입 엔티티로 바꾼다.
-//		loginDto.setLoginPassword(passwordEncoder.encode(loginDto.getLoginPassword()));
-//		adminRepository.save(modelMapper.map(loginDto, Login.class));
-//		
-//		log.info("[AuthService] regist End ====================");
-//		return loginDto;
-//		
-//	}
+	/* 1. 관리자 포함 회원가입 */
+	@Transactional
+	public LoginDto regist(LoginDto loginDto) {
+		
+		log.info("[AuthService] regist Start ====================");
+		log.info("[AuthService] loginDto : {}", loginDto);
+		
+		if(adminRepository.findByLoginId(loginDto.getLoginId()) == null) {
+			log.info("[AuthService] 아이디 중복입니다.");
+			throw new DuplicatedLoginIdException("아이디 중복됩니다.");
+		}
+		
+		// 암호화하는 메서드로 암호화하고 저장함. save 통해 우리가 전달받은 dto 값을 Member 타입 엔티티로 바꾼다.
+		loginDto.setLoginPassword(passwordEncoder.encode(loginDto.getLoginPassword()));
+		adminRepository.save(modelMapper.map(loginDto, Login.class));
+		
+		log.info("[AuthService] regist End ====================");
+		return loginDto;
+		
+	}
 	
 	/* 2. 로그인 */
 	@Transactional

@@ -55,10 +55,6 @@ public class TokenProvider {
 				.claims()
 				.setSubject(login.getLoginId());
 		
-		// 멤버 권한 claim에 담기
-		List<String> roles = Collections.singletonList(login.getMemberRole());	// 권한 가져오기
-		claims.put(AUTHORITIES_KEY, roles);
-		
 		long now = (new Date()).getTime();
 		
 		Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);	//현재 시간 + 30분 => 토큰 만료시간
@@ -66,7 +62,7 @@ public class TokenProvider {
 		// Access Token 생성
 		String accessToken = Jwts.builder()
 				.setClaims(claims)
-				.setExpiration(accessTokenExpiresIn)
+				.setExpiration(accessTokenExpiresIn)		// 기간
 				.signWith(key, SignatureAlgorithm.HS512)	// 서명 알고리즘
 				.compact();
 		
@@ -107,7 +103,6 @@ public class TokenProvider {
 		
 		//UserDetail 객체를 만들어서 Authentication 리턴
 		UserDetails userDetails = userDetailsService.loadUserByUsername(claims.getSubject());
-		
 		
 		return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
 	}

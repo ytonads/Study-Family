@@ -21,10 +21,11 @@ import lombok.ToString;
 @DynamicInsert
 public class Authority {
 	
-	@Id
-	@Column(name="AUTHORITY_CODE")
-	private Long authorityCode;
+//	@Id
+//	@Column(name="AUTHORITY_CODE")
+//	private Long authorityCode;
 
+	@Id
 	@Column(name="AUTHORITY_NAME")
 	private String authorityName;
 	

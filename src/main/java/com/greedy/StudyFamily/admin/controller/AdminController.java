@@ -23,14 +23,14 @@ public class AdminController {
 
 	
 	
-//	/* 1. 관리자 회원 가입(관리자 로그인 가데이터 넣기위해서 관리자도 가입은 가능해야 함) */
-//	@PostMapping("/regist")
-//	public ResponseEntity<ResponseDto> regist(@RequestBody LoginDto loginDto) {
-//		
-//		// responsedto에 status, message, data 전송
-//		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.CREATED, "회원 가입이 완료되었습니다.", adminService.regist(loginDto)));
-//		
-//	}
+	/* 1. 관리자 회원 가입(관리자 로그인 가데이터 넣기위해서 관리자도 가입은 가능해야 함) */
+	@PostMapping("/regist")
+	public ResponseEntity<ResponseDto> regist(@RequestBody LoginDto loginDto) {
+		
+		// responsedto에 status, message, data 전송
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.CREATED, "회원 가입이 완료되었습니다.", adminService.regist(loginDto)));
+		
+	}
 	
 	/* 2. 로그인 */
 	@PostMapping("/login")

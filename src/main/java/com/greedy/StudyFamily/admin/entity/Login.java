@@ -43,8 +43,7 @@ public class Login implements Serializable{
 	@OneToOne
 	private Student student;
 	
-	@JoinColumn(name="AUTHORITY_CODE")
-	@OneToOne
-	private Authority authority;
+	@JoinColumn(name="MEMBER_ROLE")
+	private String memberRole;
 
 }
