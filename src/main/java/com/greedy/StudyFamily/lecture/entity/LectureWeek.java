@@ -1,6 +1,7 @@
 package com.greedy.StudyFamily.lecture.entity;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,7 +25,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+//@ToString
 @Entity
 @Table(name = "TBL_LECTURE_WEEK")
 @DynamicInsert
@@ -43,21 +43,10 @@ public class LectureWeek {
 	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
-	private Lecture lecture;
+	private Lecture lectures;
 	
-	@Column(name = "START_DATE")
-	private Date startDate;
-	
-	@Column(name = "END_DATE")
-	private Date endDate;
-
-	/*@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "FILE_CODE")
-	private File file;
+	private File files;
 	
-	
-	//수업자료 파일 수정 용도의 메소드
-	public void update(File file) {
-		this.file = file;
-	}*/
 }

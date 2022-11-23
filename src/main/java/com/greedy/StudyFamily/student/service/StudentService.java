@@ -27,7 +27,7 @@ public class StudentService {
 	}
 	
 	/* [학생] 내 정보 조회 */
-	public StudentDto selectMyInfo(String studentNo) {
+	public StudentDto selectMyInfo(Long studentNo) {
 		
 		log.info("[StudentService] selectMyInfo Start ===========================");
 		log.info("[StudentService] studentNo : {}", studentNo);

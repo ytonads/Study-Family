@@ -1,13 +1,19 @@
 package com.greedy.StudyFamily.admin.dto;
 
-import com.greedy.StudyFamily.board.dto.SchoolNoticeDto;
-import com.greedy.StudyFamily.board.dto.SubnoticeDto;
-import com.greedy.StudyFamily.lecture.dto.LectureWeekDto;
-import com.greedy.StudyFamily.lecture.dto.TaskDto;
+import java.sql.Date;
 
-import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
-@Data
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class FileDto {
 
 	private Long fileCode;
@@ -18,9 +24,16 @@ public class FileDto {
 	private String thumbnailRoute;
 	private String thumbnailName;
 	private String fileCategory;
-	private SubnoticeDto subnotice;
-	private SchoolNoticeDto schoolNotice;
-	private TaskDto task;
-	private LectureWeekDto lectureWeek;
+	private Date startDate;
+	private Date endDate;
+	private Long subnotice;
+	private Long schoolNotice;
+	private Long taskCode;
+	private Long lectureWeekCode;
+	
+	
+	//파일 업로드시 추가로 사용할 로직
+	private MultipartFile lectureFiles;
+	
 	
 }

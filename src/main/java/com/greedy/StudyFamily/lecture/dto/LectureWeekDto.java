@@ -1,26 +1,26 @@
 package com.greedy.StudyFamily.lecture.dto;
 
-import java.sql.Date;
-
-import org.springframework.web.multipart.MultipartFile;
-
-
 import com.greedy.StudyFamily.admin.dto.FileDto;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class LectureWeekDto {
 
 	private Long lectureWeekCode;
 	private String week;
 	private String fileDivision;
-	private LectureDto lecture;
-	private Date startDate;
-	private Date endDate;
-	private FileDto file;
+	private LectureDto lectures;
+	private FileDto files;
 	
-	//파일 업로드시 추가로 사용할 로직
-	private MultipartFile lectureFiles;
 
+	
 }

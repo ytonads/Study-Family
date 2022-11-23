@@ -14,7 +14,7 @@ import com.greedy.StudyFamily.student.dto.StudentDto;
 import com.greedy.StudyFamily.student.service.StudentService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class StudentController {
 	
 	private final StudentService studentService;
@@ -25,14 +25,14 @@ public class StudentController {
 	}
 	
 	/* [학생] 내 정보 조회 */
-	@GetMapping("/students/mypage/{studentNo}")
-	public ResponseEntity<ResponseDto> selectMyStudentNo(@PathVariable String studentNo) {
+	@GetMapping("/students/{studentNo}")
+	public ResponseEntity<ResponseDto> selectMyStudentNo(@PathVariable Long studentNo) {
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "내 정보 조회 성공", studentService.selectMyInfo(studentNo)));
 	}
 	
 	/* [학생] 내 정보 - 개인정보 수정*/
-	@PutMapping("/students")
+	@PutMapping("/students/{studentNo}")
 	public ResponseEntity<ResponseDto> updateStudent(@ModelAttribute StudentDto studentDto) {
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "개인 정보 수정 성공", studentService.updateStudent(studentDto)));
