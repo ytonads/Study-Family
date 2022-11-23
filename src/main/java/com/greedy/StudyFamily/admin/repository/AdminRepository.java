@@ -14,6 +14,4 @@ public interface AdminRepository extends JpaRepository<Login, Long> {
 
 
 
-	
-
 }

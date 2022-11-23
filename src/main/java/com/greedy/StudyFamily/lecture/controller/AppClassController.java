@@ -2,6 +2,8 @@ package com.greedy.StudyFamily.lecture.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +34,7 @@ public class AppClassController {
 		
 		//나중에 삭제할 코드
 		StudentDto student = new StudentDto();
-		student.setStudentNo(1L);
+		student.setStudentNo(3L);
 		
 		//appClassDto.setStudent(loginUser.getStudentCode());
 		appClassDto.setStudent(student);
@@ -45,5 +47,5 @@ public class AppClassController {
 		
 	}
 	
-
+	
 }

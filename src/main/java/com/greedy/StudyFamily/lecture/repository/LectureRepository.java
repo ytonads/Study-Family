@@ -1,8 +1,11 @@
 package com.greedy.StudyFamily.lecture.repository;
 
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -36,12 +39,6 @@ public interface LectureRepository extends JpaRepository<Lecture, Long>{
 	//수강신청 리스트 조회
 	Page<Lecture> findAll(Pageable pageable);
 	
-	
-
-	
-
-	
-
 
 	
 

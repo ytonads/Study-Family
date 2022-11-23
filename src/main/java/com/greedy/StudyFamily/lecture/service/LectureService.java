@@ -1,7 +1,9 @@
 package com.greedy.StudyFamily.lecture.service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
 import com.greedy.StudyFamily.admin.dto.FileDto;
 import com.greedy.StudyFamily.admin.entity.File;
 import com.greedy.StudyFamily.admin.repository.FileRepository;
+import com.greedy.StudyFamily.exception.UserNotFoundException;
+import com.greedy.StudyFamily.lecture.dto.AppClassDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.lecture.repository.LectureRepository;
@@ -191,7 +195,6 @@ public class LectureService {
 	}
 
 
-	
 	
 
 	
