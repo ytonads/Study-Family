@@ -77,14 +77,14 @@ public class SecurityConfig {
 		             .authorizeRequests()
 		             /* 클라이언트가 외부 도메인을 요청하는 경우 웹 브라우저에서 자체적으로 사전 요청(preflight)이 일어남
 		              * 이 때 OPTIONS 메서드로 서버에 사전 요청을 보내 요청 권한이 있는지 확인 */
-		             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+		             .antMatchers(HttpMethod.OPTIONS, "/**").hasAnyRole("STUDENT")
 		             .antMatchers("/auth/**").permitAll()
-		             .antMatchers("/api/v1/lectures/**").permitAll()
-		             .antMatchers("/api/v1/**").permitAll()
-		             .antMatchers("/api/v1/student/**").permitAll()
-		             .antMatchers("/api/v1/professor/**").permitAll()
-		             .antMatchers("/api/v1/tasks/**").permitAll()
-		             .antMatchers("/api/v1/message/**").permitAll()
+		             .antMatchers("/api/v1/lectures/**").hasAnyRole("PROFESSOR")
+		             .antMatchers("/api/v1/**").hasAnyRole("STUDENT", "PROFESSOR", "ADMIN")
+		             .antMatchers("/api/v1/student/**").hasAnyRole("STUDENT")
+		             .antMatchers("/api/v1/professor/**").hasAnyRole("PROFESSOR", "ADMIN")
+		             .antMatchers("/api/v1/tasks/**").hasAnyRole("STUDENT")
+		             .antMatchers("/api/v1/message/**").hasAnyRole("STUDENT", "PROFESSOR")
 
 		             /* SpringSecurity를 사용하려면 여기서 사용하는것이 맞다. */
 		             //.antMatchers(HttpMethod.GET, "/api/v1/reviews/**").permitAll()	//GET방식 외에는 AthenticationPrincipal이 필요하다.

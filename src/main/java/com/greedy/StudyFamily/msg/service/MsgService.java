@@ -1,6 +1,6 @@
 package com.greedy.StudyFamily.msg.service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -24,6 +24,8 @@ import com.greedy.StudyFamily.lecture.repository.LectureRepository;
 import com.greedy.StudyFamily.msg.dto.MsgDto;
 import com.greedy.StudyFamily.msg.entity.Msg;
 import com.greedy.StudyFamily.msg.repository.MsgRepository;
+import com.greedy.StudyFamily.subject.entity.Department;
+import com.greedy.StudyFamily.subject.repository.DepartmentRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,20 +37,22 @@ public class MsgService {
 	private final LoginRepository loginRepository;
 	private final LectureRepository lectureRepository;
 	private final AppClassRepository appClassRepository;
+	private final DepartmentRepository departmentRepository;
 	private final ModelMapper modelMapper;
 	
 	public MsgService(AppClassRepository appClassRepository, LectureRepository lectureRepository, 
-			MsgRepository msgRepository, LoginRepository loginRepository, ModelMapper modelMapper) {
+			MsgRepository msgRepository, LoginRepository loginRepository, DepartmentRepository departmentRepository, ModelMapper modelMapper) {
 		this.loginRepository = loginRepository;
 		this.msgRepository = msgRepository;
 		this.lectureRepository = lectureRepository;
 		this.appClassRepository = appClassRepository;
+		this.departmentRepository = departmentRepository;
 		this.modelMapper = modelMapper;
 	}
 	
 	
 	
-	//수강생 리스트 조회
+	/* 수강생 리스트 조회 - 완료!!! */
 	public Page<AppClassDto> selectStudentListByLectureCode(int page, LectureDto lecture) {
 		log.info("[MsgService] selectStudentListByLectureCode Start =======================");
 		
@@ -66,20 +70,21 @@ public class MsgService {
 		log.info("[MsgService] selectStudentListByLectureCode End =======================");
 		return appClassDtoList;
 	}
+	
+	
 
 	
-	
-	
-	
-	//쪽지 발송
+	/* 쪽지 발송 - 완료!!! */
 	@Transactional
 	public MsgDto write(MsgDto msgDto, LoginDto senderDto) {
+		
 		log.info("[MsgService] write Start =======================");
 		log.info("[MsgService] msgDto : {}", msgDto);
 		
 		//수신자 조회
-		Login receiver = loginRepository.findByLoginId(msgDto.getReceiver().getLoginId())
-				.orElseThrow(() -> new IllegalArgumentException("해당 학생이 존재하지 않습니다."));
+		Login receiver = loginRepository.findById(msgDto.getReceiver().getLoginCode())
+				.orElseThrow(() -> new IllegalArgumentException("해당 수신자가 존재하지 않습니다."));
+		
 		//강좌 조회
 		Lecture lecture = lectureRepository.findById(msgDto.getLecture().getLectureCode())
 				.orElseThrow(() -> new IllegalArgumentException("해당 강좌가 존재하지 않습니다."));
@@ -94,8 +99,6 @@ public class MsgService {
 		newMsg.setLecture(lecture);
 		msgRepository.save(newMsg);
 		
-		
-		log.info("[MsgService] newMsg : {}", newMsg);
 		log.info("[MsgService] write End =======================");
 		return modelMapper.map(newMsg, MsgDto.class);
 	}

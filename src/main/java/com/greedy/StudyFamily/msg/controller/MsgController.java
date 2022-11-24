@@ -38,7 +38,7 @@ public class MsgController {
 		this.loginRepository = loginRepository;
 	}
 	
-	//수강생 리스트 조회
+	/* 수강생 리스트 조회 - 완료!!! */
 	@GetMapping("/message/lectures/{lectureCode}")
 	public ResponseEntity<ResponseDto> selectStudentList(@PathVariable Long lectureCode, 
 			@RequestParam(name = "page", defaultValue="1") int page){
@@ -64,8 +64,9 @@ public class MsgController {
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "동일 강좌 학생 리스트 조회 성공", responseDtoWithPaging));
 	}
 	
+	
 
-	//쪽지 발송
+	/* 쪽지 발송 - 완료!!! */
 	@PostMapping("/message/send")
 	public ResponseEntity<ResponseDto> sendMessage(@RequestBody MsgDto msgDto,
 			@AuthenticationPrincipal LoginDto sender){
@@ -74,8 +75,9 @@ public class MsgController {
 	}
 	
 	
+	
 	//쪽지 수신함 조회
-	@GetMapping("/message/received")
+	@GetMapping("/message/receive")
 	public ResponseEntity<ResponseDto> getReceivedMessage(@AuthenticationPrincipal LoginDto receiver, 
 			@RequestParam(name = "page", defaultValue = "1") int page){
 		

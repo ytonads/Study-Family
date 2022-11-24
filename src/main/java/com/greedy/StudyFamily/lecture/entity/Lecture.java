@@ -26,7 +26,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+//@ToString
 @Entity
 @Table(name = "TBL_LECTURE")
 @DynamicInsert
@@ -60,7 +60,6 @@ public class Lecture {
 	private List<AppClass> AppClasses = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "lectures", cascade = CascadeType.ALL)
-
 	private List<LectureWeek> lectureWeeks = new ArrayList<>();
 
 
