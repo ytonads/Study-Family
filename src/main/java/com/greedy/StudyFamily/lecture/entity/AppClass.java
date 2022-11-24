@@ -44,9 +44,5 @@ public class AppClass {
 
 
 
-	public void remove(Long appClassCode) {
-		this.appClassCode = appClassCode;
-		
-	}
 	
 }

@@ -96,12 +96,5 @@ public class Student {
 }
 
 
-
-	//== 수강 취소 ==//
-    public void cancel(AppClass appClass) {
-        this.appClasses.remove(appClass);
-    }
-	
-	
 	
 }
