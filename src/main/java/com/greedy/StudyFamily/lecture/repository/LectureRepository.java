@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.greedy.StudyFamily.admin.entity.Login;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.professor.entity.Professor;
 import com.greedy.StudyFamily.student.entity.Student;
@@ -19,13 +20,13 @@ import com.greedy.StudyFamily.student.entity.Student;
 public interface LectureRepository extends JpaRepository<Lecture, Long>{
 
 	
-	/* 강의실 조회(학생) - 완료!!! */
-	@EntityGraph(attributePaths= {"subject", "professor"})
-	@Query("SELECT l " +
-			"FROM Lecture l, AppClass a, Student s " +
-			"WHERE l.lectureCode = a.lecture.lectureCode " +
-			"AND a.student.studentNo = s.studentNo")
-	Page<Lecture> findByStudent(Pageable pageable, Student findStudent);
+	/* 강의실 조회(학생) - 변경 */
+//	@EntityGraph(attributePaths= {"subject", "professor"})
+//	@Query("SELECT l " +
+//			"FROM Lecture l, AppClass a, Student s " +
+//			"WHERE l.lectureCode = a.lecture.lectureCode " +
+//			"AND a.student.studentNo = s.studentNo")
+//	Page<Lecture> findByStudent(Pageable pageable, Student findStudent);
 	
 	
 	/* 강의실 조회(교수) - 완료!!! */
@@ -40,6 +41,14 @@ public interface LectureRepository extends JpaRepository<Lecture, Long>{
 	
 	//수강신청 리스트 조회
 	Page<Lecture> findAll(Pageable pageable);
+
+	/* 강의실 조회(학생) - 완료!!! */
+	@Query("SELECT l " +
+			"FROM Lecture l, AppClass a, Student s " +
+			"WHERE l.lectureCode = a.lecture.lectureCode " +
+			"AND a.student.studentNo = s.studentNo " +
+			"AND s.studentNo = :studentNo")
+	List<Lecture> findByStu(@Param("studentNo")Long studentNo);
 	
 
 	
