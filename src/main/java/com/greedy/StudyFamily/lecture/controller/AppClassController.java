@@ -47,9 +47,10 @@ public class AppClassController {
 
 	//수강취소2
 	  
-	  @DeleteMapping("/appClass/delete/{appClassCode}") public String
-	  courseCancel(@PathVariable("appClassCode") Long appClassCode) {
-	  appClassService.delete(appClassCode);
+	  @DeleteMapping("/appClass/delete/{appClassCode}") 
+	  public String courseCancel(@PathVariable("appClassCode") Long appClassCode) {
+	  
+		  appClassService.delete(appClassCode);
 	  
 	  return "redirect:/appClass/list"; 
 	  }
