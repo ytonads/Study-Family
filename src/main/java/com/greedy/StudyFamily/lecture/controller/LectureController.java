@@ -4,6 +4,7 @@ package com.greedy.StudyFamily.lecture.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.greedy.StudyFamily.admin.dto.FileDto;
+import com.greedy.StudyFamily.admin.dto.LoginDto;
 import com.greedy.StudyFamily.common.ResponseDto;
 import com.greedy.StudyFamily.common.paging.Pagenation;
 import com.greedy.StudyFamily.common.paging.PagingButtonInfo;
@@ -21,7 +23,6 @@ import com.greedy.StudyFamily.common.paging.ResponseDtoWithPaging;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.service.LectureService;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
-import com.greedy.StudyFamily.student.dto.StudentDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,9 +38,10 @@ public class LectureController {
 	}
 	
 	
-	/* 강좌 목록 조회(학생)  - 완료!!! */
-	@GetMapping("/student/{studentNo}")
-	public ResponseEntity<ResponseDto> selectLectureStuList(@PathVariable Long studentNo, @RequestParam(name = "page", defaultValue="1") int page){
+	/* 강좌 목록 조회(학생)  - 변경 */
+/*	@GetMapping("/student/{studentNo}")
+	public ResponseEntity<ResponseDto> selectLectureStuList(@PathVariable Long studentNo, 
+			@RequestParam(name = "page", defaultValue="1") int page, @AuthenticationPrincipal StudentDto student){
 		
 		log.info("[LectureController] selectLectureStuList Start =======================================");
 		log.info("[LectureController] page : {}", page);
@@ -60,8 +62,17 @@ public class LectureController {
 		log.info("[LectureController] selectLectureStuList End =======================================");
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "학생 강좌 목록 조회 성공", responseDtoWithPaging));
+	}*/
+	
+	
+	/* 강좌 목록 조회(학생)  - 완료!!! */
+	@GetMapping("/student/stuLectureList")
+	public ResponseEntity<ResponseDto> selectLectureStuList(@AuthenticationPrincipal LoginDto loginStu){
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "학생 강좌 목록 조회 성공", lectureService.selectLectureStuList(loginStu)));
 	}
 	
+
 	
 	
 	/* 강좌 목록 조회(교수) - 완료!!! */
