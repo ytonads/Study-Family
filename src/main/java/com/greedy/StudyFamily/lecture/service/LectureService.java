@@ -86,16 +86,9 @@ public class LectureService {
 
 
 	/* 강좌 상세 조회(학생) - 완료!!! */
-	public LectureDto selectLectureDetailStu(Long lectureCode, Long studentNo) {
-		
-		log.info("[LectureService] selectLectureDetailStu Start =====================" );
-		log.info("[LectureService] lectureCode : {}", lectureCode );
-		log.info("[LectureService] studentNo : {}", studentNo );
+	public LectureDto selectLectureDetailStu(Long lectureCode) {
 		
 		LectureDto lectureDto = modelMapper.map(lectureRepository.findByLectureCode(lectureCode), LectureDto.class);
-		
-		log.info("[LectureService] lectureCode : {}", lectureCode );
-		log.info("[LectureService] selectLectureDetailStu End =====================" );
 		
 		return lectureDto;
 	}
