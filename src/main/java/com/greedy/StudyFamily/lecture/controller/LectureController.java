@@ -38,32 +38,6 @@ public class LectureController {
 	}
 	
 	
-	/* 강좌 목록 조회(학생)  - 변경 */
-/*	@GetMapping("/student/{studentNo}")
-	public ResponseEntity<ResponseDto> selectLectureStuList(@PathVariable Long studentNo, 
-			@RequestParam(name = "page", defaultValue="1") int page, @AuthenticationPrincipal StudentDto student){
-		
-		log.info("[LectureController] selectLectureStuList Start =======================================");
-		log.info("[LectureController] page : {}", page);
-		
-		StudentDto studentDto = new StudentDto();
-		studentDto.setStudentNo(studentNo);
-		
-		Page<LectureDto> lectureDtoStuList = lectureService.selectLectureStuList(page, studentDto);
-		
-		PagingButtonInfo pageInfo = Pagenation.getPagingButtonInfo(lectureDtoStuList);
-		
-		log.info("[ProductController] pageInfo : {}", pageInfo);
-		
-		ResponseDtoWithPaging responseDtoWithPaging = new ResponseDtoWithPaging();
-		responseDtoWithPaging.setPageInfo(pageInfo);
-		responseDtoWithPaging.setData(lectureDtoStuList.getContent());
-		
-		log.info("[LectureController] selectLectureStuList End =======================================");
-		
-		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "학생 강좌 목록 조회 성공", responseDtoWithPaging));
-	}*/
-	
 	
 	/* 강좌 목록 조회(학생)  - 완료!!! */
 	@GetMapping("/student/stuLectureList")
@@ -73,33 +47,11 @@ public class LectureController {
 	}
 	
 
-	
-	
 	/* 강좌 목록 조회(교수) - 완료!!! */
-	@GetMapping("/professor/{professorCode}")
-	public ResponseEntity<ResponseDto> selectLectureProList(@PathVariable Long professorCode, @RequestParam(name="page", defaultValue="1") int page){
+	@GetMapping("/professor/proLectureList")
+	public ResponseEntity<ResponseDto> selectLectureProList(@AuthenticationPrincipal LoginDto loginPro){
 		
-		log.info("[LectureController] selectLectureProList Start =======================================");
-		log.info("[LectureController] page : {}", page);
-		
-		
-		ProfessorDto professorDto = new ProfessorDto();
-		professorDto.setProfessorCode(professorCode);
-		
-		Page<LectureDto> lectureDtoProList = lectureService.selectLectureProList(page, professorDto);
-		
-		PagingButtonInfo pageInfo = Pagenation.getPagingButtonInfo(lectureDtoProList);
-		
-		log.info("[ProductController] pageInfo : {}", pageInfo);
-		
-		ResponseDtoWithPaging responseDtoWithPaging = new ResponseDtoWithPaging();
-		responseDtoWithPaging.setPageInfo(pageInfo);
-		responseDtoWithPaging.setData(lectureDtoProList.getContent());
-		
-		log.info("[LectureController] selectLectureProList End =======================================");
-		
-		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "교수 강좌 목록 조회 성공", responseDtoWithPaging));
-		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "교수 강좌 목록 조회 성공", lectureService.selectLectureProList(loginPro)));
 	}
 
 	

@@ -60,36 +60,11 @@ public class LectureService {
 		this.loginRepository = loginRepository;
 		this.modelMapper = modelMapper;
 	}
-
-	
-	
-	/* 강좌 목록 조회(학생) - 변경 */
-//	public Page<LectureDto> selectLectureStuList(int page, StudentDto student) {
-//		
-//		log.info("[LectureService] selectLectureStuList Start =====================" );
-//		
-//		Pageable pageable = PageRequest.of(page -1, 10, Sort.by("lectureCode").descending());
-//		
-//		/* 학생 엔티티 조회 */
-//		Student findStudent = studentRepository.findById(student.getStudentNo())
-//				.orElseThrow(() -> new IllegalArgumentException("해당 학생이 없습니다. studentNo= " + student.getStudentNo()));
-//		
-//		Page<Lecture> lectureStuList = lectureRepository.findByStudent(pageable, findStudent);
-//		Page<LectureDto> lectureDtoStuList = lectureStuList.map(lecture -> modelMapper.map(lecture, LectureDto.class));
-//		
-//		log.info("[ProductService] lectureDtoStuList : {}", lectureDtoStuList.getContent());
-//		log.info("[LectureService] selectLectureStuList End =====================" );
-//		
-//		return lectureDtoStuList;
-//	}
 	
 	
 	
 	/* 강좌 목록 조회(학생) - 완료!!! */
 	public List<LectureDto> selectLectureStuList(LoginDto loginStu) {
-		
-//		Login newStu = loginRepository.findById(loginStu.getStudent().getStudentNo())
-//				.orElseThrow(() -> new IllegalArgumentException("학생이 존재하지 않습니다."));
 		
 		List<Lecture> lectList = lectureRepository.findByStu(loginStu.getStudent().getStudentNo());
 		List<LectureDto> lecDtoList = lectList.stream().map(lecture -> modelMapper.map(lecture, LectureDto.class)).toList();
@@ -100,24 +75,12 @@ public class LectureService {
 	
 
 	/* 강좌 목록 조회(교수) - 완료!!! */
-	public Page<LectureDto> selectLectureProList(int page, ProfessorDto professor) {
+	public List<LectureDto> selectLectureProList(LoginDto loginPro) {
 		
-		log.info("[LectureService] selectLectureProList Start =====================" );
+		List<Lecture> lecProList = lectureRepository.findByProfessor(loginPro.getProfessor().getProfessorCode());
+		List<LectureDto> lecProDtoList = lecProList.stream().map(lecture -> modelMapper.map(lecture, LectureDto.class)).toList();
 		
-		Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("lectureCode").descending());
-		
-		/* 교수 엔티티 조회 */
-		Professor findProfessor = professorRepository.findById(professor.getProfessorCode())
-				.orElseThrow(() -> new IllegalArgumentException("해당 교수가 없습니다. professorCode = " + professor.getProfessorCode()));
-		
-
-		Page<Lecture> lectureProList = lectureRepository.findByProfessor(pageable, findProfessor);
-		Page<LectureDto> lectureDtoProList = lectureProList.map(lecture -> modelMapper.map(lecture, LectureDto.class));
-		
-		log.info("[ProductService] lectureDtoProList : {}", lectureDtoProList.getContent());
-		log.info("[LectureService] selectLectureProList End =====================" );
-		
-		return lectureDtoProList;
+		return lecProDtoList;
 	}
 
 

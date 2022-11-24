@@ -69,7 +69,13 @@ public class TokenProvider {
 				.signWith(key, SignatureAlgorithm.HS512)	// 서명 알고리즘
 				.compact();
 		
-		String memberName = login.getProfessor() != null ? login.getProfessor().getProfessorName() : login.getStudent().getStudentName();
+		
+		String memberName = null;
+		if(login.getProfessor() != null && login.getStudent() == null) {
+			memberName = login.getProfessor().getProfessorName();
+		} else if(login.getStudent() != null && login.getProfessor() == null) {
+			memberName = login.getStudent().getStudentName();
+		}
 		
 							//(TYPE , NAME, TOKEN , 유효시간) - DTO에 선언한 모든 데이터를 반환한다.
 		return new TokenDto(BEARER_TYPE, memberName, accessToken, accessTokenExpiresIn.getTime());
