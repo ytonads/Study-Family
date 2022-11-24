@@ -63,9 +63,6 @@ public class Lecture {
 
 	private List<LectureWeek> lectureWeeks = new ArrayList<>();
 
-	//== 수강 취소 ==//
-    public void cancel() {
-        this.lecturePersonnel--;
-    }
+
 
 }

@@ -2,6 +2,7 @@ package com.greedy.StudyFamily.lecture.repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,5 +37,7 @@ public interface AppClassRepository extends JpaRepository<AppClass, Long> {
 	@EntityGraph(attributePaths = {"lecture"})
 	List<AppClass> findByStudent(Student student, Sort appClass);
 
+	//수강취소
+	Optional<AppClass> findByLecture(Long lectureCode);
 
 }

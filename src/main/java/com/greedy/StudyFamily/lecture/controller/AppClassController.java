@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,39 +48,27 @@ public class AppClassController {
 	}
 
 	//수강취소
-	  
-	  @DeleteMapping("/appClass/delete/{appClassCode}") 
-	  public String courseCancel(@PathVariable("appClassCode") Long appClassCode) {
-	  
-		  appClassService.delete(appClassCode);
-	  
-	  return "redirect:/appClass/list"; 
-	  }
+	 @DeleteMapping("/appClass/delete/{appClassCode}") 
+	 public ResponseEntity<ResponseDto> deleteAppClass(@ModelAttribute AppClassDto appClassDto,
+			 @PathVariable("appClassCode") Long appClassCode,
+			 @AuthenticationPrincipal LoginDto loginUser) {
+		 
+		appClassDto.setStudent(loginUser.getStudent());
+
+		log.info("appClassDto : {}", appClassDto);
+			
+		appClassService.deleteAppClass(appClassCode);
+		
+	 
+	 return ResponseEntity
+			 .noContent()
+			 .build();
+	 }
 	
-	// 수강취소 test2
-	
-	/*
-	 * @DeleteMapping("/appClass/delete/test/{appClassCode}") public
-	 * ResponseEntity<ResponseDto> deleteAppClass(@RequestBody AppClassDto
-	 * appClassDto ,
-	 * 
-	 * @AuthenticationPrincipal LoginDto loginUser){
-	 * 
-	 * appClassDto.setStudent(loginUser.getStudent());
-	 * 
-	 * 
-	 * log.info("appClassDto : {}", appClassDto);
-	 * 
-	 * return ResponseEntity .ok() .body(new ResponseDto(HttpStatus.OK, "수강취소 완료",
-	 * appClassService.deleteAppClass(appClassDto)));
-	 * 
-	 * }
-	 */
 	  
 	 
 
 	/* 수강신청한 리스트 목록 */
-	
 	  @GetMapping("/appClass/{studentNo}") 
 	  public ResponseEntity<ResponseDto> getAppClass(@PathVariable Long studentNo) {
 	  

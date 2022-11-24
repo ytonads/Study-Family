@@ -68,47 +68,25 @@ public class AppClassService {
 	
 	 //수강취소
 	@Transactional
-   public void delete(Long appClassCode) {
-       AppClass appClass = appClassRepository.findById(appClassCode).get();
-
-       Student student = studentRepository.findById(appClass.getStudent().getStudentNo()).get();
-       student.cancel(appClass);
-
-       Lecture lecture = lectureRepository.findById(appClass.getLecture().getLectureCode()).get();
-       lecture.cancel();
-
-       appClassRepository.delete(appClass);
-   }
-	
-	//수강취소test2
-	/*
-	 * @Transactional public AppClassDto deleteAppClass(AppClassDto appClassDto) {
-	 * log.info("[AppClassService] deleteAppClass Start =========================");
-	 * log.info("[AppClassService] appClassDto : {}", appClassDto);
-	 * log.info("[AppClassService] appClassDto : {}",
-	 * appClassDto.getLecture().getLectureCode());
-	 * 
-	 * AppClassWrite appClasswrite = new AppClassWrite();
-	 * appClasswrite.setLectureCode(appClassDto.getLecture().getLectureCode());
-	 * appClasswrite.setStudentNo(appClassDto.getStudent().getStudentNo()); // 신청학생
-	 * 정보 입력 AppClassWrite appClass = appClassRepository.save(appClasswrite);
-	 * 
-	 * // Lecture 테이블의 Lecture 조회하여 신청인원 업데이트 Lecture foundLecture =
-	 * lectureRepository.findByLectureCode(appClassDto.getLecture().getLectureCode()
-	 * ); //.orElseThrow(() -> new
-	 * IllegalArgumentException("해당 강좌가 없습니다. lectureCode=" +
-	 * appClassDto.getLecture().getLectureCode()));
-	 * 
-	 * //수강취소하면 신청인원 카운팅
-	 * foundLecture.setLecturePersonnel(foundLecture.getLecturePersonnel() - 1);
-	 * 
-	 * log.info("[AppClassService] insertAppClass End =========================");
-	 * 
-	 * return modelMapper.map(appClass, AppClassDto.class); }
-	 */
+	public void deleteAppClass(Long appClassCode) {
+		
+		log.info("[AppClassService] deleteAppClass Start =========================");
+		log.info("[AppClassService] appClassDto : {}", appClassCode);
+		
+		//AppClass foundAppClass = appClassRepository.findById(appClassDto.getAppClassCode())
+		//		.orElseThrow(() -> new RuntimeException("존재하지 않는 강좌입니다."));
+		
+		AppClass foundAppClass = appClassRepository.findById(appClassCode).get();
+		
+				 
+		appClassRepository.delete(foundAppClass);
+		
+		log.info("[AppClassService] deleteAppClass End =========================");
+		
+	}
+	 
 	 
 	// 수강신청한 리스트 조회
-	
 	  public List<AppClassDto> selectAppClassList(Long studentNo) { 
 	  log.info("[AppClassService] selectAppClassList Start =========================");
 	  log.info("[AppClassService] studentNo : {}", studentNo);
@@ -124,6 +102,7 @@ public class AppClassService {
 	  
 	  return appClassList; 
 	  }
+
 	 
 
 	

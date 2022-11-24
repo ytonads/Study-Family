@@ -5,15 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
-
-import com.greedy.StudyFamily.professor.entity.Professor;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,7 +23,7 @@ import lombok.ToString;
 @Table(name = "TBL_SUB_PLAN")
 @SequenceGenerator(name = "PLAN_SEQ_GENERATOR", sequenceName = "SEQ_PLAN_CODE", initialValue = 1, allocationSize = 1)
 @DynamicInsert
-public class SubPlan {
+public class SubPlanWrite {
 
 	@Id
 	@Column(name = "PLAN_CODE")
@@ -38,13 +33,11 @@ public class SubPlan {
 	@Column(name = "PURPOSE")
 	private String purpose;
 	
-	@ManyToOne
-	@JoinColumn(name = "PROFESSOR_CODE")
-	private Professor professor;
+	@Column(name = "PROFESSOR_CODE")
+	private Long professorCode;
 	
-	@OneToOne
-	@JoinColumn(name = "LECTURE_CODE")
-	private Lecture lecture;
+	@Column(name = "LECTURE_CODE")
+	private Long lectureCode;
 	
 	@Column(name = "PLAN_NAME")
 	private String planName;	
