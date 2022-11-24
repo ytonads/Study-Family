@@ -37,7 +37,7 @@ public class LectureController {
 	}
 	
 	
-	//강좌 목록 조회 - 학생
+	/* 강좌 목록 조회(학생)  - 완료!!! */
 	@GetMapping("/student/{studentNo}")
 	public ResponseEntity<ResponseDto> selectLectureStuList(@PathVariable Long studentNo, @RequestParam(name = "page", defaultValue="1") int page){
 		
@@ -64,7 +64,7 @@ public class LectureController {
 	
 	
 	
-	//강좌 목록 조회 - 교수
+	/* 강좌 목록 조회(교수) - 완료!!! */
 	@GetMapping("/professor/{professorCode}")
 	public ResponseEntity<ResponseDto> selectLectureProList(@PathVariable Long professorCode, @RequestParam(name="page", defaultValue="1") int page){
 		
@@ -94,7 +94,7 @@ public class LectureController {
 	
 	
 	
-	//강좌 상세 조회 - 학생	
+	/* 강좌 상세 조회(학생) - 완료!!! */
 	@GetMapping("/student/{studentNo}/lecture/{lectureCode}")
 	public ResponseEntity<ResponseDto> selectLectureDetailStu(@PathVariable Long lectureCode, @PathVariable Long studentNo){
 		
@@ -112,7 +112,7 @@ public class LectureController {
 	
 	
 	
-	//강좌 상세 조회 - 교수
+	/* 강좌 상세 조회 - (교수) - 완료!!! */
 	@GetMapping("professor/{professorCode}/lecture/{lectureCode}")
 	public ResponseEntity<ResponseDto> selectLectureDetailPro(@PathVariable Long professorCode, @PathVariable Long lectureCode){
 		
@@ -129,12 +129,13 @@ public class LectureController {
 	}
 	
 	
-	//수업 자료 등록 - 교수
+	/* 수업 자료 등록(교수) - 완료!!! */
 	@PostMapping("/lectures")
 	public ResponseEntity<ResponseDto> insertLectureFile(@ModelAttribute FileDto fileDto){
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "파일 등록 성공", lectureService.insertLectureFile(fileDto)));
 	}
+	
 	
 	
 	//수강신청 강좌 목록 조회 
@@ -159,8 +160,10 @@ public class LectureController {
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "조회 성공", responseDtoWithPaging));
 	}
 	
+	
+	
 
-	//수업 자료 수정 - 교수
+	/* 수업 자료 수정(교수) - 완료!!! */
 	@PutMapping("/lectures")
 	public ResponseEntity<ResponseDto> updateLectureFile(@ModelAttribute FileDto fileDto){
 		
@@ -169,7 +172,7 @@ public class LectureController {
 	
 	
 	
-	//과제 파일 등록 - 학생
+	/* 과제 파일 등록(학생) - 완료!!! */
 	@PostMapping("/tasks")
 	public ResponseEntity<ResponseDto> insertTaskFile(@ModelAttribute FileDto fileDto){
 		
@@ -177,7 +180,7 @@ public class LectureController {
 	}
 	
 	
-	//과제 파일 수정 - 학생
+	/* 과제 파일 수정(학생) - 완료!!! */
 	@PutMapping("/tasks")
 	public ResponseEntity<ResponseDto> updateTaskFile(@ModelAttribute FileDto fileDto){
 		

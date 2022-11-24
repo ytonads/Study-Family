@@ -19,30 +19,25 @@ import com.greedy.StudyFamily.student.entity.Student;
 public interface LectureRepository extends JpaRepository<Lecture, Long>{
 
 	
-	//강의실 조회 - 교수
-	@EntityGraph(attributePaths= {"subject", "professor"})
-	Page<Lecture> findByProfessor(Pageable pageable, Professor findProfessor);
-
-	
-	
-	//강의실 조회 - 학생
+	/* 강의실 조회(학생) - 완료!!! */
 	@EntityGraph(attributePaths= {"subject", "professor"})
 	@Query("SELECT l " +
 			"FROM Lecture l, AppClass a, Student s " +
 			"WHERE l.lectureCode = a.lecture.lectureCode " +
 			"AND a.student.studentNo = s.studentNo")
 	Page<Lecture> findByStudent(Pageable pageable, Student findStudent);
-
-
-
-	//강좌 상세 조회 - 학생!!&교수
-	/* 이거 써야 orElseThrow 동작함
-	 * @Query("SELECT l " + "FROM Lecture l " +
-	 * "WHERE l.lectureCode = :lectureCode ") Optional<Lecture>
-	 * findByLectureCode(@Param("lectureCode") Long lectureCode);
-	 */
+	
+	
+	/* 강의실 조회(교수) - 완료!!! */
+	@EntityGraph(attributePaths= {"subject", "professor"})
+	Page<Lecture> findByProfessor(Pageable pageable, Professor findProfessor);
+	
+	
+	/* 강좌 상세 조회(학생, 교수) - 완료!!! */
+	@EntityGraph(attributePaths= {"professor"})
 	Lecture findByLectureCode(Long lectureCode);
 
+	
 	//수강신청 리스트 조회
 	Page<Lecture> findAll(Pageable pageable);
 	

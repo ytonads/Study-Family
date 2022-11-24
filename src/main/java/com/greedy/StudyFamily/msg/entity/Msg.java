@@ -26,7 +26,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+//@ToString
 @Entity
 @Table(name = "TBL_MSG")
 @SequenceGenerator(name = "MSG_SEQ_GENERATOR", sequenceName = "SEQ_MSG_CODE", initialValue = 1, allocationSize = 1)
@@ -67,6 +67,8 @@ public class Msg implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "RECEIVER")
 	private Login receiver;
+
+	
 
 	
 }
