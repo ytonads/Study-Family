@@ -1,10 +1,15 @@
 package com.greedy.StudyFamily.lecture.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.greedy.StudyFamily.exception.UserNotFoundException;
 import com.greedy.StudyFamily.lecture.dto.AppClassDto;
 import com.greedy.StudyFamily.lecture.entity.AppClass;
 import com.greedy.StudyFamily.lecture.entity.AppClassWrite;
@@ -103,24 +108,23 @@ public class AppClassService {
 	 */
 	 
 	// 수강신청한 리스트 조회
-	/*
-	 * public List<AppClassDto> selectAppClassList(Long studentNo) { log.
-	 * info("[AppClassService] selectAppClassList Start =========================");
-	 * log.info("[AppClassService] studentNo : {}", studentNo);
-	 * 
-	 * Student student = studentRepository.findByStudentNo(studentNo)
-	 * .orElseThrow(() -> new UserNotFoundException("해당 학생이 없습니다."));
-	 * 
-	 * List<AppClassDto> appClassList = appClassRepository.findByStudentNo(student,
-	 * Sort.by(Sort.Direction.DESC, "appClassCode")) .stream().map(appClass ->
-	 * modelMapper.map(appClass, AppClassDto.class)).collect(Collectors.toList());
-	 * 
-	 * log.info("[AppClassService] appClassList : {}", appClassList);
-	 * log.info("[AppClassService] selectAppClassList End ========================="
-	 * );
-	 * 
-	 * return appClassList; }
-	 */
+	
+	  public List<AppClassDto> selectAppClassList(Long studentNo) { 
+	  log.info("[AppClassService] selectAppClassList Start =========================");
+	  log.info("[AppClassService] studentNo : {}", studentNo);
+	  
+	  Student student = studentRepository.findByStudentNo(studentNo)
+	  .orElseThrow(() -> new UserNotFoundException("해당 학생이 없습니다."));
+	  
+	  List<AppClassDto> appClassList = appClassRepository.findByStudent(student, Sort.by(Sort.Direction.DESC, "appClassCode")) 
+			  .stream().map(appClass -> modelMapper.map(appClass, AppClassDto.class)).collect(Collectors.toList());
+	  
+	  log.info("[AppClassService] appClassList : {}", appClassList);
+	  log.info("[AppClassService] selectAppClassList End =========================");
+	  
+	  return appClassList; 
+	  }
+	 
 
 	
 	 
