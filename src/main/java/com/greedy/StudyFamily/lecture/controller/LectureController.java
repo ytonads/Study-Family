@@ -53,26 +53,15 @@ public class LectureController {
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "교수 강좌 목록 조회 성공", lectureService.selectLectureProList(loginPro)));
 	}
+	
+	
+	@GetMapping("/student/stuLectureList/{lectureCode}")
+	public ResponseEntity<ResponseDto> selectLectureDetailStu(@PathVariable Long lectureCode){
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "학생 강좌 상세 조회 성공", lectureService.selectLectureDetailStu(lectureCode)));
+	}
 
-	
-	
-	
-	/* 강좌 상세 조회(학생) - 완료!!! */
-	@GetMapping("/student/{studentNo}/lecture/{lectureCode}")
-	public ResponseEntity<ResponseDto> selectLectureDetailStu(@PathVariable Long lectureCode, @PathVariable Long studentNo){
-		
-		log.info("[LectureController] selectLectureDetailStu Start =======================================");
-		log.info("[LectureController] lectureCode : {}", lectureCode);
-		log.info("[LectureController] studentNo : {}", studentNo);
-		
-		LectureDto lectureDtoDeStuList = lectureService.selectLectureDetailStu(lectureCode, studentNo);
-		
-		log.info("[LectureController] lectureDtoDeStuList : {}", lectureDtoDeStuList);
-		log.info("[LectureController] selectLectureDetailStu End =======================================");
-		
-		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "학생 강좌 상세 조회 성공", lectureDtoDeStuList));
-	}	
-	
+
 	
 	
 	/* 강좌 상세 조회 - (교수) - 완료!!! */

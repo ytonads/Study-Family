@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +19,6 @@ import com.greedy.StudyFamily.admin.entity.File;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -48,5 +46,8 @@ public class LectureWeek {
 	@ManyToOne
 	@JoinColumn(name = "FILE_CODE")
 	private File files;
+	
+	@OneToMany(mappedBy = "lectureWeek", cascade = CascadeType.ALL)
+	private List<CourseHistory> courseHistories = new ArrayList<>();
 	
 }
