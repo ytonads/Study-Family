@@ -44,7 +44,6 @@ public class SubnoticeService {
 	}
 
 	
-	
 	//강좌공지 목록 조회
 	public Page<SubNoticeDto> selectSubnoticeList(int page) {
 		
@@ -83,6 +82,7 @@ public class SubnoticeService {
 		return subNoticeDto;
 	}
 
+	
 	//강좌공지 작성
 	  @Transactional 
 	  public SubNoticeDto insertSubnotice(SubNoticeDto subNoticeDto, LoginDto loginUser)
@@ -118,46 +118,17 @@ public class SubnoticeService {
 	  }
 	 
 
-
 	//강좌공지 수정
 	@Transactional
-	public SubNoticeDto updateSubnotice(SubNoticeDto subNoticeDto, LoginDto loginUser) {
+	public SubNoticeDto updateSubnotice(SubNoticeDto subNoticeDto) {
 
-		 log.info("[SubNoticeService] updateSubnotice Start ========================="); 
-		  log.info("[SubNoticeService] subNoticeDto : {}", subNoticeDto);
-		  log.info("[SubNoticeService] subNoticeDto : {}", subNoticeDto.getLecture().getLectureCode());
-
-		  
-			
-			  List<Lecture> lectureList =
-			  lectureRepository.findByProfessor(loginUser.getProfessor().getProfessorCode());
-			  
-			  Optional<Lecture> anyElement = lectureList.stream().
-					  filter(l -> l.getLectureCode() == subNoticeDto.getLecture().getLectureCode()).findAny();
-			  
-			  if(anyElement.isEmpty()) { 
-				  throw new RuntimeException("교수번호와 강좌코드가 일치하지 않습니다."); 
-			  }
-
-			  else {
-			 
-			 
-				/*
-				 * SubNoticeWrite subnotice = new SubNoticeWrite();
-				 * subnotice.setSubnoticeTitle(subNoticeDto.getSubnoticeTitle());
-				 * subnotice.setContent(subNoticeDto.getContent());
-				 * subnotice.setLecture(subNoticeDto.getLecture().getLectureCode());
-				 */
 		SubNotice subnotice = subnoticeRepository.findById(subNoticeDto.getSubnoticeCode())
 				.orElseThrow(() -> new IllegalArgumentException("해당 공지사항이 없습니다. subnoticeCode=" + subNoticeDto.getSubnoticeCode()));
 
 		subnotice.update(subNoticeDto.getSubnoticeTitle(), subNoticeDto.getContent());
 				
 		 subnoticeRepository.save(subnotice);
-			/* } */
-			  }
-		 log.info("[SubNoticeService] updateSubnotice End =========================");
-		 
+
 		return subNoticeDto;
 	}
 

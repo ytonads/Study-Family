@@ -91,11 +91,10 @@ public class SubnoticeController {
 	 
 	  //강좌공지 수정
 		@PutMapping("/subnotices/make")
-		public ResponseEntity<ResponseDto> updateSubnotice(@RequestBody SubNoticeDto subNoticeDto,
-				@AuthenticationPrincipal LoginDto loginUser) {
-			
+		public ResponseEntity<ResponseDto> updateSubnotice(@RequestBody SubNoticeDto subNoticeDto) 
+		{
 			return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "강좌공지 수정 성공", 
-					subnoticeService.updateSubnotice(subNoticeDto, loginUser)));	
+					subnoticeService.updateSubnotice(subNoticeDto)));	
 		}
 	  
 		//강좌공지 삭제
@@ -111,4 +110,7 @@ public class SubnoticeController {
 					.noContent() 
 					.build();
 		}
+		
+
+				
 }
