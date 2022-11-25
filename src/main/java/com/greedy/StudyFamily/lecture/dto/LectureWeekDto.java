@@ -1,5 +1,6 @@
 package com.greedy.StudyFamily.lecture.dto;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,8 @@ public class LectureWeekDto {
 	private String fileDivision;
 	private LectureDto lectures;
 	private FileDto files;
+	private Date startDate;
+	private Date endDate;
 	
 	@JsonIgnore
 	private List<CourseHistoryDto> courseHistories;

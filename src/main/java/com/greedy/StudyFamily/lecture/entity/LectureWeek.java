@@ -1,5 +1,6 @@
 package com.greedy.StudyFamily.lecture.entity;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,12 @@ public class LectureWeek {
 	
 	@Column(name = "FILE_DIVISION")
 	private String fileDivision;
+	
+	@Column(name = "START_DATE")
+	private Date startDate;
+	
+	@Column(name = "END_DATE")
+	private Date endDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")

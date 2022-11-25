@@ -187,8 +187,8 @@ public class LectureService {
 					fileDto.getFileCode(),
 					fileDto.getOriginName(),
 					fileDto.getSavedRoute(),
-					fileDto.getStartDate(),
-					fileDto.getEndDate(),
+//					fileDto.getStartDate(),
+//					fileDto.getEndDate(),
 					fileDto.getFileType(),
 					fileDto.getLectureWeekCode()
 			);

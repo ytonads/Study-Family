@@ -46,8 +46,8 @@ public class LectureDto {
 		 map.put("fileCode", lectureWeek.getFiles().getFileCode());
 		 map.put("originName", lectureWeek.getFiles().getOriginName());
 		 map.put("savedRoute", lectureWeek.getFiles().getSavedRoute());
-		 map.put("startDate", lectureWeek.getFiles().getStartDate());
-		 map.put("endDate", lectureWeek.getFiles().getEndDate());
+//		 map.put("startDate", lectureWeek.getFiles().getStartDate());
+//		 map.put("endDate", lectureWeek.getFiles().getEndDate());
 		 map.put("lectureWeekCode", lectureWeek.getFiles().getLectureWeekCode());
 		 
 		 return map;
