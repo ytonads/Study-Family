@@ -50,9 +50,9 @@ public class LectureWeek {
 	@JoinColumn(name = "LECTURE_CODE")
 	private Lecture lectures;
 	
-	@ManyToOne
-	@JoinColumn(name = "FILE_CODE")
-	private File files;
+//	@ManyToOne
+//	@JoinColumn(name = "LECTURE_WEEK_CODE")
+//	private File files;
 	
 	@OneToMany(mappedBy = "lectureWeek", cascade = CascadeType.ALL)
 	private List<CourseHistory> courseHistories = new ArrayList<>();
