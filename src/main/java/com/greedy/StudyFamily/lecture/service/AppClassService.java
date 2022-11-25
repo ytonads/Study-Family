@@ -78,7 +78,12 @@ public class AppClassService {
 		
 		AppClass foundAppClass = appClassRepository.findById(appClassCode).get();
 		
-				 
+		//수강취소하면 신청인원 카운팅
+		Student student = studentRepository.findById(foundAppClass.getStudent().getStudentNo()).get();
+	    student.cancel(foundAppClass);
+	    Lecture lecture = lectureRepository.findById(foundAppClass.getLecture().getLectureCode()).get();
+	    lecture.cancel();
+	    
 		appClassRepository.delete(foundAppClass);
 		
 		log.info("[AppClassService] deleteAppClass End =========================");

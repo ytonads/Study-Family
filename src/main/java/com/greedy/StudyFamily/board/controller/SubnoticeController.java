@@ -1,12 +1,17 @@
 package com.greedy.StudyFamily.board.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +24,9 @@ import com.greedy.StudyFamily.common.ResponseDto;
 import com.greedy.StudyFamily.common.paging.Pagenation;
 import com.greedy.StudyFamily.common.paging.PagingButtonInfo;
 import com.greedy.StudyFamily.common.paging.ResponseDtoWithPaging;
+import com.greedy.StudyFamily.lecture.dto.AppClassDto;
+import com.greedy.StudyFamily.lecture.dto.LectureDto;
+import com.greedy.StudyFamily.lecture.entity.Lecture;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -69,12 +77,38 @@ public class SubnoticeController {
 	
 	
 	
-	//강좌공지 작성
-	  @PostMapping("/subnotice")
-	  public ResponseEntity<ResponseDto> insertSubnotice(@RequestBody SubNoticeDto subNoticeDto,
-	   @AuthenticationPrincipal LoginDto loginUser) {
-	  
-	  
-	  return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "강좌공지 작성 성공", subnoticeService.insertSubnotice(subNoticeDto))); }
+	  //강좌공지 작성
+	  @PostMapping("/subnotices/make") 
+	  public ResponseEntity<ResponseDto> insertSubnotice(@RequestBody SubNoticeDto subnoticeDto, 
+			  @AuthenticationPrincipal LoginDto loginUser) {
+
+	  log.info("subnoticeDto : {}", subnoticeDto);
+		  
+	  return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "강좌공지 작성 성공",
+	  subnoticeService.insertSubnotice(subnoticeDto, loginUser))); 
+	  }
 	 
+	 
+	  //강좌공지 수정
+		@PutMapping("/subnotices/make")
+		public ResponseEntity<ResponseDto> updateSubnotice(@RequestBody SubNoticeDto subNoticeDto,
+				@AuthenticationPrincipal LoginDto loginUser) {
+			
+			return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "강좌공지 수정 성공", 
+					subnoticeService.updateSubnotice(subNoticeDto, loginUser)));	
+		}
+	  
+		//강좌공지 삭제
+		@DeleteMapping("/subnotices/delete/{subnoticeCode}")
+		public ResponseEntity<?> removeSubnotice(@ModelAttribute SubNoticeDto subnoticeDto,
+				 @PathVariable("subnoticeCode") Long subnoticeCode) {
+			
+			log.info("subnoticeDto : {}", subnoticeDto);
+			
+			subnoticeService.deleteSubnotice(subnoticeCode);
+			
+			return ResponseEntity 
+					.noContent() 
+					.build();
+		}
 }

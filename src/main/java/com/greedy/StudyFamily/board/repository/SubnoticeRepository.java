@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.greedy.StudyFamily.board.entity.SubNotice;
+import com.greedy.StudyFamily.board.entity.SubNoticeWrite;
 
 
 public interface SubnoticeRepository extends JpaRepository<SubNotice, Long>{
@@ -25,6 +26,9 @@ public interface SubnoticeRepository extends JpaRepository<SubNotice, Long>{
 			"WHERE p.subnoticeCode = :subnoticeCode " +
 	          "AND p.status = 'Y'")
 	Optional<SubNotice> findBySubNoticeCode(@Param("subnoticeCode") Long subnoticeCode);
+
+	// 강좌공지 작성
+	SubNoticeWrite save(SubNoticeWrite subnoticeWrite);
 	
 
 
