@@ -1,7 +1,5 @@
 package com.greedy.StudyFamily.lecture.controller;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -27,14 +25,13 @@ import lombok.extern.slf4j.Slf4j;
 public class AppClassController {
 
 	private final AppClassService appClassService;
-	private List<AppClassDto> appClass;
 
 	public AppClassController(AppClassService appClassService) {
 		this.appClassService = appClassService;
 	}
 
 	/* 수강신청 */
-	@PostMapping("/appClass")
+	@PostMapping("/appClass/go")
 	public ResponseEntity<ResponseDto> insertAppClass(@RequestBody AppClassDto appClassDto,
 			@AuthenticationPrincipal LoginDto loginUser) {
 

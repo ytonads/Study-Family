@@ -1,10 +1,14 @@
 package com.greedy.StudyFamily.lecture.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import com.greedy.StudyFamily.admin.dto.LoginDto;
 import com.greedy.StudyFamily.lecture.dto.SubPlanDto;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.lecture.entity.SubPlan;
@@ -49,11 +53,21 @@ public class SubPlanService {
 
 	//수업계획서 작성
 	@Transactional
-	public SubPlanDto insertSubPlan(SubPlanDto subPlanDto) {
+	public SubPlanDto insertSubPlan(SubPlanDto subPlanDto, LoginDto loginUser) {
 		log.info("[SubPlanService] insertSubPlan Start =========================");
 		log.info("[SubPlanService] subPlanDto : {}", subPlanDto);
 		log.info("[SubPlanService] subPlanDto : {}", subPlanDto.getLecture().getLectureCode());
 		
+		List<Lecture> lectureList = lectureRepository.findByProfessor(loginUser.getProfessor().getProfessorCode());
+		  
+		  Optional<Lecture> anyElement = lectureList.stream()
+			        .filter(l -> l.getLectureCode() == subPlanDto.getLecture().getLectureCode()).findAny();
+		  
+		  if(anyElement.isEmpty()) {
+				 throw new RuntimeException("교수번호와 강좌코드가 일치하지 않습니다.");
+			  }
+		  
+		  else {
 		SubPlanWrite subPlanWrite = new SubPlanWrite();
 		subPlanWrite.setLectureCode(subPlanDto.getLecture().getLectureCode());
 		subPlanWrite.setPurpose(subPlanDto.getPurpose());
@@ -63,8 +77,9 @@ public class SubPlanService {
 		// 작성교수 정보 입력
 		SubPlanWrite subPlan = subPlanRepository.save(subPlanWrite);
 
+		  }
 		log.info("[SubPlanService] insertSubPlan End =========================");
 		
-		return modelMapper.map(subPlan, SubPlanDto.class);
+		return modelMapper.map(subPlanDto, SubPlanDto.class);
 	}
 }

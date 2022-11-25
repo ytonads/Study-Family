@@ -7,14 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
-
-import com.greedy.StudyFamily.lecture.entity.Lecture;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +25,7 @@ import lombok.ToString;
 @Table(name = "TBL_SUBNOTICE")
 @SequenceGenerator(name = "SUBNOTICE_SEQ_GENERATOR", sequenceName = "SEQ_SUBNOTICE_CODE", initialValue = 1, allocationSize = 1)
 @DynamicInsert
-public class SubNotice {
+public class SubNoticeWrite {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SUBNOTICE_SEQ_GENERATOR")
@@ -54,16 +50,13 @@ public class SubNotice {
 	@Column(name = "STATUS")
 	private String status;
 	
-	@ManyToOne
-	@JoinColumn(name = "LECTURE_CODE")
-	private Lecture lecture;
+	@Column(name = "LECTURE_CODE")
+	private Long lecture;
 
 	public void update(String subnoticeTitle, String content) {
 		this.subnoticeTitle = subnoticeTitle;
 		this.content = content;
 		
 	}
-
-
 	
 }

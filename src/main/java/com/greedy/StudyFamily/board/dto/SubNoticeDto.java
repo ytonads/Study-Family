@@ -16,5 +16,6 @@ public class SubNoticeDto {
 	private Date modifiedDate;
 	private Date deleteDate;
 	private String status;
-	private LectureDto lectureCode;
+	private LectureDto lecture;
+	
 }
