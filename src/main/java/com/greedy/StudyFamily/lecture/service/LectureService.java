@@ -94,22 +94,31 @@ public class LectureService {
 	}
 
 	
-
 	/* 강좌 상세 조회 - (교수) - 완료!!! */
-	public LectureDto selectLectureDetailPro(Long lectureCode, Long professorCode) {
-		
-		log.info("[LectureService] selectLectureDetailPro Start =====================" );
-		log.info("[LectureService] lectureCode : {}", lectureCode );
-		log.info("[LectureService] professorCode : {}", professorCode );
+	public LectureDto selectLectureDetailPro(Long lectureCode) {
 		
 		LectureDto lectureDto = modelMapper.map(lectureRepository.findByLectureCode(lectureCode), LectureDto.class);
 		
-		log.info("[LectureService] lectureCode : {}", lectureCode );
-		log.info("[LectureService] selectLectureDetailPro End =====================" );
-		
-		
 		return lectureDto;
 	}
+
+	
+
+	/* 강좌 상세 조회 - (교수) - 완료!!! */
+//	public LectureDto selectLectureDetailPro(Long lectureCode, Long professorCode) {
+//		
+//		log.info("[LectureService] selectLectureDetailPro Start =====================" );
+//		log.info("[LectureService] lectureCode : {}", lectureCode );
+//		log.info("[LectureService] professorCode : {}", professorCode );
+//		
+//		LectureDto lectureDto = modelMapper.map(lectureRepository.findByLectureCode(lectureCode), LectureDto.class);
+//		
+//		log.info("[LectureService] lectureCode : {}", lectureCode );
+//		log.info("[LectureService] selectLectureDetailPro End =====================" );
+//		
+//		
+//		return lectureDto;
+//	}
 
 
 	/* 수업 자료 등록(교수) - 완료!!! */
@@ -327,6 +336,9 @@ public class LectureService {
 		return lectureDtoList;
 	}
 
+
+
+	
 
 	
 

@@ -58,8 +58,6 @@ public class File {
 	@Column(name="THUMBNAIL_NAME")
 	private String thumbnailName;
 	
-
-	
 	@Column(name="SUBNOTICE_CODE")
 	private Long subnoticeCode;
 	
@@ -71,6 +69,7 @@ public class File {
 	
 	@Column(name="LECTURE_WEEK_CODE")
 	private Long lectureWeekCode;
+	
 	
 	//강좌 수업자료 수정 용도의 메소드 정의
 	public void lectureUpdate(Long fileCode, String originName, String savedRoute,

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -50,9 +51,8 @@ public class LectureWeek {
 	@JoinColumn(name = "LECTURE_CODE")
 	private Lecture lectures;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "LECTURE_WEEK_CODE")
-//	private File files;
+	@OneToMany(mappedBy = "lectureWeekCode", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<File> file = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "lectureWeek", cascade = CascadeType.ALL)
 	private List<CourseHistory> courseHistories = new ArrayList<>();

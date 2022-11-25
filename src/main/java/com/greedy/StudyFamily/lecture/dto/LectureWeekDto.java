@@ -1,6 +1,7 @@
 package com.greedy.StudyFamily.lecture.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.greedy.StudyFamily.admin.dto.FileDto;
+import com.greedy.StudyFamily.admin.entity.File;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,10 +28,12 @@ public class LectureWeekDto {
 	private String week;
 	private String fileDivision;
 	private LectureDto lectures;
-//	private FileDto files;
 	private Date startDate;
 	private Date endDate;
+	private List<File> file;
 	
+	
+	/* 출결 상태를 위한 참조 */
 	@JsonIgnore
 	private List<CourseHistoryDto> courseHistories;
 
@@ -48,5 +52,8 @@ public class LectureWeekDto {
 		
 		return map;
 	}
+	
+	
+	
 	
 }
