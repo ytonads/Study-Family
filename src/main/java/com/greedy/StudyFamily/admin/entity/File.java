@@ -58,11 +58,7 @@ public class File {
 	@Column(name="THUMBNAIL_NAME")
 	private String thumbnailName;
 	
-	@Column(name = "START_DATE")
-	private Date startDate;
-	
-	@Column(name = "END_DATE")
-	private Date endDate;
+
 	
 	@Column(name="SUBNOTICE_CODE")
 	private Long subnoticeCode;
@@ -77,14 +73,12 @@ public class File {
 	private Long lectureWeekCode;
 	
 	//강좌 수업자료 수정 용도의 메소드 정의
-	public void lectureUpdate(Long fileCode, String originName, String savedRoute, Date startDate, Date endDate,
+	public void lectureUpdate(Long fileCode, String originName, String savedRoute,
 			String fileType, Long lectureWeekCode) {
 		
 		this.fileCode = fileCode;
 		this.originName = originName;
 		this.savedRoute = savedRoute;
-		this.startDate = startDate;
-		this.endDate = endDate;
 		this.fileType = fileType;
 		this.lectureWeekCode = lectureWeekCode;
 	}
