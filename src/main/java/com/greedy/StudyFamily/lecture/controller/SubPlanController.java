@@ -39,14 +39,14 @@ private final SubPlanService subPlanService;
 		}	
 		
 	/* 수업계획서 작성 */
-	@PostMapping("/subPlan")
+	@PostMapping("/subPlan/make")
 	public ResponseEntity<ResponseDto> insertSubPlan(@RequestBody SubPlanDto subPlanDto, 
 			@AuthenticationPrincipal LoginDto loginUser) {
 			
 		subPlanDto.setProfessor(loginUser.getProfessor());
 		
-		log.info("appClassDto : {}", subPlanDto);
+		log.info("subPlanDto : {}", subPlanDto);
 		
-		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "수업계획서 작성 성공", subPlanService.insertSubPlan(subPlanDto)));	
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "수업계획서 작성 성공", subPlanService.insertSubPlan(subPlanDto, loginUser)));	
 	}
 }

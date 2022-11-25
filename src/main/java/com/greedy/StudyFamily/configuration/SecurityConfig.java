@@ -85,7 +85,12 @@ public class SecurityConfig {
 		             .antMatchers("/api/v1/professor/**").hasAnyRole("PROFESSOR", "ADMIN")
 		             .antMatchers("/api/v1/tasks/**").hasAnyRole("STUDENT")
 		             .antMatchers("/api/v1/message/**").hasAnyRole("STUDENT", "PROFESSOR")
-
+		             .antMatchers("/api/v1/appClass/**").hasAnyRole("STUDENT")
+		             //교수만 수업계획서 작성 가능 코드
+		             .antMatchers("/api/v1/subPlan").hasRole("PROFESSOER")
+		             //교수만 강좌 공지 작성 가능 코드
+		             .antMatchers("/api/v1/subNotice").hasRole("PROFESSOER")
+		             
 		             /* SpringSecurity를 사용하려면 여기서 사용하는것이 맞다. */
 		             //.antMatchers(HttpMethod.GET, "/api/v1/reviews/**").permitAll()	//GET방식 외에는 AthenticationPrincipal이 필요하다.
 		             //.antMatchers("/api/**").hasAnyRole("STUDENT", "ADMIN", "PROFESSOR")  // 나머지 API 는 전부 인증 필요
