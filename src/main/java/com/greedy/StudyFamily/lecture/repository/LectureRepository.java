@@ -20,6 +20,7 @@ import com.greedy.StudyFamily.student.entity.Student;
 public interface LectureRepository extends JpaRepository<Lecture, Long>{
 
 	/* 강의실 조회(학생) - 완료!!! */
+	@EntityGraph(attributePaths= {"professor", "subject"})
 	@Query("SELECT l " +
 			"FROM Lecture l, AppClass a, Student s " +
 			"WHERE l.lectureCode = a.lecture.lectureCode " +
