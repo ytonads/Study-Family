@@ -7,18 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
-
-import com.greedy.StudyFamily.board.entity.SchoolNotice;
-import com.greedy.StudyFamily.board.entity.Subnotice;
-import com.greedy.StudyFamily.lecture.entity.LectureWeek;
-import com.greedy.StudyFamily.lecture.entity.Task;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
