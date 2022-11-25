@@ -20,6 +20,9 @@ public class StudentDto {
 	private String studentAddress;
 	private String nationality;
 	
+	/* 추가 */
+	private SchoolStatusDto schoolStatus;
+	
 	
 
 }
