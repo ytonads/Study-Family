@@ -43,8 +43,8 @@ public class LectureDto {
 		 map.put("lectureWeekCode", lectureWeek.getLectureWeekCode());
 		 map.put("week", lectureWeek.getWeek());
 		 map.put("fileDivision", lectureWeek.getFileDivision());
-		 map.put("startDate", lectureWeek.getStartDate());
-		 map.put("endDate", lectureWeek.getEndDate());
+//		 map.put("startDate", lectureWeek.getFile().);
+//		 map.put("endDate", lectureWeek.getEndDate());
 		 map.put("files", lectureWeek.getFile().toArray());
 		 
 		 return map;

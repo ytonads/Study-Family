@@ -24,9 +24,11 @@ public class FileDto {
 	private String thumbnailRoute;
 	private String thumbnailName;
 	private Long subnotice;
-	private Long schoolNotice;
-	private Long taskCode;
-	private Long lectureWeekCode;
+	private Long school;
+	private Long task;
+	private Long lectureWeek;
+	private Date startDate;
+	private Date endDate;
 	
 	
 	//파일 업로드시 추가로 사용할 로직

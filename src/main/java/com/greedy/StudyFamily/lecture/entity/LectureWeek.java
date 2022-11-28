@@ -41,17 +41,12 @@ public class LectureWeek {
 	@Column(name = "FILE_DIVISION")
 	private String fileDivision;
 	
-	@Column(name = "START_DATE")
-	private Date startDate;
-	
-	@Column(name = "END_DATE")
-	private Date endDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
 	private Lecture lectures;
 	
-	@OneToMany(mappedBy = "lectureWeekCode", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "lectureWeek", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<File> file = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "lectureWeek", cascade = CascadeType.ALL)

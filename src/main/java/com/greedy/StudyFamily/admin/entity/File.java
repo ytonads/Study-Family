@@ -51,37 +51,43 @@ public class File {
 	private String thumbnailName;
 	
 	@Column(name="SUBNOTICE_CODE")
-	private Long subnoticeCode;
+	private Long subnotice;
 	
 	@Column(name="SCHOOL_NOTICE_CODE")
-	private Long schoolNoticeCode;
+	private Long schoolNotice;
 	
 	@Column(name="TASK_CODE")
-	private Long taskCode;
+	private Long task;
 	
 	@Column(name="LECTURE_WEEK_CODE")
-	private Long lectureWeekCode;
+	private Long lectureWeek;
+	
+	@Column(name="START_DATE")
+	private Date startDate;
+	
+	@Column(name="END_DATE")
+	private Date endDate;
 	
 	
 	//강좌 수업자료 수정 용도의 메소드 정의
 	public void lectureUpdate(Long fileCode, String originName, String savedRoute,
-			String fileType, Long lectureWeekCode) {
+			String fileType, Long lectureWeek) {
 		
 		this.fileCode = fileCode;
 		this.originName = originName;
 		this.savedRoute = savedRoute;
 		this.fileType = fileType;
-		this.lectureWeekCode = lectureWeekCode;
+		this.lectureWeek = lectureWeek;
 	}
 	
 	
 	//과제 파일 수정 용도의 메소드 정의
-	public void taskUpdate(Long fileCode, String originName, String savedRoute, Long taskCode, String fileType) {
+	public void taskUpdate(Long fileCode, String originName, String savedRoute, Long task, String fileType) {
 		
 		this.fileCode = fileCode;
 		this.originName = originName;
 		this.savedRoute = savedRoute;
-		this.taskCode = taskCode;
+		this.task = task;
 		this.fileType = fileType;
 		
 	}
