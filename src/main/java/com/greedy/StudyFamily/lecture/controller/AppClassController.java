@@ -31,7 +31,7 @@ public class AppClassController {
 	}
 
 	/* 수강신청 */
-	@PostMapping("/appClass/go")
+	@PostMapping("/appClass")
 	public ResponseEntity<ResponseDto> insertAppClass(@RequestBody AppClassDto appClassDto,
 			@AuthenticationPrincipal LoginDto loginUser) {
 

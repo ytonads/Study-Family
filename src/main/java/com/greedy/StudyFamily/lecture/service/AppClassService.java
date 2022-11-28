@@ -53,8 +53,8 @@ public class AppClassService {
 		AppClassWrite appClass = appClassRepository.save(appClasswrite);
 		
 		// Lecture 테이블의 Lecture 조회하여 신청인원 업데이트
-		Lecture foundLecture = lectureRepository.findByLectureCode(appClassDto.getLecture().getLectureCode());
-				//.orElseThrow(() -> new IllegalArgumentException("해당 강좌가 없습니다. lectureCode=" + appClassDto.getLecture().getLectureCode()));
+		Lecture foundLecture = lectureRepository.findByLecture(appClassDto.getLecture().getLectureCode())
+				.orElseThrow(() -> new IllegalArgumentException("해당 강좌가 없습니다. lectureCode=" + appClassDto.getLecture().getLectureCode()));
 		
 		//수강신청하면 신청인원 카운팅
 		foundLecture.setLecturePersonnel(foundLecture.getLecturePersonnel() + 1);

@@ -324,7 +324,7 @@ public class LectureService {
 		
 		log.info("[LectureService] selectLectureList Start =====================" );
 		
-		Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("lectureCode").descending());
+		Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("lectureCode").ascending ());
 	
 		Page<Lecture> lectureList = lectureRepository.findAll(pageable);
 		Page<LectureDto> lectureDtoList = lectureList.map(lecture -> modelMapper.map(lecture, LectureDto.class));
