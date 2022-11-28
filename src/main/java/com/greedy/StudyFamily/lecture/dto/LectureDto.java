@@ -29,6 +29,7 @@ public class LectureDto {
 	private Long lecturePersonnel;
 	private String openingDate;
 	
+	
 	@JsonIgnore
 	private List<LectureWeekDto> lectureWeeks;
 	
@@ -49,6 +50,7 @@ public class LectureDto {
 		 
 		 return map;
 	 }
+	 
 	
 	
 }
