@@ -38,7 +38,7 @@ public class Student {
 	private Long studentNo;
 	
 	@Column(name = "STUDENT_CODE")
-	private Long studentCode;
+	private String studentCode;
 	
 	// 오타 수정
 	@Column(name = "STUDENT_NAME")
