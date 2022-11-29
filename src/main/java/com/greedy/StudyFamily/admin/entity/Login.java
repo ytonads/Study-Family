@@ -45,6 +45,7 @@ public class Login implements Serializable{
 	@Column(name="LOGIN_PASSWORD")
 	private String loginPassword;
 	
+	// 테스트
 	@JoinColumn(name="PROFESSOR_CODE")
 	@OneToOne
 	private Professor professor;
