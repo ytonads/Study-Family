@@ -1,5 +1,6 @@
 package com.greedy.StudyFamily.lecture.entity;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,6 @@ import com.greedy.StudyFamily.admin.entity.File;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -41,12 +41,15 @@ public class LectureWeek {
 	@Column(name = "FILE_DIVISION")
 	private String fileDivision;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
 	private Lecture lectures;
 	
-	@ManyToOne
-	@JoinColumn(name = "FILE_CODE")
-	private File files;
+	@OneToMany(mappedBy = "lectureWeek", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<File> file = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "lectureWeek", cascade = CascadeType.ALL)
+	private List<CourseHistory> courseHistories = new ArrayList<>();
 	
 }

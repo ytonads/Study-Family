@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.greedy.StudyFamily.student.dto.StudentDto;
+import com.greedy.StudyFamily.student.entity.SchoolStatus;
 import com.greedy.StudyFamily.student.entity.Student;
 import com.greedy.StudyFamily.student.repository.StudentListRepository;
 import com.greedy.StudyFamily.subject.entity.Department;
@@ -102,7 +103,9 @@ public class StudentListService {
 					studentDto.getStudentEmail(),
 					studentDto.getStudentPhone(),
 					studentDto.getStudentAddress(),
-					studentDto.getNationality());
+					studentDto.getNationality(),
+					modelMapper.map(studentDto.getSchoolStatus(), SchoolStatus.class));
+					
 			
 			studentListRepository.save(oriStudent);
 			

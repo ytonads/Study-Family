@@ -7,23 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
-import com.greedy.StudyFamily.board.entity.SchoolNotice;
-import com.greedy.StudyFamily.board.entity.Subnotice;
-import com.greedy.StudyFamily.lecture.entity.LectureWeek;
-import com.greedy.StudyFamily.lecture.entity.Task;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 //@ToString
 @NoArgsConstructor
@@ -58,45 +49,47 @@ public class File {
 	@Column(name="THUMBNAIL_NAME")
 	private String thumbnailName;
 	
-	@Column(name = "START_DATE")
-	private Date startDate;
-	
-	@Column(name = "END_DATE")
-	private Date endDate;
-	
 	@Column(name="SUBNOTICE_CODE")
-	private Long subnoticeCode;
+	private Long subnotice;
 	
 	@Column(name="SCHOOL_NOTICE_CODE")
-	private Long schoolNoticeCode;
+	private Long schoolNotice;
 	
 	@Column(name="TASK_CODE")
-	private Long taskCode;
+	private Long task;
 	
 	@Column(name="LECTURE_WEEK_CODE")
-	private Long lectureWeekCode;
+	private Long lectureWeek;
+	
+	@Column(name="START_DATE")
+	private Date startDate;
+	
+	@Column(name="END_DATE")
+	private Date endDate;
+	
 	
 	//강좌 수업자료 수정 용도의 메소드 정의
-	public void lectureUpdate(Long fileCode, String originName, String savedRoute, Date startDate, Date endDate,
-			String fileType, Long lectureWeekCode) {
+	public void lectureUpdate(Long fileCode, String originName, String savedRoute,
+			Date startDate,  Date endtDate, String fileType, Long lectureWeek) {
 		
 		this.fileCode = fileCode;
 		this.originName = originName;
 		this.savedRoute = savedRoute;
 		this.startDate = startDate;
-		this.endDate = endDate;
+		this.endDate = endtDate;
 		this.fileType = fileType;
-		this.lectureWeekCode = lectureWeekCode;
+		this.lectureWeek = lectureWeek;
+		
 	}
 	
 	
 	//과제 파일 수정 용도의 메소드 정의
-	public void taskUpdate(Long fileCode, String originName, String savedRoute, Long taskCode, String fileType) {
+	public void taskUpdate(Long fileCode, String originName, String savedRoute, Long task, String fileType) {
 		
 		this.fileCode = fileCode;
 		this.originName = originName;
 		this.savedRoute = savedRoute;
-		this.taskCode = taskCode;
+		this.task = task;
 		this.fileType = fileType;
 		
 	}

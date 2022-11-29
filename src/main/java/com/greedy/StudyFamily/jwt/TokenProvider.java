@@ -34,7 +34,7 @@ public class TokenProvider {
 	
 	private static final String AUTHORITIES_KEY = "auth";
 	private static final String BEARER_TYPE = "bearer";						// jwp에서 사용하는 타입
-	private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30;	// 30분
+	private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60;	// 60분
 	private final Key key;
 	
 	private final UserDetailsService userDetailsService;
@@ -52,13 +52,16 @@ public class TokenProvider {
 		
 		log.info("[TokenProvider] generateTokenDTO Start =================");
 		
+		List<String> roles = Collections.singletonList(login.getMemberRole());
+		
 		// Claims라고 불리우는 JWT body(payload)에 정보 담기
 		Claims claims = Jwts
 				.claims()
 				.setSubject(login.getLoginId());
 		
-		long now = (new Date()).getTime();
+		claims.put(AUTHORITIES_KEY, roles);
 		
+		long now = (new Date()).getTime();
 		Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);	//현재 시간 + 30분 => 토큰 만료시간
 		
 		// Access Token 생성
@@ -68,8 +71,16 @@ public class TokenProvider {
 				.signWith(key, SignatureAlgorithm.HS512)	// 서명 알고리즘
 				.compact();
 		
+		
+		String memberName = null;
+		if(login.getProfessor() != null && login.getStudent() == null) {
+			memberName = login.getProfessor().getProfessorName();
+		} else if(login.getStudent() != null && login.getProfessor() == null) {
+			memberName = login.getStudent().getStudentName();
+		}
+		
 							//(TYPE , NAME, TOKEN , 유효시간) - DTO에 선언한 모든 데이터를 반환한다.
-		return new TokenDto(BEARER_TYPE, login.getLoginId(), accessToken, accessTokenExpiresIn.getTime());
+		return new TokenDto(BEARER_TYPE, memberName, accessToken, accessTokenExpiresIn.getTime());
 	}
 	
 //	public TokenDto generateTokenDto(ProfessorRegistDto professorRegist) {
