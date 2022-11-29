@@ -44,12 +44,6 @@ public class StudentRegist implements Serializable {
 	@Column(name="STUDENT_CODE")
 	private String studentCode;
 	
-	@Column(name="STUDENT_ID")
-	private String studentId;
-	
-	@Column(name="STUDENT_PASSWORD")
-	private String studentPassword;
-	
 	@Column(name="STUDENT_NAME")
 	private String studentName;
 	
@@ -81,11 +75,8 @@ public class StudentRegist implements Serializable {
 	@Column(name = "NATIONALITY")
 	private String nationality;
 	
-	@Column(name="MEMBER_ROLE")
-	private String memberRole;
-	
-	@ManyToOne
-	@JoinColumn(name = "PROFESSOR_ID")
-	private Professor professorId;
+//	@ManyToOne
+//	@JoinColumn(name = "PROFESSOR_ID")
+//	private Professor professorId;
 	
 }

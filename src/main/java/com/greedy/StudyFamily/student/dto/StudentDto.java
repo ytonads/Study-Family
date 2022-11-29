@@ -8,7 +8,7 @@ import lombok.Data;
 public class StudentDto {
 	
 	private Long studentNo;
-	private String studentCode;
+	private Long studentCode;
 	private String studentName;
 	private String admissionsDay;
 	private DepartmentDto department;

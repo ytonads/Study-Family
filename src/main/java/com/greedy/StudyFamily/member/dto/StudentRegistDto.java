@@ -17,12 +17,12 @@ import lombok.Data;
 public class StudentRegistDto implements UserDetails {
 
 	private Long studentNo;
+	private String studentCode;
 	private String studentId;
 	private String studentPassword;
-	private String studentCode;
 	private String studentName;
-	private String admissionsDay;
 	private DepartmentDto department;
+	private String admissionsDay;
 	private String studentRegistNum;
 	private String grade;
 	private String gender;
@@ -32,11 +32,11 @@ public class StudentRegistDto implements UserDetails {
 	private String nationality;
 	private String memberRole;
 	
-	public StudentRegistDto() {
-		this.memberRole = "ROLE_STUDENT";
-	}
+//	public StudentRegistDto() {
+//		this.memberRole = "ROLE_STUDENT";
+//	}
 	
-private Collection<? extends GrantedAuthority> authorities;
+	private Collection<? extends GrantedAuthority> authorities;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

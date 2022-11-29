@@ -21,7 +21,7 @@ public class ProfessorRegistDto implements UserDetails {
 	private String professorPassword;
 	private String professorName;
 	private String professorPosition;
-	private Date professorHireDate;
+	private String professorHireDate;
 	private String professorRegistNum;
 	private String professorPhone;
 	private String professorAddress;
@@ -30,9 +30,9 @@ public class ProfessorRegistDto implements UserDetails {
 	private DepartmentDto department;
 	private String memberRole;
 	
-	public ProfessorRegistDto() {
-		this.memberRole = "ROLE_PROFESSOR";
-	}
+//	public ProfessorRegistDto() {
+//		this.memberRole = "ROLE_PROFESSOR";
+//	}
 
 	private Collection<? extends GrantedAuthority> authorities;
 	

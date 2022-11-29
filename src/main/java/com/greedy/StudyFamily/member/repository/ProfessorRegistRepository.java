@@ -2,19 +2,22 @@ package com.greedy.StudyFamily.member.repository;
 
 import java.util.Optional;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.greedy.StudyFamily.member.entity.ProfessorRegist;
-import com.greedy.StudyFamily.member.entity.StudentRegist;
+import com.greedy.StudyFamily.professor.entity.Professor;
 
-public interface ProfessorRegistRepository extends JpaRepository<ProfessorRegist, Long>{
+public interface ProfessorRegistRepository extends JpaRepository<Professor, Long>{
 
 	//ProfessorRegist findByProfessorId(String professorId);
 	
-	ProfessorRegist findByProfessorRegistNum(String professorRegistNum);
+	Professor findByProfessorRegistNum(String professorRegistNum);
 	
-	Optional<ProfessorRegist> findByProfessorId(String professorId);
+	//Optional<Professor> findByProfessorId(String professorId);
 	
-	Optional<StudentRegist> findByStudentId(String studentId);
+	//Optional<StudentRegist> findByStudentId(String studentId);
+	
+	/* professor의 professorCode 조회 */
+	Professor findByProfessorCode(Long professorCode);
 	
 }

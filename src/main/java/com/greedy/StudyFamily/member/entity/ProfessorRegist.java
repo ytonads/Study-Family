@@ -78,9 +78,9 @@ public class ProfessorRegist implements Serializable {
 	@Column(name="MEMBER_ROLE")
 	private String memberRole;
 	
-	//@Column(name="STUDENT_ID")
-	@ManyToOne
-	@JoinColumn(name="STUDENT_ID")
-	private StudentRegist studentId;
+//	//@Column(name="STUDENT_ID")
+//	@ManyToOne
+//	@JoinColumn(name="STUDENT_ID")
+//	private StudentRegist studentId;
 	
 }

@@ -37,7 +37,7 @@ public class Professor {
 	private String professorPosition;
 	
 	@Column(name="PROFESSOR_HIRE_DATE")
-	private Date professorHireDate;
+	private String professorHireDate;
 	
 	@Column(name="PROFESSOR_REGIST_NUM")
 	private String professorRegistNum;
