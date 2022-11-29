@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -29,6 +31,7 @@ import lombok.Setter;
 @DynamicInsert
 public class Login implements Serializable{
 	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LOGIN_SEQ_GENERATOR")
 	@Id
 	@Column(name="LOGIN_CODE")
 	private Long loginCode;
