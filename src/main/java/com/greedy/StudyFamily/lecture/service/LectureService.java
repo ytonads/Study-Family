@@ -102,24 +102,6 @@ public class LectureService {
 		return lectureDto;
 	}
 
-	
-
-	/* 강좌 상세 조회 - (교수) - 완료!!! */
-//	public LectureDto selectLectureDetailPro(Long lectureCode, Long professorCode) {
-//		
-//		log.info("[LectureService] selectLectureDetailPro Start =====================" );
-//		log.info("[LectureService] lectureCode : {}", lectureCode );
-//		log.info("[LectureService] professorCode : {}", professorCode );
-//		
-//		LectureDto lectureDto = modelMapper.map(lectureRepository.findByLectureCode(lectureCode), LectureDto.class);
-//		
-//		log.info("[LectureService] lectureCode : {}", lectureCode );
-//		log.info("[LectureService] selectLectureDetailPro End =====================" );
-//		
-//		
-//		return lectureDto;
-//	}
-
 
 	/* 수업 자료 등록(교수) - 완료!!! */
 	@Transactional
@@ -196,10 +178,10 @@ public class LectureService {
 					fileDto.getFileCode(),
 					fileDto.getOriginName(),
 					fileDto.getSavedRoute(),
-//					fileDto.getStartDate(),
-//					fileDto.getEndDate(),
+					fileDto.getStartDate(),
+					fileDto.getEndDate(),
 					fileDto.getFileType(),
-					fileDto.getLectureWeekCode()
+					fileDto.getLectureWeek()
 			);
 			
 			fileRepository.save(oriFiles);
@@ -295,7 +277,7 @@ public class LectureService {
 					fileDto.getFileCode(),
 					fileDto.getOriginName(),
 					fileDto.getSavedRoute(),
-					fileDto.getTaskCode(),
+					fileDto.getTask(),
 					fileDto.getFileType()
 			);
 			
