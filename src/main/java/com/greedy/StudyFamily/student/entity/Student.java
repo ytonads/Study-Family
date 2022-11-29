@@ -40,7 +40,8 @@ public class Student {
 	@Column(name = "STUDENT_CODE")
 	private Long studentCode;
 	
-	@Column(name = "Student_Name")
+	// 오타 수정
+	@Column(name = "STUDENT_NAME")
 	private String studentName;
 	
 	@Column(name = "ADMISSIONS_DAY")
@@ -76,6 +77,7 @@ public class Student {
 	@JoinColumn(name = "SCHOOL_STATUS_CODE")
 	private SchoolStatus schoolStatus;
 
+
 	@OneToMany(mappedBy = "student")
 	//@JoinColumn(name = "APP_CLASS_CODE")
 	 private List<AppClass> appClasses;
@@ -84,6 +86,7 @@ public class Student {
     public void cancel(AppClass appClass) {
         this.appClasses.remove(appClass);
     }
+
 
 	/* 학생정보 수정 용도 메소드 정의 */
 	public void update(String studentCode, String studentName, String admissionsDay, Department department, String studentRegistNum,
