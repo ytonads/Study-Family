@@ -17,6 +17,6 @@ public interface StudentRegistRepository extends JpaRepository<Student, Long>{
 
 	Student findByStudentRegistNum(String studentRegistNum);
 	
-	Student findByStudentCode(Long studentCode);
+	Student findByStudentCode(String studentCode);
 	
 }
