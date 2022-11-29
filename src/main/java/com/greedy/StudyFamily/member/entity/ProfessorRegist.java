@@ -1,15 +1,21 @@
-package com.greedy.StudyFamily.professor.entity;
+package com.greedy.StudyFamily.member.entity;
+
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.greedy.StudyFamily.subject.dto.DepartmentDto;
 import com.greedy.StudyFamily.subject.entity.Department;
 
 import lombok.Getter;
@@ -18,17 +24,27 @@ import lombok.Setter;
 import lombok.ToString;
 
 @ToString
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
-@Table(name="TBL_PROFESSOR")
-@DynamicInsert	// 기본 역할에 대한 설정
-public class Professor {
+@Table(name = "TBL_PROFESSOR")
+@SequenceGenerator(name = "PROFESSOR_SEQ_GENERATOR", sequenceName = "SEQ_PROFESSOR_CODE", initialValue = 1, allocationSize = 1)
+@DynamicInsert
+public class ProfessorRegist implements Serializable {
 	
 	@Id
 	@Column(name="PROFESSOR_CODE")
+	@GeneratedValue(
+			strategy = GenerationType.SEQUENCE, generator = "PROFESSOR_SEQ_GENERATOR"
+	)
 	private Long professorCode;
+	
+	@Column(name="PROFESSOR_ID")
+	private String professorId;
+	
+	@Column(name="PROFESSOR_PASSWORD")
+	private String professorPassword;
 	
 	@Column(name="PROFESSOR_NAME")
 	private String professorName;
@@ -37,7 +53,7 @@ public class Professor {
 	private String professorPosition;
 	
 	@Column(name="PROFESSOR_HIRE_DATE")
-	private String professorHireDate;
+	private Date professorHireDate;
 	
 	@Column(name="PROFESSOR_REGIST_NUM")
 	private String professorRegistNum;
@@ -54,18 +70,17 @@ public class Professor {
 	@Column(name="PROFESSOR_EMAIL")
 	private String professorEmail;
 	
+	//@Column(name="DEPARTMENT_CODE")
 	@ManyToOne
 	@JoinColumn(name="DEPARTMENT_CODE")
 	private Department department;
-
-	public void update(String professorEmail2, String professorPhone2, String professorAddress2) {
-		
-	}
+	
+	@Column(name="MEMBER_ROLE")
+	private String memberRole;
+	
+//	//@Column(name="STUDENT_ID")
+//	@ManyToOne
+//	@JoinColumn(name="STUDENT_ID")
+//	private StudentRegist studentId;
+	
 }
-
-
-
-
-
-
-

@@ -1,4 +1,4 @@
-package com.greedy.StudyFamily.admin.service;
+package com.greedy.StudyFamily.member.Service;
 
 import javax.transaction.Transactional;
 
@@ -18,14 +18,14 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class AdminService {
+public class LoginService {
 
 	private final AdminRepository adminRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final ModelMapper modelMapper;
 	private final TokenProvider tokenProvider;
 	
-	public AdminService(AdminRepository adminRepository,  PasswordEncoder passwordEncoder, ModelMapper modelMapper,  TokenProvider tokenProvider) {
+	public LoginService(AdminRepository adminRepository,  PasswordEncoder passwordEncoder, ModelMapper modelMapper,  TokenProvider tokenProvider) {
 		this.adminRepository = adminRepository;
 		this.passwordEncoder = passwordEncoder;
 		this.modelMapper = modelMapper;
@@ -36,11 +36,11 @@ public class AdminService {
 	@Transactional
 	public LoginDto regist(LoginDto loginDto) {
 		
-		log.info("[AdminService] regist Start ====================");
-		log.info("[AdminService] loginDto : {}", loginDto);
+		log.info("[AuthService] regist Start ====================");
+		log.info("[AuthService] loginDto : {}", loginDto);
 		
 		if(adminRepository.findByLoginId(loginDto.getLoginId()) == null) {
-			log.info("[AdminService] 아이디 중복입니다.");
+			log.info("[AuthService] 아이디 중복입니다.");
 			throw new DuplicatedLoginIdException("아이디 중복됩니다.");
 		}
 		
@@ -48,7 +48,7 @@ public class AdminService {
 		loginDto.setLoginPassword(passwordEncoder.encode(loginDto.getLoginPassword()));
 		adminRepository.save(modelMapper.map(loginDto, Login.class));
 		
-		log.info("[AdminService] regist End ====================");
+		log.info("[AuthService] regist End ====================");
 		return loginDto;
 		
 	}
@@ -57,8 +57,8 @@ public class AdminService {
 	@Transactional
 	public TokenDto login(LoginDto loginDto) {
 		
-		log.info("[AdminService] login Start ====================");
-		log.info("[AdminService] loginDto : {}", loginDto);
+		log.info("[AuthService] login Start ====================");
+		log.info("[AuthService] loginDto : {}", loginDto);
 		
 		// 1. 아이디 조회. null이면 예외처리 아니면 2,3 번 진행
 		Login login = adminRepository.findByLoginId(loginDto.getLoginId())
@@ -66,7 +66,7 @@ public class AdminService {
 		
 		// 2. 비밀번호 매칭
 		if(!passwordEncoder.matches(loginDto.getLoginPassword(), login.getLoginPassword())) {
-			log.info("[AdminService] Password Match Fail!!!");
+			log.info("[AuthService] Password Match Fail!!!");
 			throw new LoginFailedException("잘못 된 아이디 또는 비밀번호입니다.");
 			
 		}
@@ -78,9 +78,9 @@ public class AdminService {
 		// 주로 Json Web Token(JWT) 사용. Header(사용중인 알고리즘, 토큰 유형), Payload(발급자, 만료시간, 제목 등), Signature(무결성 확인에 사용하는 암호화 알고리즘 통해 생성된 문자열)
 		TokenDto tokenDto = tokenProvider.generateTokenDto(modelMapper.map(login, LoginDto.class));
 		
-		log.info("[AdminService] tokenDto : {}", tokenDto);
+		log.info("[AuthService] tokenDto : {}", tokenDto);
 		
-		log.info("[AdminService] login End ====================");
+		log.info("[AuthService] login End ====================");
 		
 		return tokenDto;
 		

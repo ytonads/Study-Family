@@ -1,4 +1,4 @@
-package com.greedy.StudyFamily.admin.controller;
+package com.greedy.StudyFamily.member.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

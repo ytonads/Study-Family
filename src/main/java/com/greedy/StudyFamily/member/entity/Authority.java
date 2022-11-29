@@ -1,4 +1,4 @@
-package com.greedy.StudyFamily.admin.entity;
+package com.greedy.StudyFamily.member.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
