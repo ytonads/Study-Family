@@ -15,7 +15,6 @@ import org.hibernate.annotations.DynamicInsert;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 //@ToString
 @NoArgsConstructor
@@ -71,13 +70,16 @@ public class File {
 	
 	//강좌 수업자료 수정 용도의 메소드 정의
 	public void lectureUpdate(Long fileCode, String originName, String savedRoute,
-			String fileType, Long lectureWeek) {
+			Date startDate,  Date endtDate, String fileType, Long lectureWeek) {
 		
 		this.fileCode = fileCode;
 		this.originName = originName;
 		this.savedRoute = savedRoute;
+		this.startDate = startDate;
+		this.endDate = endtDate;
 		this.fileType = fileType;
 		this.lectureWeek = lectureWeek;
+		
 	}
 	
 	

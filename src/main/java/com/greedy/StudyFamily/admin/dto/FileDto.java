@@ -4,16 +4,17 @@ import java.sql.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class FileDto {
 
 	private Long fileCode;
@@ -32,6 +33,7 @@ public class FileDto {
 	
 	
 	//파일 업로드시 추가로 사용할 로직
+	@JsonIgnore
 	private MultipartFile lectureFiles;
 	
 	
