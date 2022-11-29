@@ -59,6 +59,9 @@ public class LectureDto {
 			 map.put("originName", lectureWeek.getFile().get(0).getOriginName());
 			 map.put("startDate", lectureWeek.getFile().get(0).getStartDate());
 			 map.put("endDate", lectureWeek.getFile().get(0).getEndDate());
+			 map.put("lectureWeekInFile", lectureWeek.getFile().get(0).getLectureWeek());
+			 map.put("fileType", lectureWeek.getFile().get(0).getFileType());
+			 map.put("fileCode", lectureWeek.getFile().get(0).getFileCode());
 			 
 			//파일을 넣기 위한 가공
 			 lectureWeek.getFile().get(0).setSavedRoute(FILE_URL + lectureWeek.getFile().get(0).getSavedRoute());
