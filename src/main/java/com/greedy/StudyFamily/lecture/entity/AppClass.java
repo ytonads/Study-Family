@@ -27,7 +27,7 @@ import lombok.ToString;
 @Table(name = "TBL_APP_CLASS")
 @SequenceGenerator(name = "APP_SEQ_CLASS", sequenceName = "SEQ_APP_CLASS_CODE", initialValue = 1, allocationSize = 1)
 @DynamicInsert
-public class AppClass /*implements Serializable */{
+public class AppClass {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "APP_SEQ_CLASS")
@@ -41,5 +41,8 @@ public class AppClass /*implements Serializable */{
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
 	private Lecture lecture;
+
+
+
 	
 }

@@ -38,7 +38,7 @@ public class MsgController {
 		this.loginRepository = loginRepository;
 	}
 	
-	//강좌코드로 수강 학생 리스트 조회 - AppClass Entity 기준!
+	/* 수강생 리스트 조회 - 완료!!! */
 	@GetMapping("/message/lectures/{lectureCode}")
 	public ResponseEntity<ResponseDto> selectStudentList(@PathVariable Long lectureCode, 
 			@RequestParam(name = "page", defaultValue="1") int page){
@@ -64,21 +64,37 @@ public class MsgController {
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "동일 강좌 학생 리스트 조회 성공", responseDtoWithPaging));
 	}
 	
+	
 
-	//쪽지 발송
-	@PostMapping("/message")
-	public ResponseEntity<ResponseDto> sendMessage(@RequestBody MsgDto msgDto){
+	/* 쪽지 발송 - 완료!!! */
+	@PostMapping("/message/send")
+	public ResponseEntity<ResponseDto> sendMessage(@RequestBody MsgDto msgDto,
+			@AuthenticationPrincipal LoginDto sender){
 		
-		
-		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "쪽지 발송 성공", msgService.write(msgDto)));
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "쪽지 발송 성공", msgService.write(msgDto, sender)));
 	}
 	
 	
-	//받은 편지함
-	@GetMapping("/message/{loginId}")
-	public ResponseEntity<ResponseDto> getReceivedMessage(@AuthenticationPrincipal LoginDto login){
+	
+	//쪽지 수신함 조회
+	@GetMapping("/message/receive")
+	public ResponseEntity<ResponseDto> getReceivedMessage(@AuthenticationPrincipal LoginDto receiver, 
+			@RequestParam(name = "page", defaultValue = "1") int page){
 		
-		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "수신함 조회 성공", msgService.receivedMessage(login)));
+		log.info("[MsgController] selectStudentList start =======================================");
+		log.info("[MsgController] page : {}", page);
+		
+		Page<MsgDto> msgDtoList = msgService.selectReceivedBox(page, receiver);
+		
+		PagingButtonInfo pageInfo = Pagenation.getPagingButtonInfo(msgDtoList);
+		
+		log.info("[MsgController] pageInfo : {}", pageInfo);
+		
+		ResponseDtoWithPaging responseDtoWithPaging = new ResponseDtoWithPaging();
+		responseDtoWithPaging.setPageInfo(pageInfo);
+		responseDtoWithPaging.setData(msgDtoList.getContent());
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "쪽지 수신함 조회 성공", responseDtoWithPaging));
 	}
 	
 	
