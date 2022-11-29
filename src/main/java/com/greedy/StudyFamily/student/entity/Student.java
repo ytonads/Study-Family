@@ -40,7 +40,7 @@ public class Student {
 	@Column(name = "STUDENT_CODE")
 	private Long studentCode;
 	
-	@Column(name = "Student_Name")
+	@Column(name = "STUDENT_NAME")
 	private String studentName;
 	
 	@Column(name = "ADMISSIONS_DAY")
@@ -71,9 +71,9 @@ public class Student {
 	@Column(name = "NATIONALITY")
 	private String nationality;
 
-//	@OneToMany
-//	@JoinColumn(name = "APP_CLASS_CODE")
-//	 private List<AppClass> appClasses;
+	@OneToMany
+	@JoinColumn(name = "APP_CLASS_CODE")
+	 private List<AppClass> appClasses;
 
 	/* 학생정보 수정 용도 메소드 정의 */
 	public void update(Long studentCode, String studentName, String admissionsDay, Department department, String studentRegistNum,
