@@ -85,6 +85,7 @@ public class SecurityConfig {
 		             .antMatchers("/api/v1/professor/**").hasAnyRole("PROFESSOR", "ADMIN")
 		             .antMatchers("/api/v1/tasks/**").hasAnyRole("STUDENT")
 		             .antMatchers("/api/v1/message/**").hasAnyRole("STUDENT", "PROFESSOR")
+		             //학생만 수강신청 가능 코드
 		             .antMatchers("/api/v1/appClass/**").hasAnyRole("STUDENT")
 		             //교수만 수업계획서 작성 가능 코드
 		             .antMatchers("/api/v1/subPlan").hasRole("PROFESSOER")
