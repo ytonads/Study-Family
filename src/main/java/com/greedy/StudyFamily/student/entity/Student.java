@@ -40,6 +40,7 @@ public class Student {
 	@Column(name = "STUDENT_CODE")
 	private Long studentCode;
 	
+	// 오타 수정
 	@Column(name = "STUDENT_NAME")
 	private String studentName;
 	
