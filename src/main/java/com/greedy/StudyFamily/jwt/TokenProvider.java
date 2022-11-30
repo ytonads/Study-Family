@@ -33,6 +33,8 @@ import lombok.extern.slf4j.Slf4j;
 public class TokenProvider {
 	
 	private static final String AUTHORITIES_KEY = "auth";
+	private static final String STUDENT_NO = "studentNo";
+	private static final String PROFESSOR_CODE = "professorCode";
 	private static final String BEARER_TYPE = "bearer";						// jwp에서 사용하는 타입
 	private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60;	// 60분
 	private final Key key;
@@ -60,6 +62,14 @@ public class TokenProvider {
 				.setSubject(login.getLoginId());
 		
 		claims.put(AUTHORITIES_KEY, roles);
+		
+		if(login.getProfessor() != null && login.getStudent() == null ) {
+			claims.put(PROFESSOR_CODE, login.getProfessor().getProfessorCode());
+		
+		} else if(login.getStudent() != null && login.getProfessor() == null) {
+			claims.put(STUDENT_NO, login.getStudent().getStudentNo());
+		
+		}
 		
 		long now = (new Date()).getTime();
 		Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);	//현재 시간 + 30분 => 토큰 만료시간

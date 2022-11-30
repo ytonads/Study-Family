@@ -20,8 +20,11 @@ import com.greedy.StudyFamily.admin.entity.File;
 import com.greedy.StudyFamily.admin.entity.Login;
 import com.greedy.StudyFamily.admin.repository.FileRepository;
 import com.greedy.StudyFamily.admin.repository.LoginRepository;
+import com.greedy.StudyFamily.lecture.dto.CourseHistoryDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
+import com.greedy.StudyFamily.lecture.entity.CourseHistory;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
+import com.greedy.StudyFamily.lecture.repository.CourseRepository;
 import com.greedy.StudyFamily.lecture.repository.LectureRepository;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
 import com.greedy.StudyFamily.professor.entity.Professor;
@@ -37,6 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class LectureService {
 
+	private final CourseRepository courseRepository;
 	private final LoginRepository loginRepository;
 	private final FileRepository fileRepository;
 	private final ProfessorRepository professorRepository;
@@ -51,13 +55,14 @@ public class LectureService {
 	private String FILE_URL;
 	
 	
-	public LectureService(LoginRepository loginRepository, FileRepository fileRepository, ProfessorRepository professorRepository, 
+	public LectureService(CourseRepository courseRepository, LoginRepository loginRepository, FileRepository fileRepository, ProfessorRepository professorRepository, 
 			LectureRepository lectureRepository, StudentRepository studentRepository, ModelMapper modelMapper) {
 		this.professorRepository = professorRepository;
 		this.lectureRepository = lectureRepository;
 		this.studentRepository = studentRepository;
 		this.fileRepository = fileRepository;
 		this.loginRepository = loginRepository;
+		this.courseRepository = courseRepository;
 		this.modelMapper = modelMapper;
 	}
 	
@@ -320,7 +325,14 @@ public class LectureService {
 
 
 
-	
+	/* 출결 상태 등록(학생) */
+	@Transactional
+	public Object courseHisotry(CourseHistoryDto courseHistoryDto) {
+		
+		courseRepository.save(modelMapper.map(courseHistoryDto, CourseHistory.class));
+		
+		return courseHistoryDto;
+	}
 
 	
 
