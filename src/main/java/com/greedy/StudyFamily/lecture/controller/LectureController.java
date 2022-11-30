@@ -20,6 +20,7 @@ import com.greedy.StudyFamily.common.ResponseDto;
 import com.greedy.StudyFamily.common.paging.Pagenation;
 import com.greedy.StudyFamily.common.paging.PagingButtonInfo;
 import com.greedy.StudyFamily.common.paging.ResponseDtoWithPaging;
+import com.greedy.StudyFamily.lecture.dto.CourseHistoryDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.service.LectureService;
 
@@ -126,6 +127,16 @@ public class LectureController {
 	public ResponseEntity<ResponseDto> updateTaskFile(@ModelAttribute FileDto fileDto){
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "과제 수정 성공", lectureService.updateTaskFile(fileDto)));
+	}
+	
+	
+	/* 출결 상태 등록(학생) */
+	@PostMapping("/courseHistory")
+	public ResponseEntity<ResponseDto> courseHisotry(@ModelAttribute CourseHistoryDto courseHistoryDto, @AuthenticationPrincipal LoginDto student){
+		
+		courseHistoryDto.setStudent(student.getStudent());
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "리뷰 작성 성공", lectureService.courseHisotry(courseHistoryDto)));
 	}
 
 	
