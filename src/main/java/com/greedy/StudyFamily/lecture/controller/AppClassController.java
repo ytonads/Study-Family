@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.greedy.StudyFamily.admin.dto.LoginDto;
 import com.greedy.StudyFamily.common.ResponseDto;
 import com.greedy.StudyFamily.lecture.dto.AppClassDto;
+import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.lecture.service.AppClassService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -45,21 +46,20 @@ public class AppClassController {
 	}
 
 	//수강취소
-	 @DeleteMapping("/appClass/delete/{appClassCode}") 
+	 @DeleteMapping("/appClass/delete/{lectureCode}") 
 	 public ResponseEntity<ResponseDto> deleteAppClass(@ModelAttribute AppClassDto appClassDto,
-			 @PathVariable("appClassCode") Long appClassCode,
+			 @PathVariable("lectureCode") Lecture lectureCode,
 			 @AuthenticationPrincipal LoginDto loginUser) {
 		 
 		appClassDto.setStudent(loginUser.getStudent());
 
 		log.info("appClassDto : {}", appClassDto);
 			
-		appClassService.deleteAppClass(appClassCode);
+		appClassService.deleteAppClass(lectureCode);
 		
 	 
-	 return ResponseEntity
-			 .noContent()
-			 .build();
+	 return ResponseEntity.ok()
+				.body(new ResponseDto(HttpStatus.OK, "수강취소 완료", null));
 	 }
 	
 	  

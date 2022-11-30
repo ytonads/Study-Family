@@ -68,23 +68,28 @@ public class AppClassService {
 	
 	 //수강취소
 	@Transactional
-	public void deleteAppClass(Long appClassCode) {
+	public void deleteAppClass(Lecture lectureCode) {
 		
 		log.info("[AppClassService] deleteAppClass Start =========================");
-		log.info("[AppClassService] appClassDto : {}", appClassCode);
+		log.info("[AppClassService] appClassDto : {}", lectureCode);
 		
 		//AppClass foundAppClass = appClassRepository.findById(appClassDto.getAppClassCode())
 		//		.orElseThrow(() -> new RuntimeException("존재하지 않는 강좌입니다."));
 		
-		AppClass foundAppClass = appClassRepository.findById(appClassCode).get();
+		AppClass foundlecture = (AppClass) appClassRepository.findByLecture(lectureCode).get();
+		
+		
+		//수강신청하면 신청인원 카운팅
+		//foundlecture.setLecturePersonnel(foundlecture.getLecturePersonnel() - 1);
+				
 		
 		//수강취소하면 신청인원 카운팅
-		Student student = studentRepository.findById(foundAppClass.getStudent().getStudentNo()).get();
-	    student.cancel(foundAppClass);
-	    Lecture lecture = lectureRepository.findById(foundAppClass.getLecture().getLectureCode()).get();
+		Student student = studentRepository.findById(foundlecture.getStudent().getStudentNo()).get();
+	    student.cancel(foundlecture);
+	    Lecture lecture = lectureRepository.findById(foundlecture.getLecture().getLectureCode()).get();
 	    lecture.cancel();
 	    
-		appClassRepository.delete(foundAppClass);
+		appClassRepository.delete(foundlecture);
 		
 		log.info("[AppClassService] deleteAppClass End =========================");
 		

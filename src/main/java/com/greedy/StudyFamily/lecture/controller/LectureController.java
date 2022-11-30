@@ -22,7 +22,6 @@ import com.greedy.StudyFamily.common.paging.PagingButtonInfo;
 import com.greedy.StudyFamily.common.paging.ResponseDtoWithPaging;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.service.LectureService;
-import com.greedy.StudyFamily.professor.dto.ProfessorDto;
 
 import lombok.extern.slf4j.Slf4j;
 

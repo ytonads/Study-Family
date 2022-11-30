@@ -32,6 +32,6 @@ public interface AppClassRepository extends JpaRepository<AppClass, Long> {
 	List<AppClass> findByStudent(Student student, Sort appClass);
 
 	//수강취소
-	Optional<AppClass> findByLecture(Long lectureCode);
+	Optional<AppClass> findByLecture(Lecture lectureCode);
 
 }
