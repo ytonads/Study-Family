@@ -136,8 +136,17 @@ public class LectureController {
 		
 		courseHistoryDto.setStudent(student.getStudent());
 		
-		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "리뷰 작성 성공", lectureService.courseHisotry(courseHistoryDto)));
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "출결 상태 등록 성공", lectureService.courseHisotry(courseHistoryDto)));
 	}
+	
+	
+	/* 출결 상태 수정(학생) */
+	@PutMapping("/courseHistory")
+	public ResponseEntity<ResponseDto> courseHisotryUpdate(@ModelAttribute CourseHistoryDto courseHistoryDto){
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "출결 상태 변경 성공", lectureService.courseHisotryUpdate(courseHistoryDto)));
+	}
+
 
 	
 }

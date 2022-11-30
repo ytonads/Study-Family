@@ -334,6 +334,24 @@ public class LectureService {
 		return courseHistoryDto;
 	}
 
+
+	/* 출결 상태 수정(학생) */
+	@Transactional
+	public CourseHistoryDto courseHisotryUpdate(CourseHistoryDto courseHistoryDto) {
+		
+		CourseHistory courseUpdate = courseRepository.findById(courseHistoryDto.getCourseCode())
+				.orElseThrow(() -> new IllegalArgumentException("해당 자료가 존재하지 않습니다. courseCode=" + courseHistoryDto.getCourseCode()));
+		
+		courseUpdate.historyUpdate(
+				courseHistoryDto.getCourseCode(),
+				courseHistoryDto.getCourseTime(),
+				courseHistoryDto.getCourseStatus()
+				);
+		courseRepository.save(courseUpdate);
+		
+		return courseHistoryDto;
+	}
+
 	
 
 

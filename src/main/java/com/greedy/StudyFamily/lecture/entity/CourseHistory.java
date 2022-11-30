@@ -49,4 +49,12 @@ public class CourseHistory {
 	private String courseStatus;	
 	
 	
+	public void historyUpdate(Long courseCode, Long courseTime, String courseStatus) {
+		
+		this.courseCode = courseCode;
+		this.courseTime = courseTime;
+		this.courseStatus = courseStatus;
+	}
+	
+	
 }
