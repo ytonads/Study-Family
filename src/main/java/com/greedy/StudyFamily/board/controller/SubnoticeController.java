@@ -24,9 +24,6 @@ import com.greedy.StudyFamily.common.ResponseDto;
 import com.greedy.StudyFamily.common.paging.Pagenation;
 import com.greedy.StudyFamily.common.paging.PagingButtonInfo;
 import com.greedy.StudyFamily.common.paging.ResponseDtoWithPaging;
-import com.greedy.StudyFamily.lecture.dto.AppClassDto;
-import com.greedy.StudyFamily.lecture.dto.LectureDto;
-import com.greedy.StudyFamily.lecture.entity.Lecture;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -80,14 +77,14 @@ public class SubnoticeController {
 	  //강좌공지 작성
 	  @PostMapping("/subnotices/make") 
 	  public ResponseEntity<ResponseDto> insertSubnotice(@RequestBody SubNoticeDto subnoticeDto, 
-			  @AuthenticationPrincipal LoginDto loginUser) {
+	  		  @AuthenticationPrincipal LoginDto loginUser) {
 
 	  log.info("subnoticeDto : {}", subnoticeDto);
 		  
 	  return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "강좌공지 작성 성공",
 	  subnoticeService.insertSubnotice(subnoticeDto, loginUser))); 
 	  }
-	 
+		
 	 
 	  //강좌공지 수정
 		@PutMapping("/subnotices/make")

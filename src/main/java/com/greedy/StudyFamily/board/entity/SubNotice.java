@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 
 import com.greedy.StudyFamily.lecture.entity.Lecture;
+import com.greedy.StudyFamily.professor.entity.Professor;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -58,6 +59,10 @@ public class SubNotice {
 	@JoinColumn(name = "LECTURE_CODE")
 	private Lecture lecture;
 
+	@ManyToOne
+	@JoinColumn(name = "PROFESSOR_CODE")
+	private Professor propessor;
+	
 	public void update(String subnoticeTitle, String content) {
 		this.subnoticeTitle = subnoticeTitle;
 		this.content = content;
