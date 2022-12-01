@@ -28,7 +28,7 @@ public interface SubnoticeRepository extends JpaRepository<SubNotice, Long>{
 	Optional<SubNotice> findBySubNoticeCode(@Param("subnoticeCode") Long subnoticeCode);
 
 	// 강좌공지 작성
-	
+	SubNoticeWrite save(SubNoticeWrite subnoticeWrite);
 
 
 }
