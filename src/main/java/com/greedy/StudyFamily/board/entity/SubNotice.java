@@ -58,10 +58,6 @@ public class SubNotice {
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
 	private Lecture lecture;
-
-	@ManyToOne
-	@JoinColumn(name = "PROFESSOR_CODE")
-	private Professor propessor;
 	
 	public void update(String subnoticeTitle, String content) {
 		this.subnoticeTitle = subnoticeTitle;

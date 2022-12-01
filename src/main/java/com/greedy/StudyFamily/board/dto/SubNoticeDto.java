@@ -18,5 +18,4 @@ public class SubNoticeDto {
 	private Date deleteDate;
 	private String status;
 	private LectureDto lecture;
-	private ProfessorDto professor;
 }
