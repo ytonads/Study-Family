@@ -79,7 +79,7 @@ public class AppClassService {
 		AppClass foundlecture = (AppClass) appClassRepository.findByLecture(lectureCode).get();
 		
 		
-		//수강신청하면 신청인원 카운팅
+		//수강취소하면 신청인원 카운팅
 		//foundlecture.setLecturePersonnel(foundlecture.getLecturePersonnel() - 1);
 				
 		
