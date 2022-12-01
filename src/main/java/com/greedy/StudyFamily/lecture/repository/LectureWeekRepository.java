@@ -15,4 +15,5 @@ public interface LectureWeekRepository extends JpaRepository<LectureWeek, Long> 
 
 
 
+
 }

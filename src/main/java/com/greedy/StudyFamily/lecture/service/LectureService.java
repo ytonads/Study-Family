@@ -17,17 +17,17 @@ import org.springframework.stereotype.Service;
 import com.greedy.StudyFamily.admin.dto.FileDto;
 import com.greedy.StudyFamily.admin.dto.LoginDto;
 import com.greedy.StudyFamily.admin.entity.File;
-import com.greedy.StudyFamily.admin.entity.Login;
 import com.greedy.StudyFamily.admin.repository.FileRepository;
 import com.greedy.StudyFamily.admin.repository.LoginRepository;
+import com.greedy.StudyFamily.lecture.dto.CourseHistoryDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
+import com.greedy.StudyFamily.lecture.entity.CourseHistory;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
+import com.greedy.StudyFamily.lecture.entity.LectureWeek;
+import com.greedy.StudyFamily.lecture.repository.CourseRepository;
 import com.greedy.StudyFamily.lecture.repository.LectureRepository;
-import com.greedy.StudyFamily.professor.dto.ProfessorDto;
-import com.greedy.StudyFamily.professor.entity.Professor;
+import com.greedy.StudyFamily.lecture.repository.LectureWeekRepository;
 import com.greedy.StudyFamily.professor.repository.ProfessorRepository;
-import com.greedy.StudyFamily.student.dto.StudentDto;
-import com.greedy.StudyFamily.student.entity.Student;
 import com.greedy.StudyFamily.student.repository.StudentRepository;
 import com.greedy.StudyFamily.util.FileUploadUtils;
 
@@ -37,6 +37,8 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class LectureService {
 
+	private final LectureWeekRepository lectureWeekRepository;
+	private final CourseRepository courseRepository;
 	private final LoginRepository loginRepository;
 	private final FileRepository fileRepository;
 	private final ProfessorRepository professorRepository;
@@ -51,13 +53,15 @@ public class LectureService {
 	private String FILE_URL;
 	
 	
-	public LectureService(LoginRepository loginRepository, FileRepository fileRepository, ProfessorRepository professorRepository, 
-			LectureRepository lectureRepository, StudentRepository studentRepository, ModelMapper modelMapper) {
+	public LectureService(CourseRepository courseRepository, LoginRepository loginRepository, FileRepository fileRepository, ProfessorRepository professorRepository, 
+			LectureRepository lectureRepository, StudentRepository studentRepository, LectureWeekRepository lectureWeekRepository, ModelMapper modelMapper) {
 		this.professorRepository = professorRepository;
 		this.lectureRepository = lectureRepository;
 		this.studentRepository = studentRepository;
 		this.fileRepository = fileRepository;
 		this.loginRepository = loginRepository;
+		this.courseRepository = courseRepository;
+		this.lectureWeekRepository = lectureWeekRepository;
 		this.modelMapper = modelMapper;
 	}
 	
@@ -101,6 +105,8 @@ public class LectureService {
 		
 		return lectureDto;
 	}
+	
+	
 
 
 	/* 수업 자료 등록(교수) - 완료!!! */
@@ -116,7 +122,8 @@ public class LectureService {
 		try {
 			replaceFileName = FileUploadUtils.saveFile(FILE_DIR, fileName, fileDto.getLectureFiles());
 			fileDto.setSavedRoute(replaceFileName);
-		
+			
+			
 			log.info("[ProductService] replaceFileName : {}", replaceFileName);
 			
 			//DB 저장
@@ -317,6 +324,41 @@ public class LectureService {
 		
 		return lectureDtoList;
 	}
+
+
+	/* 출결 상태 등록(학생) */
+	@Transactional
+	public Object courseHisotry(CourseHistoryDto courseHistoryDto) {
+		
+		courseRepository.save(modelMapper.map(courseHistoryDto, CourseHistory.class));
+			
+		return courseHistoryDto;
+	}
+
+
+	/* 출결 상태 수정(학생) */
+	@Transactional
+	public CourseHistoryDto courseHisotryUpdate(CourseHistoryDto courseHistoryDto) {
+		
+		CourseHistory courseUpdate = courseRepository.findByLectureWeek(courseHistoryDto.getLectureWeek().getLectureWeekCode());
+		
+		if(courseUpdate == null && courseUpdate.getCourseStatus() == "진행중") {
+			courseUpdate.historyUpdate(
+					courseHistoryDto.getCourseCode(),
+					courseHistoryDto.getCourseTime(),
+					courseHistoryDto.getCourseStatus(),
+					modelMapper.map(courseHistoryDto.getLectureWeek(), LectureWeek.class)
+					);
+			courseRepository.save(courseUpdate);
+		}
+		
+		return courseHistoryDto;
+	}
+
+
+
+
+	
 
 
 

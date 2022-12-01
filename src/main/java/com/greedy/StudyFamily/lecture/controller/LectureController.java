@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,9 +21,10 @@ import com.greedy.StudyFamily.common.ResponseDto;
 import com.greedy.StudyFamily.common.paging.Pagenation;
 import com.greedy.StudyFamily.common.paging.PagingButtonInfo;
 import com.greedy.StudyFamily.common.paging.ResponseDtoWithPaging;
+import com.greedy.StudyFamily.lecture.dto.CourseHistoryDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.service.LectureService;
-import com.greedy.StudyFamily.professor.dto.ProfessorDto;
+import com.greedy.StudyFamily.student.dto.StudentDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -69,6 +71,8 @@ public class LectureController {
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "교수 강좌 상세 조회 성공", lectureService.selectLectureDetailPro(lectureCode)));
 	}
+
+	
 	
 	
 	/* 수업 자료 등록(교수) - 완료!!! */
@@ -77,6 +81,7 @@ public class LectureController {
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "파일 등록 성공", lectureService.insertLectureFile(fileDto)));
 	}
+	
 	
 	
 	
@@ -128,6 +133,25 @@ public class LectureController {
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "과제 수정 성공", lectureService.updateTaskFile(fileDto)));
 	}
-
+	
+	
+	/* 출결 상태 등록(학생) */
+	@PostMapping("/courseHistory")
+	public ResponseEntity<ResponseDto> courseHisotry(@ModelAttribute CourseHistoryDto courseHistoryDto, @AuthenticationPrincipal LoginDto student){
+		
+		courseHistoryDto.setStudent(student.getStudent());
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "출결 상태 등록 성공", lectureService.courseHisotry(courseHistoryDto)));
+	}
+	
+	/* 출결 상태 수정(학생) */
+	@PutMapping("/courseHistory")
+	public ResponseEntity<ResponseDto> courseHisotryUpdate(@ModelAttribute CourseHistoryDto courseHistoryDto, @AuthenticationPrincipal LoginDto student){
+		
+		courseHistoryDto.setStudent(student.getStudent());
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "출결 상태 변경 성공", lectureService.courseHisotryUpdate(courseHistoryDto)));
+	}
+	
 	
 }

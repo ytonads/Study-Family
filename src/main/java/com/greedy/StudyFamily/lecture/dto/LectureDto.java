@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,6 +22,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LectureDto {
+	
+	private final static String FILE_URL = "http://localhost:8001/files/";
 
 	private Long lectureCode;
 	private SubjectDto subject;
@@ -38,11 +41,7 @@ public class LectureDto {
 	    return lectureWeeks.stream().map(lectureWeek -> dtoToMap(lectureWeek)).toList();
 	 }
 	 
-	 
-	@Value("${file.file-dir}")
-	private String FILE_DIR;
-	@Value("${file.file-url}")
-	private String FILE_URL;
+
 	 
 	 public Map<String, Object> dtoToMap(LectureWeekDto lectureWeek){
 		 
@@ -55,20 +54,28 @@ public class LectureDto {
 		 
 		 //file이 0이 아닐때만 가져오는 조건
 		 if(lectureWeek.getFile().size()!=0) {
+			 //파일을 넣기 위한 가공
+			 lectureWeek.getFile().get(0).setSavedRoute(FILE_URL + lectureWeek.getFile().get(0).getSavedRoute());
+			 
 			 map.put("savedRoute", lectureWeek.getFile().get(0).getSavedRoute());
 			 map.put("originName", lectureWeek.getFile().get(0).getOriginName());
 			 map.put("startDate", lectureWeek.getFile().get(0).getStartDate());
 			 map.put("endDate", lectureWeek.getFile().get(0).getEndDate());
-			 map.put("lectureWeekInFile", lectureWeek.getFile().get(0).getLectureWeek());
+			 map.put("lectureWeek", lectureWeek.getFile().get(0).getLectureWeek());
 			 map.put("fileType", lectureWeek.getFile().get(0).getFileType());
 			 map.put("fileCode", lectureWeek.getFile().get(0).getFileCode());
 			 
-			//파일을 넣기 위한 가공
-			 lectureWeek.getFile().get(0).setSavedRoute(FILE_URL + lectureWeek.getFile().get(0).getSavedRoute());
-			 
 		 }
 		 
+		 //courseHistory가 0이 아닐때만 가져온다.
+		 if(lectureWeek.getCourseHistories().size()!=0) {
+			 
+			 map.put("courseCode", lectureWeek.getCourseHistories().get(0).getCourseCode());
+			 map.put("courseStatus", lectureWeek.getCourseHistories().get(0).getCourseStatus());
+			 map.put("courseTime", lectureWeek.getCourseHistories().get(0).getCourseTime());
 
+		 }
+		 
 		 
 		 return map;
 	 }
