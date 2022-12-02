@@ -1,6 +1,9 @@
 package com.greedy.StudyFamily.professor.dto;
 
 
+import java.util.List;
+
+import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.subject.dto.DepartmentDto;
 
 import lombok.Data;
@@ -18,5 +21,7 @@ public class ProfessorDto{
 	private String professorStatus;
 	private String professorEmail;
 	private DepartmentDto department;
+	private List<LectureDto> lecture;
+	private List<ProfessorHistoryDto> professorHistory;
 	
 }

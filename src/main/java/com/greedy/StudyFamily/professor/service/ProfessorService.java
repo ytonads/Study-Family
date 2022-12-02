@@ -50,12 +50,13 @@ public class ProfessorService {
 		log.info("[ProfessorService] updateProfessor Start ===================================");
 		log.info("[ProfessorService] professorDto : {}", professorDto);
 		
-		Professor oriProfessor = professorRepository.findByProfessorCode(professorDto.getProfessorCode())
+		Professor oriProfessor = professorRepository.findById(professorDto.getProfessorCode())
 				.orElseThrow(() -> new IllegalArgumentException("해당 교수가 없습니다. professorCode = " + professorDto.getProfessorCode()));
 		
-		oriProfessor.update(professorDto.getProfessorEmail()
-				          , professorDto.getProfessorPhone()
-				          , professorDto.getProfessorAddress());
+		oriProfessor.update2(professorDto.getProfessorCode(),
+							 professorDto.getProfessorPhone(),
+							 professorDto.getProfessorAddress(),
+							 professorDto.getProfessorEmail());
 		
 		professorRepository.save(oriProfessor);
 		

@@ -1,15 +1,42 @@
 package com.greedy.StudyFamily.lecture.dto;
 
-import com.greedy.StudyFamily.student.dto.StudentDto;
+import java.util.HashMap;
+import java.util.Map;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Data
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class EvalDto {
 
+	private Long evalCode;
 	private EvalStandardDto evalStandard;
-	private StudentDto student;
-	private LectureDto lecture;
-	private Long evalGrade;
+	private String evalGrade;
+	private Long evalResult;
+	private Long evalMiddle;
+	private Long evalFinal;
+	private Long evalTask;
+	private Long evalAttend;
+	
+	@JsonIgnore
+	private AppClassDto appClass;
+
+	@JsonProperty
+	public Map<String, Object> getAppClass() {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("appClassCode", appClass.getAppClassCode());
+		
+		return map;
+	}
 	
 }

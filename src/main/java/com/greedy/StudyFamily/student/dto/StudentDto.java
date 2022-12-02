@@ -1,5 +1,8 @@
 package com.greedy.StudyFamily.student.dto;
 
+import java.util.List;
+
+import com.greedy.StudyFamily.lecture.dto.AppClassDto;
 import com.greedy.StudyFamily.subject.dto.DepartmentDto;
 
 import lombok.Data;
@@ -19,6 +22,8 @@ public class StudentDto {
 	private String studentPhone;
 	private String studentAddress;
 	private String nationality;
+	
+	private List<AppClassDto> appClasses;
 	
 	/* 추가 */
 	private SchoolStatusDto schoolStatus;
