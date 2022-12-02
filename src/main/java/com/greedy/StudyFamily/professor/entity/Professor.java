@@ -1,5 +1,7 @@
 package com.greedy.StudyFamily.professor.entity;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -36,7 +38,7 @@ public class Professor {
 	private String professorPosition;
 	
 	@Column(name="PROFESSOR_HIRE_DATE")
-	private String professorHireDate;
+	private Date professorHireDate;
 	
 	@Column(name="PROFESSOR_REGIST_NUM")
 	private String professorRegistNum;
