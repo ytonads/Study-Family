@@ -1,9 +1,12 @@
 package com.greedy.StudyFamily.student.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -80,7 +83,7 @@ public class Student {
 
 	@OneToMany(mappedBy = "student")
 	//@JoinColumn(name = "APP_CLASS_CODE")
-	 private List<AppClass> appClasses;
+	 private List<AppClass> appClasses = new ArrayList<>();
 	 
     //== 수강 취소 ==//
     public void cancel(AppClass appClass) {

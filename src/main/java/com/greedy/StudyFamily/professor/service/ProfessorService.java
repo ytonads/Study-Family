@@ -34,8 +34,8 @@ public class ProfessorService {
 		log.info("[ProfessorService] selectMyInfo Start ===========================");
 		log.info("[ProfessorService] professorCode : {}", professorCode);
 		
-		Professor professor = professorRepository.findByProfessorCode(professorCode)
-				.orElseThrow(() -> new UserNotFoundException(professorCode + "를 찾을 수 없습니다."));
+		Professor professor = professorRepository.findByProfessorCode(professorCode);
+//				.orElseThrow(() -> new UserNotFoundException(professorCode + "를 찾을 수 없습니다."))
 		
 		log.info("[ProfessorService] professor : {}", professor);
 		
