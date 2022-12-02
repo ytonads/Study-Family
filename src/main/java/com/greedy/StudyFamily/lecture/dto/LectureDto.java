@@ -53,7 +53,7 @@ public class LectureDto {
 		 //file이 0이 아닐때만 가져오는 조건
 		 if(lectureWeek.getFile().size()!=0) {
 			 //파일을 넣기 위한 가공
-			 lectureWeek.getFile().get(0).setSavedRoute("http://localhost:8001/files/" + lectureWeek.getFile().get(0).getSavedRoute());
+			 lectureWeek.getFile().get(0).setSavedRoute(FILE_URL + lectureWeek.getFile().get(0).getSavedRoute());
 			 
 			 map.put("savedRoute", lectureWeek.getFile().get(0).getSavedRoute());
 			 map.put("originName", lectureWeek.getFile().get(0).getOriginName());
