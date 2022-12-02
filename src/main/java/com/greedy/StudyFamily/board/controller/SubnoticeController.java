@@ -103,9 +103,8 @@ public class SubnoticeController {
 			
 			subnoticeService.deleteSubnotice(subnoticeCode);
 			
-			return ResponseEntity 
-					.noContent() 
-					.build();
+			return ResponseEntity.ok()
+					.body(new ResponseDto(HttpStatus.OK, "강좌 삭제 완료", null));
 		}
 		
 
