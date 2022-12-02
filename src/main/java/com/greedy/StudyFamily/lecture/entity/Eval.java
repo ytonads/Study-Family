@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -23,26 +26,52 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
+@SequenceGenerator(name = "EVAL_SEQ_GENERATOR", sequenceName = "SEQ_EVAL_CODE", initialValue = 1, allocationSize = 1)
 @Table(name = "TBL_EVAL")
 @DynamicInsert
 public class Eval implements Serializable {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EVAL_SEQ_GENERATOR")
+	@Column(name = "EVAL_CODE")
+	private Long evalCode;
+	
 	@ManyToOne
 	@JoinColumn(name = "EVAL_STANDARD_CODE")
 	private EvalStandard evalStandard;
 	
-	@Id
+	@JoinColumn(name = "APP_CLASS_CODE")
 	@ManyToOne
-	@JoinColumn(name = "STUDENT_NO")
-	private Student student;
-	
-	@Id
-	@ManyToOne
-	@JoinColumn(name = "LECTURE_CODE")
-	private Lecture lecture;
+	private AppClass appClass;
 	
 	@Column(name = "EVAL_GRADE")
-	private Long evalGrade;
+	private String evalGrade;
+	
+	@Column(name = "EVAL_RESULT")
+	private Long evalResult;
+	
+	@Column(name = "EVAL_MIDDLE")
+	private Long evalMiddle;
+	
+	@Column(name = "EVAL_FINAL")
+	private Long evalFinal;
+	
+	@Column(name = "EVAL_TASK")
+	private Long evalTask;
+	
+	@Column(name = "EVAL_ATTEND")
+	private Long evalAttend;
+	
+	public void insertEval(Long evalCode, String evalGrade, Long evalResult, Long evalMiddle,
+			              Long evalFinal, Long evalTask, Long evalAttend) {
+		
+		this.evalCode = evalCode;
+		this.evalGrade = evalGrade;
+		this.evalResult = evalResult;
+		this.evalMiddle = evalMiddle;
+		this.evalFinal = evalFinal;
+		this.evalTask = evalTask;
+		this.evalAttend = evalAttend;
+	}
 	
 }

@@ -57,7 +57,34 @@ public class Professor {
 	@JoinColumn(name="DEPARTMENT_CODE")
 	private Department department;
 
-	public void update(String professorEmail2, String professorPhone2, String professorAddress2) {
+	/* [인사관리] 교수 정보 수정 */
+	public void update(Long professorCode, String professorName, 
+			String professorPosition, Date professorHireDate,
+			String professorRegistNum, String professorPhone, 
+			String professorAddress, String professorStatus, 
+			String professorEmail, Department department) {
+		
+		this.professorAddress = professorAddress;
+		this.professorCode = professorCode;
+		this.professorEmail = professorEmail;
+		this.professorHireDate = professorHireDate;
+		this.professorName = professorName;
+		this.professorPhone = professorPhone;
+		this.professorPosition = professorPosition;
+		this.professorRegistNum = professorRegistNum;
+		this.professorStatus = professorStatus;
+		this.department = department;
+		
+	}
+	
+	/* 태익 - [교수] 개인 정보 수정 메소드 */
+	public void update2(Long professorCode, String professorPhone,String professorAddress, 
+			String professorEmail) {
+		
+		this.professorCode = professorCode;
+		this.professorPhone = professorPhone;
+		this.professorAddress = professorAddress;
+		this.professorEmail = professorEmail;
 		
 	}
 }

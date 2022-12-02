@@ -147,6 +147,11 @@ public class LectureController {
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "출결 상태 변경 성공", lectureService.courseHisotryUpdate(courseHistoryDto)));
 	}
 
-
+	/* 태익 - [교수] 강좌 목록 조회 */
+	@GetMapping("/professor/professorLectureList")
+	public ResponseEntity<ResponseDto> selectProfessorLectureList(@AuthenticationPrincipal LoginDto loginPro){
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "교수 강좌 목록 조회 성공", lectureService.selectLectureProList(loginPro)));
+	}
 	
 }

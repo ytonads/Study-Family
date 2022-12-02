@@ -6,11 +6,14 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.greedy.StudyFamily.exception.UserNotFoundException;
 import com.greedy.StudyFamily.lecture.dto.AppClassDto;
+import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.AppClass;
 import com.greedy.StudyFamily.lecture.entity.AppClassWrite;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
@@ -113,13 +116,44 @@ public class AppClassService {
 	  return appClassList; 
 	  }
 
-	 
-
-	
-	 
-
-	
-	
-	
-	
+	  /* 태익 - [교수] 해당 강좌 학생 리스트 조회 */
+		public List<AppClassDto> selectStudentListByLecture(int page, LectureDto lecture) {
+			
+			log.info("[AppClassService] selectStudentListByLecture Start =======================");
+				
+			Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("student.studentNo").descending());
+				
+			//강좌 엔티티 조회
+			Lecture findLecture = lectureRepository.findById(lecture.getLectureCode())
+					.orElseThrow(() -> new IllegalArgumentException("해당 강좌가 존재하지 않습니다. lectureCode= " + lecture.getLectureCode()));
+			
+			log.info("[AppClassService] appClassDtoList : {}", findLecture.getAppClasses());
+			
+			List<AppClassDto> appClassDtoList = findLecture.getAppClasses().stream().map(appClass -> modelMapper.map(appClass, AppClassDto.class)).toList();
+				
+			log.info("[AppClassService] selectStudentListByLecture End =======================");
+			
+			return appClassDtoList;
+		}
+		
+		/* 태익 - [교수] 학생 리스트 페이지에서 강좌 평가 */
+//		@Transactional
+//		public AppClassDto insertLectureEval(AppClassDto appClassDto) {
+//		
+//			AppClass oriEval = appClassRepository.findByLectureCode(appClassDto)
+//					.orElseThrow( () -> new IllegalArgumentException("해당 평가가 없습니다."));
+//			
+//			oriEval.insertEval(appClassDto.getEval().getEvalCode(),
+//					           appClassDto.getEval().getEvalGrade(),
+//					           appClassDto.getEval().getEvalResult(),
+//					           appClassDto.getEval().getEvalMiddle(),
+//					           appClassDto.getEval().getEvalFinal(),
+//					           appClassDto.getEval().getEvalTask(),
+//					           appClassDto.getEval().getEvalAttend());
+//			
+//			appClassRepository.save(oriEval);
+//			
+//			return appClassDto;
+//		}
+	  
 }

@@ -49,12 +49,13 @@ public class StudentService {
 		log.info("[StudentService] updateStudent Start ===================================");
 		log.info("[StudentService] studentDto : {}", studentDto);
 		
-		Student oriStudent = studentRepository.findByStudentNo(studentDto.getStudentNo())
+		Student oriStudent = studentRepository.findById(studentDto.getStudentNo())
 				.orElseThrow(() -> new IllegalArgumentException("해당 학생이 없습니다. studentNo = " + studentDto.getStudentNo()));
 
-		oriStudent.update(studentDto.getStudentEmail()
-				        , studentDto.getStudentPhone()
-				        , studentDto.getStudentAddress());
+		oriStudent.update2(studentDto.getStudentNo(),
+						   studentDto.getStudentPhone(),
+						   studentDto.getStudentAddress(),
+						   studentDto.getStudentEmail());
 		
 		studentRepository.save(oriStudent);
 		
