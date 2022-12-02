@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.greedy.StudyFamily.exception.UserNotFoundException;
 import com.greedy.StudyFamily.lecture.dto.AppClassDto;
+import com.greedy.StudyFamily.lecture.dto.AppClassesDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.AppClass;
 import com.greedy.StudyFamily.lecture.entity.AppClassWrite;
@@ -44,7 +45,7 @@ public class AppClassService {
 
 	//수강신청
 	@Transactional
-	public AppClassDto insertAppClass(AppClassDto appClassDto) {
+	public AppClassDto insertAppClass(AppClassesDto appClassDto) {
 		log.info("[AppClassService] insertAppClass Start =========================");
 		log.info("[AppClassService] appClassDto : {}", appClassDto);
 		log.info("[AppClassService] appClassDto : {}", appClassDto.getLecture().getLectureCode());
