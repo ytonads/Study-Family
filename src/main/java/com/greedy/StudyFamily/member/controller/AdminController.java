@@ -40,5 +40,19 @@ public class AdminController {
 		
 	}
 	
+	/* 진행중 코드 - 용승 */
+//	/* 3. 아이디 찾기 */	
+//	@RequestMapping("/showFindLoginId")
+//	public String showFindLoginId() {
+//		return "/auth/showFindLoginId";
+//	}
+//	
+//	@RequestMapping("/doFindLoginId")
+//	@ResponseBody
+//	public String doFindLoginId(String loginId, String registNum) {
+//	
+//		return doFindLoginId(loginId, registNum);
+//	
+//	}
 	
 }
