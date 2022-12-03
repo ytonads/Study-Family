@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.greedy.StudyFamily.admin.dto.LoginDto;
 import com.greedy.StudyFamily.common.ResponseDto;
 import com.greedy.StudyFamily.lecture.dto.SubPlanDto;
+import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.lecture.service.SubPlanService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,12 +30,12 @@ private final SubPlanService subPlanService;
 	}
 	
 	//수업계획서 목록 조회
-	@GetMapping("/subPlan/list/{planCode}")
-	public ResponseEntity<ResponseDto> selectPlanList(@PathVariable Long planCode) {
+	@GetMapping("/subPlan/list/{lectureCode}")
+	public ResponseEntity<ResponseDto> selectPlanList(@PathVariable Lecture lectureCode) {
 
 		return ResponseEntity
 				.ok()
-				.body(new ResponseDto(HttpStatus.OK, "수업계획서 조회 성공", subPlanService.selectPlanList(planCode)));
+				.body(new ResponseDto(HttpStatus.OK, "수업계획서 조회 성공", subPlanService.selectPlanList(lectureCode)));
 
 		}	
 		
