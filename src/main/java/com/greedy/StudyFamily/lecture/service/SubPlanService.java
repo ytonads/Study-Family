@@ -34,14 +34,14 @@ public class SubPlanService {
 	}
 	
 	//수업계획서 조회
-	public SubPlanDto selectPlanList(Long planCode) {
+	public SubPlanDto selectPlanList(Lecture lectureCode) {
 		
 		log.info("[subPlanService] selectPlanList Start =====================" );
-		log.info("[ProductService] planCode : {}", planCode);
+		log.info("[ProductService] lectureCode : {}", lectureCode);
 		
 		
-		 SubPlan subPlan = subPlanRepository.findByPlanCode(planCode) .orElseThrow(()
-		 -> new IllegalArgumentException("해당 수업계획서가 없습니다. planCode=" + planCode));
+		 SubPlan subPlan = subPlanRepository.findByLecture(lectureCode) 
+				 .orElseThrow(() -> new IllegalArgumentException("해당 수업계획서가 없습니다. lectureCode=" + lectureCode));
 		 SubPlanDto subPlanDto = modelMapper.map(subPlan, SubPlanDto.class);
 
 		log.info("[ProductService] subPlanDto : " + subPlanDto);
