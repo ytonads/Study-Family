@@ -1,11 +1,5 @@
 package com.greedy.StudyFamily.lecture.dto;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,5 +19,6 @@ public class EvalDto {
 	private Long evalTask;
 	private Long evalAttend;
 	private LectureDto lecture;
+	private AppClassDto appClass;
 	
 }

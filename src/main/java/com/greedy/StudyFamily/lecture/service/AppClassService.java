@@ -11,14 +11,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.greedy.StudyFamily.admin.dto.LoginDto;
 import com.greedy.StudyFamily.exception.UserNotFoundException;
 import com.greedy.StudyFamily.lecture.dto.AppClassDto;
 import com.greedy.StudyFamily.lecture.dto.AppClassesDto;
+import com.greedy.StudyFamily.lecture.dto.EvalDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.AppClass;
 import com.greedy.StudyFamily.lecture.entity.AppClassWrite;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.lecture.repository.AppClassRepository;
+import com.greedy.StudyFamily.lecture.repository.EvalRepository;
 import com.greedy.StudyFamily.lecture.repository.LectureRepository;
 import com.greedy.StudyFamily.student.entity.Student;
 import com.greedy.StudyFamily.student.repository.StudentRepository;
@@ -29,17 +32,19 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class AppClassService {
 	
+	private final EvalRepository evalRepository;
 	private final AppClassRepository appClassRepository;
 	private final LectureRepository lectureRepository;
 	private final StudentRepository studentRepository;
 	private final ModelMapper modelMapper;
 	
 	
-	public AppClassService(AppClassRepository appClassRepository, LectureRepository lectureRepository, 
+	public AppClassService(EvalRepository evalRepository, AppClassRepository appClassRepository, LectureRepository lectureRepository, 
 			StudentRepository studentRepository, ModelMapper modelMapper) {
 		this.appClassRepository = appClassRepository;
 		this.lectureRepository = lectureRepository;
 		this.studentRepository = studentRepository;
+		this.evalRepository = evalRepository;
 		this.modelMapper = modelMapper;
 	}
 
@@ -108,6 +113,9 @@ public class AppClassService {
 	  
 	  return appClassList; 
 	  }
+	  
+	  
+	  
 
 	  /* 태익 - [교수] 해당 강좌 학생 리스트 조회 */
 		public List<AppClassDto> selectStudentListByLecture(int page, LectureDto lecture) {
@@ -127,6 +135,27 @@ public class AppClassService {
 			log.info("[AppClassService] selectStudentListByLecture End =======================");
 			
 			return appClassDtoList;
+		}
+		
+		
+		
+		/* 태익 - [교수] 학생 리스트 페이지에서 강좌 평가 */
+		public EvalDto insertLectureEval(EvalDto evalDto, Long lectureCode) {
+		
+			Eval updateEval = evalRepository.findByEvalCodeAndLecture(lectureCode, evalDto.getEvalCode());
+
+			updateEval.setEvalCode(evalDto.getEvalCode());
+			updateEval.getLecture().setLectureCode(evalDto.getLecture().getLectureCode());
+			updateEval.setEvalMiddle(evalDto.getEvalMiddle());
+			updateEval.setEvalFinal(evalDto.getEvalFinal());
+			updateEval.setEvalTask(evalDto.getEvalTask());
+			updateEval.setEvalAttend(evalDto.getEvalAttend());
+//			updateEval.getLecture().getProfessor().setProfessorCode(evalDto.getLecture().getProfessor().getProfessorCode());
+			
+			evalRepository.save(updateEval);
+			
+			
+			return evalDto;
 		}
 	  
 }

@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LectureDto {
+public class LectureDto  {
 	
 	private final static String FILE_URL = "http://localhost:8001/files/";
 
@@ -38,6 +38,10 @@ public class LectureDto {
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("professorCode", professor.getProfessorCode());
+		map.put("professorName", professor.getProfessorName());
+		map.put("professorPhone", professor.getProfessorPhone());
+		map.put("professorPosition", professor.getProfessorPosition());
+		map.put("professorEmail", professor.getProfessorEmail());
 		
 		return map;
 	}
