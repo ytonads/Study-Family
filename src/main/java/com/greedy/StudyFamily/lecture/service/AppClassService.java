@@ -15,13 +15,13 @@ import org.springframework.stereotype.Service;
 import com.greedy.StudyFamily.exception.UserNotFoundException;
 import com.greedy.StudyFamily.lecture.dto.AppClassDto;
 import com.greedy.StudyFamily.lecture.dto.EvalDto;
+import com.greedy.StudyFamily.lecture.dto.AppClassesDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.AppClass;
 import com.greedy.StudyFamily.lecture.entity.AppClassWrite;
 import com.greedy.StudyFamily.lecture.entity.Eval;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.lecture.repository.AppClassRepository;
-import com.greedy.StudyFamily.lecture.repository.EvalRepository;
 import com.greedy.StudyFamily.lecture.repository.LectureRepository;
 import com.greedy.StudyFamily.student.entity.Student;
 import com.greedy.StudyFamily.student.repository.StudentRepository;
@@ -34,23 +34,21 @@ public class AppClassService {
 	
 	private final AppClassRepository appClassRepository;
 	private final LectureRepository lectureRepository;
-	private final EvalRepository evalRepository;
 	private final StudentRepository studentRepository;
 	private final ModelMapper modelMapper;
 	
 	
 	public AppClassService(AppClassRepository appClassRepository, LectureRepository lectureRepository, 
-			StudentRepository studentRepository, EvalRepository evalRepository, ModelMapper modelMapper) {
+			StudentRepository studentRepository, ModelMapper modelMapper) {
 		this.appClassRepository = appClassRepository;
 		this.lectureRepository = lectureRepository;
-		this.evalRepository = evalRepository;
 		this.studentRepository = studentRepository;
 		this.modelMapper = modelMapper;
 	}
 
 	//수강신청
 	@Transactional
-	public AppClassDto insertAppClass(AppClassDto appClassDto) {
+	public AppClassDto insertAppClass(AppClassesDto appClassDto) {
 		log.info("[AppClassService] insertAppClass Start =========================");
 		log.info("[AppClassService] appClassDto : {}", appClassDto);
 		log.info("[AppClassService] appClassDto : {}", appClassDto.getLecture().getLectureCode());

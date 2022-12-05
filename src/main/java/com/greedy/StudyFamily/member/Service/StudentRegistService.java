@@ -68,6 +68,8 @@ public class StudentRegistService {
 		Login login = modelMapper.map(loginDto, Login.class);
 		login.setStudent(student);
 		
+		login.setMemberRole("ROLE_STUDENT");
+		
 		adminRepository.save(login);
 		
 		log.info("[LoginService] login End ====================");

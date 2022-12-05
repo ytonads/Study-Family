@@ -6,15 +6,22 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+//github.com/ytonads/Study-Family.git
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+//github.com/ytonads/Study-Family.git
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
 import com.greedy.StudyFamily.lecture.entity.Lecture;
+import com.greedy.StudyFamily.subject.dto.DepartmentDto;
+//github.com/ytonads/Study-Family.git
 import com.greedy.StudyFamily.subject.entity.Department;
 
 import lombok.Getter;
@@ -27,11 +34,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
+@SequenceGenerator(name = "PROFESSOR_SEQ_GENERATOR", sequenceName = "SEQ_PROFESSOR_CODE", initialValue = 1, allocationSize = 1)
 @Table(name="TBL_PROFESSOR")
 @DynamicInsert	// 기본 역할에 대한 설정
 public class Professor {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROFESSOR_SEQ_GENERATOR")
 	@Column(name="PROFESSOR_CODE")
 	private Long professorCode;
 	
@@ -69,23 +78,18 @@ public class Professor {
 	@OneToMany(mappedBy="professor", fetch = FetchType.LAZY)
 	private List<ProfessorHistory> professorHistory;
 
-	/* [인사관리] 교수 정보 수정 */
-	public void update(Long professorCode, String professorName, 
-			String professorPosition, Date professorHireDate,
-			String professorRegistNum, String professorPhone, 
-			String professorAddress, String professorStatus, 
-			String professorEmail, Department department) {
+	/* 교수정보 수정 용도 메소드 정의 */
+	public void update(String professorName, String professorPosition, String professorHireDate,
+			String professorRegistNum, String professorPhone, String professorAddress, String professorStatus,
+			String professorEmail, DepartmentDto department) {
 		
-		this.professorAddress = professorAddress;
-		this.professorCode = professorCode;
-		this.professorEmail = professorEmail;
-		this.professorHireDate = professorHireDate;
 		this.professorName = professorName;
-		this.professorPhone = professorPhone;
 		this.professorPosition = professorPosition;
 		this.professorRegistNum = professorRegistNum;
+		this.professorPhone = professorPhone;
+		this.professorAddress = professorAddress;
 		this.professorStatus = professorStatus;
-		this.department = department;
+		this.professorEmail = professorEmail;
 		
 	}
 	
@@ -99,6 +103,8 @@ public class Professor {
 		this.professorEmail = professorEmail;
 		
 	}
+
+
 }
 
 

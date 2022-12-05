@@ -46,7 +46,12 @@ public class AdminService {
 		
 		// 암호화하는 메서드로 암호화하고 저장함. save 통해 우리가 전달받은 dto 값을 Member 타입 엔티티로 바꾼다.
 		loginDto.setLoginPassword(passwordEncoder.encode(loginDto.getLoginPassword()));
-		adminRepository.save(modelMapper.map(loginDto, Login.class));
+		
+		Login login = modelMapper.map(loginDto, Login.class);
+		
+		login.setMemberRole("ROLE_ADMIN");
+		
+		adminRepository.save(login);
 		
 		log.info("[AdminService] regist End ====================");
 		return loginDto;

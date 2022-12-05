@@ -74,6 +74,8 @@ public class ProfessorRegistService {
 		Login login = modelMapper.map(loginDto, Login.class);
 		login.setProfessor(professor);
 		
+		login.setMemberRole("ROLE_PROFESSOR");
+		
 		adminRepository.save(login);
 	
 		log.info("[LoginService] login End ====================");

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.greedy.StudyFamily.admin.dto.LoginDto;
 import com.greedy.StudyFamily.common.ResponseDto;
 import com.greedy.StudyFamily.lecture.dto.AppClassDto;
-import com.greedy.StudyFamily.lecture.dto.EvalDto;
+import com.greedy.StudyFamily.lecture.dto.AppClassesDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.lecture.service.AppClassService;
@@ -39,7 +38,7 @@ public class AppClassController {
 
 	/* 수강신청 */
 	@PostMapping("/appClass")
-	public ResponseEntity<ResponseDto> insertAppClass(@RequestBody AppClassDto appClassDto,
+	public ResponseEntity<ResponseDto> insertAppClass(@RequestBody AppClassesDto appClassDto,
 			@AuthenticationPrincipal LoginDto loginUser) {
 
 		appClassDto.setStudent(loginUser.getStudent());
