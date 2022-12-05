@@ -1,12 +1,9 @@
 package com.greedy.StudyFamily.student.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +16,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 
 import com.greedy.StudyFamily.lecture.entity.AppClass;
+import com.greedy.StudyFamily.student.dto.SchoolStatusDto;
+import com.greedy.StudyFamily.subject.dto.DepartmentDto;
 import com.greedy.StudyFamily.subject.entity.Department;
 
 import lombok.Getter;
@@ -83,7 +82,7 @@ public class Student {
 
 	@OneToMany(mappedBy = "student")
 	//@JoinColumn(name = "APP_CLASS_CODE")
-	 private List<AppClass> appClasses = new ArrayList<>();
+	 private List<AppClass> appClasses;
 	 
     //== 수강 취소 ==//
     public void cancel(AppClass appClass) {
@@ -91,11 +90,11 @@ public class Student {
     }
 
 
-    /* 학생정보 수정 용도 메소드 정의 */
-	public void update(Long studentNo, String studentName, String admissionsDay, Department department, String studentRegistNum,
-			String grade, String gender, String studentEmail, String studentPhone, String studentAddress, String nationality, SchoolStatus schoolStatus) {
+	/* 학생정보 수정 용도 메소드 정의 */
+	public void update(String studentCode, String studentName, String admissionsDay, DepartmentDto Department, String studentRegistNum,
+			String grade, String gender, String studentEmail, String studentPhone, String studentAddress, String nationality, SchoolStatusDto SchoolStatus) {
 
-		this.studentNo = studentNo;
+		this.studentCode = studentCode;
 		this.studentName = studentName;
 		this.admissionsDay = admissionsDay;
 		this.department = department;
@@ -108,17 +107,7 @@ public class Student {
 		this.nationality = nationality;
 		this.schoolStatus = schoolStatus;
 	
-	}
-
-	/* 학생 마이페이지 개인정보 수정 메소드 */
-	public void update2(Long studentNo, String studentPhone, String studentAddress, String studentEmail) {
-
-		this.studentNo = studentNo;
-		this.studentPhone = studentPhone;
-		this.studentAddress = studentAddress;
-		this.studentEmail = studentEmail;
-	
-	}
+}
 
 
 	

@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.greedy.StudyFamily.subject.dto.DepartmentDto;
 import com.greedy.StudyFamily.subject.entity.Department;
 
 import lombok.Getter;
@@ -61,4 +62,17 @@ public class SchoolNotice {
 	@JoinColumn(name = "DEPARTMENT_CODE")
 	private Department department;
 
+	
+	/* 학교 공지사항 게시판 수정용 메소드 정의 */
+	public void update(String schoolNoticeTitle, String schoolNoticeContent, String schoolNoticeState,
+			String schoolNoticeCategory, DepartmentDto Department) {
+		
+		this.schoolNoticeTitle = schoolNoticeTitle;
+		this.schoolNoticeContent = schoolNoticeContent;
+		this.schoolNoticeState = schoolNoticeState;
+		this.schoolNoticeCategory = schoolNoticeCategory;
+		this.department = department;
+	}
+	
+	
 }

@@ -69,12 +69,7 @@ public class StudentListService {
 		log.info("[StudentListService] insertStudent Start ======================================= ");
 		log.info("[StudentListService] studentDto : {}", studentDto);
 
-		try {
 		studentListRepository.save(modelMapper.map(studentDto, Student.class));
-		
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 		log.info("[StudentListService] insertStudent End ======================================= ");
 		
@@ -85,36 +80,25 @@ public class StudentListService {
 	@Transactional
 	public StudentDto updateStudent(StudentDto studentDto) {
 		
-		log.info("[StudentListService] updateStudent Start ===================================== ");
-		log.info("[StudentListService] studentDto : {}", studentDto);
+		Student foundStudent = studentListRepository.findById(studentDto.getStudentNo())
+				.orElseThrow(() -> new RuntimeException ("존재하지 않는 학생 입니다."));
 		
-		try {
-			
-			Student oriStudent = studentListRepository.findById(studentDto.getStudentNo()).orElseThrow(
-					() -> new IllegalArgumentException("해당 학생이 없습니다. studentNo=" + studentDto.getStudentNo()));
-			/* 조회한 기존 정보 수정 */
-			oriStudent.update(studentDto.getStudentCode(),
-					studentDto.getStudentName(),
-					studentDto.getAdmissionsDay(),
-					modelMapper.map(studentDto.getDepartment(), Department.class),
-					studentDto.getStudentRegistNum(),
-					studentDto.getGrade(),
-					studentDto.getGender(),
-					studentDto.getStudentEmail(),
-					studentDto.getStudentPhone(),
-					studentDto.getStudentAddress(),
-					studentDto.getNationality(),
-					modelMapper.map(studentDto.getSchoolStatus(), SchoolStatus.class));
-					
-			
-			studentListRepository.save(oriStudent);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		foundStudent.update(
+				studentDto.getStudentCode(),
+				studentDto.getStudentName(),
+				studentDto.getAdmissionsDay(),
+				studentDto.getDepartment(),
+				studentDto.getStudentRegistNum(),
+				studentDto.getGrade(),
+				studentDto.getGender(),
+				studentDto.getStudentEmail(),
+				studentDto.getStudentPhone(),
+				studentDto.getStudentAddress(),
+				studentDto.getNationality(),
+				studentDto.getSchoolStatus());
 		
-	
-		log.info("[StudentListService] updateStudent End ===================================== ");		
+		studentListRepository.save(foundStudent);
+				
 		return studentDto;
 	}
 

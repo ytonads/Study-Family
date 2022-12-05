@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,7 +65,7 @@ public class ProfessorListController {
 	
 	/* 교수 정보 등록 */
 	@PostMapping("/professor")
-	public ResponseEntity<ResponseDto> insertProfessor(@ModelAttribute ProfessorDto professorDto){
+	public ResponseEntity<ResponseDto> insertProfessor(@RequestBody ProfessorDto professorDto){
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "교수 정보 등록 완료", professorListService.insertProfessor(professorDto)));
 	}
@@ -72,9 +73,9 @@ public class ProfessorListController {
 	
 	/* 교수 정보 수정 */
 	@PutMapping("/professor")
-	public ResponseEntity<ResponseDto> updateProfessor(@ModelAttribute ProfessorDto professorDto){
+	public ResponseEntity<ResponseDto> updateProfessor(@RequestBody ProfessorDto professorDto){
 		
-		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "교수 정보 수정 완료", professorListService.updateProfessor(professorDto, null)));
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "교수 정보 수정 완료", professorListService.updateProfessor(professorDto)));
 	}
 	
 	
