@@ -1,6 +1,7 @@
 package com.greedy.StudyFamily.professor.dto;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
@@ -9,7 +10,7 @@ import com.greedy.StudyFamily.subject.dto.DepartmentDto;
 import lombok.Data;
 
 @Data
-public class ProfessorDto{
+public class ProfessorDto {
 	
 	private Long professorCode;
 	private String professorName;
