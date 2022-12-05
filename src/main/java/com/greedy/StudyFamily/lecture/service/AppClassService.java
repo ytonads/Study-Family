@@ -19,6 +19,7 @@ import com.greedy.StudyFamily.lecture.dto.EvalDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.AppClass;
 import com.greedy.StudyFamily.lecture.entity.AppClassWrite;
+import com.greedy.StudyFamily.lecture.entity.Eval;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.lecture.repository.AppClassRepository;
 import com.greedy.StudyFamily.lecture.repository.EvalRepository;

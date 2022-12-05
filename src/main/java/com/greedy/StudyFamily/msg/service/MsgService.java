@@ -74,6 +74,7 @@ public class MsgService {
 	
 
 	
+	
 	/* 쪽지 발송 - 완료!!! */
 	@Transactional
 	public MsgDto write(MsgDto msgDto, LoginDto senderDto) {
@@ -114,6 +115,18 @@ public class MsgService {
 		Page<MsgDto> receivedMsgDtoList = receivedMsgs.map(msg -> modelMapper.map(msg, MsgDto.class));
 		
 		return receivedMsgDtoList;
+	}
+
+
+	//쪽지 발신함 조회
+	public Page<MsgDto> selectSendedBox(int page, LoginDto sender) {
+
+		Pageable pageable = PageRequest.of(page - 1, 10, Sort.by("msgCode").descending());
+		
+		Page<Msg> sendeddMsgs = msgRepository.findSendedMsgs(pageable, modelMapper.map(sender, Login.class));
+		Page<MsgDto> sendedMsgDtoList = sendeddMsgs.map(msg -> modelMapper.map(msg, MsgDto.class));
+		
+		return sendedMsgDtoList;
 	}
 
 	
