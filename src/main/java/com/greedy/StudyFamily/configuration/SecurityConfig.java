@@ -83,6 +83,7 @@ public class SecurityConfig {
 		             .antMatchers("/studentauth/**").permitAll()
 		             .antMatchers("/api/v1/lectures/**").hasAnyRole("PROFESSOR")
 		             .antMatchers("/api/v1/**").hasAnyRole("STUDENT", "PROFESSOR", "ADMIN")
+		             .antMatchers("/api/info/**").hasAnyRole("STUDENT", "PROFESSOR", "ADMIN")
 		             .antMatchers("/api/v1/student/**").hasAnyRole("STUDENT")
 		             .antMatchers("/api/v1/professor/**").hasAnyRole("PROFESSOR", "ADMIN")
 		             .antMatchers("/api/v1/tasks/**").hasAnyRole("STUDENT")
