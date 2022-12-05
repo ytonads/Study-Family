@@ -29,16 +29,12 @@ import lombok.ToString;
 @SequenceGenerator(name = "EVAL_SEQ_GENERATOR", sequenceName = "SEQ_EVAL_CODE", initialValue = 1, allocationSize = 1)
 @Table(name = "TBL_EVAL")
 @DynamicInsert
-public class Eval implements Serializable {
+public class Eval {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EVAL_SEQ_GENERATOR")
 	@Column(name = "EVAL_CODE")
 	private Long evalCode;
-	
-	@ManyToOne
-	@JoinColumn(name = "EVAL_STANDARD_CODE")
-	private EvalStandard evalStandard;
 	
 	@JoinColumn(name = "APP_CLASS_CODE")
 	@ManyToOne
@@ -62,16 +58,8 @@ public class Eval implements Serializable {
 	@Column(name = "EVAL_ATTEND")
 	private Long evalAttend;
 	
-	public void insertEval(Long evalCode, String evalGrade, Long evalResult, Long evalMiddle,
-			              Long evalFinal, Long evalTask, Long evalAttend) {
-		
-		this.evalCode = evalCode;
-		this.evalGrade = evalGrade;
-		this.evalResult = evalResult;
-		this.evalMiddle = evalMiddle;
-		this.evalFinal = evalFinal;
-		this.evalTask = evalTask;
-		this.evalAttend = evalAttend;
-	}
+	@JoinColumn(name = "LECTURE_CODE")
+	@ManyToOne
+	private Lecture lecture;
 	
 }

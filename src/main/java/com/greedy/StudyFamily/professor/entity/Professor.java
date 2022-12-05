@@ -1,16 +1,20 @@
 package com.greedy.StudyFamily.professor.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.subject.entity.Department;
 
 import lombok.Getter;
@@ -58,6 +62,12 @@ public class Professor {
 	@ManyToOne
 	@JoinColumn(name="DEPARTMENT_CODE")
 	private Department department;
+	
+	@OneToMany(mappedBy="professor", fetch = FetchType.LAZY)
+	private List<Lecture> lecture;
+	
+	@OneToMany(mappedBy="professor", fetch = FetchType.LAZY)
+	private List<ProfessorHistory> professorHistory;
 
 	/* [인사관리] 교수 정보 수정 */
 	public void update(Long professorCode, String professorName, 

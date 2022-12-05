@@ -26,12 +26,12 @@ spring:
       hibernate:
         '[format_sql]': true
 
-# 이미지 저장할 위치와 응답 시 이미지 주소 설정
+# 파일 저장할 위치와 응답 시 파일 주소 설정
 file:
   # WebConfig에 세팅
   add-resource-locations: classpath:/static/files/
   add-resource-handler: /files/**
-  # ProductService에 세팅
+  # Service에 세팅
   file-dir: src/main/resources/static/files
   file-url: http://localhost:8001/files/
 

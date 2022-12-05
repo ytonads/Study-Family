@@ -2,6 +2,7 @@ package com.greedy.StudyFamily.lecture.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,14 +15,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.greedy.StudyFamily.professor.entity.Professor;
 import com.greedy.StudyFamily.subject.entity.Subject;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -61,7 +60,7 @@ public class Lecture {
 	
 	@OneToMany(mappedBy = "lectures", cascade = CascadeType.ALL)
 	private List<LectureWeek> lectureWeeks = new ArrayList<>();
-
+	
 	//== 수강 취소 ==//
     public void cancel() {
         this.lecturePersonnel--;
