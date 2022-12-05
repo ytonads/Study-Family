@@ -6,17 +6,12 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.greedy.StudyFamily.admin.entity.Login;
-import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
-import com.greedy.StudyFamily.professor.entity.Professor;
-import com.greedy.StudyFamily.student.entity.Student;
 
 public interface LectureRepository extends JpaRepository<Lecture, Long>{
 

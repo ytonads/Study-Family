@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -14,12 +13,10 @@ import org.springframework.stereotype.Service;
 
 import com.greedy.StudyFamily.exception.UserNotFoundException;
 import com.greedy.StudyFamily.lecture.dto.AppClassDto;
-import com.greedy.StudyFamily.lecture.dto.EvalDto;
 import com.greedy.StudyFamily.lecture.dto.AppClassesDto;
 import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.AppClass;
 import com.greedy.StudyFamily.lecture.entity.AppClassWrite;
-import com.greedy.StudyFamily.lecture.entity.Eval;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.lecture.repository.AppClassRepository;
 import com.greedy.StudyFamily.lecture.repository.LectureRepository;
@@ -79,17 +76,9 @@ public class AppClassService {
 		
 		log.info("[AppClassService] deleteAppClass Start =========================");
 		log.info("[AppClassService] appClassDto : {}", lectureCode);
-		
-		//AppClass foundAppClass = appClassRepository.findById(appClassDto.getAppClassCode())
-		//		.orElseThrow(() -> new RuntimeException("존재하지 않는 강좌입니다."));
-		
+
 		AppClass foundlecture = (AppClass) appClassRepository.findByLecture(lectureCode).get();
-		
-		
-		//수강취소하면 신청인원 카운팅
-		//foundlecture.setLecturePersonnel(foundlecture.getLecturePersonnel() - 1);
-				
-		
+
 		//수강취소하면 신청인원 카운팅
 		Student student = studentRepository.findById(foundlecture.getStudent().getStudentNo()).get();
 	    student.cancel(foundlecture);
