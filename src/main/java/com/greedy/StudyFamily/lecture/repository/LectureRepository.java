@@ -46,4 +46,6 @@ public interface LectureRepository extends JpaRepository<Lecture, Long>{
 	//수강신청 리스트 조회
 	Page<Lecture> findAll(Pageable pageable);
 
+
+
 }

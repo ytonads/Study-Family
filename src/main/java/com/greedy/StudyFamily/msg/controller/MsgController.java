@@ -81,7 +81,7 @@ public class MsgController {
 	public ResponseEntity<ResponseDto> getReceivedMessage(@AuthenticationPrincipal LoginDto receiver, 
 			@RequestParam(name = "page", defaultValue = "1") int page){
 		
-		log.info("[MsgController] selectStudentList start =======================================");
+		log.info("[MsgController] getReceivedMessage start =======================================");
 		log.info("[MsgController] page : {}", page);
 		
 		Page<MsgDto> msgDtoList = msgService.selectReceivedBox(page, receiver);
@@ -96,6 +96,29 @@ public class MsgController {
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "쪽지 수신함 조회 성공", responseDtoWithPaging));
 	}
+	
+	
+	//쪽지 발신함 조회
+	@GetMapping("/message/send")
+	public ResponseEntity<ResponseDto> getSendeddMessage(@AuthenticationPrincipal LoginDto sender, 
+			@RequestParam(name = "page", defaultValue = "1") int page){
+		
+		log.info("[MsgController] getSendeddMessage start =======================================");
+		log.info("[MsgController] page : {}", page);
+		
+		Page<MsgDto> msgDtoList = msgService.selectSendedBox(page, sender);
+		
+		PagingButtonInfo pageInfo = Pagenation.getPagingButtonInfo(msgDtoList);
+		
+		log.info("[MsgController] pageInfo : {}", pageInfo);
+		
+		ResponseDtoWithPaging responseDtoWithPaging = new ResponseDtoWithPaging();
+		responseDtoWithPaging.setPageInfo(pageInfo);
+		responseDtoWithPaging.setData(msgDtoList.getContent());
+		
+		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "쪽지 발신함 조회 성공", responseDtoWithPaging));
+	}
+	
 	
 	
 	

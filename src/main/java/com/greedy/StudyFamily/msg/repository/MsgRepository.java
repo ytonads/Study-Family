@@ -23,6 +23,15 @@ public interface MsgRepository extends JpaRepository<Msg, Long> {
 	Page<Msg> findReceivedMsgs(Pageable pageable, @Param("receiver") Login receiver);
 
 	
+	//쪽지 발신함 조회
+	@EntityGraph(attributePaths= {"receiver", "sender"})
+	@Query("SELECT m " +
+			"FROM Msg m " +
+			"WHERE m.sender = :sender " +
+			"AND m.deleteStatus = 'N'")
+	Page<Msg> findSendedMsgs(Pageable pageable, @Param("sender") Login sender);
+
+	
 	
 
 
