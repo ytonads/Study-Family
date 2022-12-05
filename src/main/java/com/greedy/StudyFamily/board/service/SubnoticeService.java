@@ -30,12 +30,6 @@ public class SubnoticeService {
 	private final LectureRepository lectureRepository;
 	private final ModelMapper modelMapper;
 	
-	/*
-	 * @Value("${image.image-dir}") private String IMAGE_DIR;
-	 * 
-	 * @Value("${image.image-url}") private String IMAGE_URL;
-	 */
-	
 	public SubnoticeService(SubnoticeRepository subnoticeRepository, ModelMapper modelMapper
 			,LectureRepository lectureRepository) {
 		this.subnoticeRepository = subnoticeRepository;
@@ -53,8 +47,6 @@ public class SubnoticeService {
 		
 		Page<SubNotice> subnoticeList = subnoticeRepository.findByStatus(pageable, "Y");
 		Page<SubNoticeDto> subnoticeDtoList = subnoticeList.map(subNotice -> modelMapper.map(subNotice, SubNoticeDto.class));
-		/* 클라이언트 측에서 서버에 저장 된 이미지 요청 시 필요한 주소로 가공 */
-		//subnoticeDtoList.forEach(subNotice -> subNotice.setFileCode(IMAGE_URL + subNotice.getFileCode()));
 		
 		log.info("[SubnoticeService] subnoticeDtoList : {}", subnoticeDtoList.getContent());
 		
