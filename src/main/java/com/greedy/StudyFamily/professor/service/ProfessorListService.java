@@ -13,9 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
-import com.greedy.StudyFamily.professor.dto.ProfessorHistoryDto;
 import com.greedy.StudyFamily.professor.entity.Professor;
-import com.greedy.StudyFamily.professor.entity.ProfessorHistory;
 import com.greedy.StudyFamily.professor.repository.ProfessorListRepository;
 import com.greedy.StudyFamily.subject.entity.Department;
 
@@ -71,12 +69,7 @@ public class ProfessorListService {
 		log.info("[ProfessorListService] insertProfessor Start ================================= ");
 		log.info("[ProfessorListService] professorDto : {}", professorDto);
 		
-		try {
-			professorListRepository.save(modelMapper.map(professorDto, Professor.class));
-		
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		professorListRepository.save(modelMapper.map(professorDto, Professor.class));
 				
 		log.info("[ProfessorListService] insertProfessor End ================================= ");		
 		return professorDto;
@@ -85,45 +78,29 @@ public class ProfessorListService {
 	
 	/* 교수 정보 수정 */
 	@Transactional
-	public ProfessorDto updateProfessor(ProfessorDto professorDto, List<ProfessorHistory> professorHistories) {
+	public ProfessorDto updateProfessor(ProfessorDto professorDto) {
 		
-		log.info("[ProfessorListService] updeateProfessor Start ================================= ");	
-		log.info("[ProfessorListService] updeateProfessor professorDto : {}", professorDto);	
+		Professor foundProfessor = professorListRepository.findById(professorDto.getProfessorCode())
+				.orElseThrow(() -> new RuntimeException ("존재하지 않는 교수 입니다."));
 		
-		try {
-			
-			Professor oriProfessor = professorListRepository.findById(professorDto.getProfessorCode()).orElseThrow(
-					() -> new IllegalArgumentException("해당 교수가 없습니다. professorCode=" + professorDto.getProfessorCode()));
-	
-			/* 조회한 기존 정보 수정 */
-			oriProfessor.update(professorDto.getProfessorCode(),
-					professorDto.getProfessorName(),
-					professorDto.getProfessorPosition(),
-					professorDto.getProfessorHireDate(),
-					professorDto.getProfessorRegistNum(),
-					professorDto.getProfessorPhone(),
-					professorDto.getProfessorAddress(),
-					professorDto.getProfessorStatus(),
-					professorDto.getProfessorEmail(),
-					modelMapper.map(professorDto.getDepartment(), Department.class)
-					);
-					
-			professorListRepository.save(oriProfessor);
-			
-			
-			
+		foundProfessor.update(
+				professorDto.getProfessorName(),
+				professorDto.getProfessorPosition(),
+				professorDto.getProfessorHireDate(),
+				professorDto.getProfessorRegistNum(),
+				professorDto.getProfessorPhone(),
+				professorDto.getProfessorAddress(),
+				professorDto.getProfessorStatus(),
+				professorDto.getProfessorEmail(),
+				professorDto.getDepartment());
 		
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		
+			professorListRepository.save(foundProfessor);
+				
 		log.info("[ProfessorListService] updeateProfessor End ================================= ");	
 		return professorDto;
 	
 	
 	}
-	
-	
+
 	
 }

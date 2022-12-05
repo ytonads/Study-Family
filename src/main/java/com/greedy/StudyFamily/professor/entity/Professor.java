@@ -4,13 +4,17 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.greedy.StudyFamily.subject.dto.DepartmentDto;
 import com.greedy.StudyFamily.subject.entity.Department;
 
 import lombok.Getter;
@@ -23,11 +27,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
+@SequenceGenerator(name = "PROFESSOR_SEQ_GENERATOR", sequenceName = "SEQ_PROFESSOR_CODE", initialValue = 1, allocationSize = 1)
 @Table(name="TBL_PROFESSOR")
 @DynamicInsert	// 기본 역할에 대한 설정
 public class Professor {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROFESSOR_SEQ_GENERATOR")
 	@Column(name="PROFESSOR_CODE")
 	private Long professorCode;
 	
@@ -59,36 +65,26 @@ public class Professor {
 	@JoinColumn(name="DEPARTMENT_CODE")
 	private Department department;
 
-	/* [인사관리] 교수 정보 수정 */
-	public void update(Long professorCode, String professorName, 
-			String professorPosition, Date professorHireDate,
-			String professorRegistNum, String professorPhone, 
-			String professorAddress, String professorStatus, 
-			String professorEmail, Department department) {
+	
+
+	
+	/* 교수정보 수정 용도 메소드 정의 */
+	public void update(String professorName, String professorPosition, String professorHireDate,
+			String professorRegistNum, String professorPhone, String professorAddress, String professorStatus,
+			String professorEmail, DepartmentDto department) {
 		
-		this.professorAddress = professorAddress;
-		this.professorCode = professorCode;
-		this.professorEmail = professorEmail;
-		this.professorHireDate = professorHireDate;
 		this.professorName = professorName;
-		this.professorPhone = professorPhone;
 		this.professorPosition = professorPosition;
 		this.professorRegistNum = professorRegistNum;
-		this.professorStatus = professorStatus;
-		this.department = department;
-		
-	}
-	
-	/* 태익 - [교수] 개인 정보 수정 메소드 */
-	public void update2(Long professorCode, String professorPhone,String professorAddress, 
-			String professorEmail) {
-		
-		this.professorCode = professorCode;
 		this.professorPhone = professorPhone;
 		this.professorAddress = professorAddress;
+		this.professorStatus = professorStatus;
 		this.professorEmail = professorEmail;
 		
+		
 	}
+
+
 }
 
 
