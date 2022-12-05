@@ -25,14 +25,14 @@ public class StudentController {
 	}
 	
 	/* [학생] 내 정보 조회 */
-	@GetMapping("/students/{studentNo}")
+	@GetMapping("/student/mypage/{studentNo}")
 	public ResponseEntity<ResponseDto> selectMyStudentNo(@PathVariable Long studentNo) {
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "내 정보 조회 성공", studentService.selectMyInfo(studentNo)));
 	}
 	
 	/* [학생] 내 정보 - 개인정보 수정*/
-	@PutMapping("/students/{studentNo}")
+	@PutMapping("/student/mypage/{studentNo}")
 	public ResponseEntity<ResponseDto> updateStudent(@ModelAttribute StudentDto studentDto) {
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "개인 정보 수정 성공", studentService.updateStudent(studentDto)));

@@ -18,25 +18,12 @@ import lombok.Setter;
 public class EvalDto {
 
 	private Long evalCode;
-	private EvalStandardDto evalStandard;
 	private String evalGrade;
 	private Long evalResult;
 	private Long evalMiddle;
 	private Long evalFinal;
 	private Long evalTask;
 	private Long evalAttend;
-	
-	@JsonIgnore
-	private AppClassDto appClass;
-
-	@JsonProperty
-	public Map<String, Object> getAppClass() {
-		
-		Map<String, Object> map = new HashMap<>();
-		
-		map.put("appClassCode", appClass.getAppClassCode());
-		
-		return map;
-	}
+	private LectureDto lecture;
 	
 }

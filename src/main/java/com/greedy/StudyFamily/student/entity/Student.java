@@ -89,7 +89,6 @@ public class Student {
         this.appClasses.remove(appClass);
     }
 
-
 	/* 학생정보 수정 용도 메소드 정의 */
 	public void update(String studentCode, String studentName, String admissionsDay, DepartmentDto Department, String studentRegistNum,
 			String grade, String gender, String studentEmail, String studentPhone, String studentAddress, String nationality, SchoolStatusDto SchoolStatus) {
@@ -107,8 +106,16 @@ public class Student {
 		this.nationality = nationality;
 		this.schoolStatus = schoolStatus;
 	
-}
+	}
 
+	/* 학생 마이페이지 개인정보 수정 메소드 */
+	public void update2(Long studentNo, String studentPhone, String studentAddress, String studentEmail) {
 
+		this.studentNo = studentNo;
+		this.studentPhone = studentPhone;
+		this.studentAddress = studentAddress;
+		this.studentEmail = studentEmail;
+	
+	}
 	
 }

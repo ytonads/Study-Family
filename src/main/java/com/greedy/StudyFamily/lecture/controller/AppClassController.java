@@ -96,12 +96,5 @@ public class AppClassController {
 			log.info("[AppClassController] selectLectureStudentList End =======================================");
 			return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "동일 강좌 학생 리스트 조회 성공", appClassDtoList));
 		}
-		
-		/* 태익 - [교수] 학생 리스트 페이지에서 강좌 평가 */
-//		@PutMapping("/professor/studentlist/{lectureCode}")
-//		public ResponseEntity<ResponseDto> insertLectureEval(@PathVariable Long lectureCode, @ModelAttribute AppClassDto appClassDto) {
-//			
-//			return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "강좌 평가 성공", appClassService.insertLectureEval(appClassDto)));
-//		}
 	 
 }

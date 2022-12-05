@@ -40,28 +40,6 @@ public class AppClass {
 	
 	@ManyToOne
 	@JoinColumn(name = "LECTURE_CODE")
-	private Lecture lecture;
-
-//	private Long evalCode;
-//	private String evalGrade;
-//	private Long evalResult;
-//	private Long evalMiddle;
-//	private Long evalFinal;
-//	private Long evalTask;
-//	private Long evalAttend;
-//
-//	public void insertEval(Long evalCode, String evalGrade, Long evalResult, Long evalMiddle, Long evalFinal,
-//			Long evalTask, Long evalAttend) {
-//		
-//		this.evalCode = evalCode;
-//		this.evalGrade = evalGrade;
-//		this.evalResult = evalResult;
-//		this.evalMiddle = evalMiddle;
-//		this.evalFinal = evalFinal;
-//		this.evalTask = evalTask;
-//		this.evalAttend = evalAttend;
-//		
-//	}
-	
+	private Lecture lecture;	
 	
 }

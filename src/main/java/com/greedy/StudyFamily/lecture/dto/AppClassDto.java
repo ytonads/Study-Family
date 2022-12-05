@@ -25,8 +25,6 @@ public class AppClassDto {
 	@JsonIgnore
 	private StudentDto student;
 	
-	private EvalDto eval;
-	
 	@JsonProperty("lecture")
 	public Map<String, Object> getLecture() {
 		

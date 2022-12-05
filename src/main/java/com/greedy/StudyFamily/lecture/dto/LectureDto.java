@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.greedy.StudyFamily.professor.dto.ProfessorDto;
@@ -26,10 +25,22 @@ public class LectureDto {
 	private Long lectureCode;
 	private SubjectDto subject;
 	private Long capacity;
-	private ProfessorDto professor;
 	private String lectureName;
 	private Long lecturePersonnel;
 	private String openingDate;
+	
+	@JsonIgnore
+	private ProfessorDto professor;
+	
+	@JsonProperty("professor")
+	public Map<String, Object> getProfessor() {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("professorCode", professor.getProfessorCode());
+		
+		return map;
+	}
 	
 	@JsonIgnore
 	private List<LectureWeekDto> lectureWeeks;
@@ -39,11 +50,7 @@ public class LectureDto {
 	    return lectureWeeks.stream().map(lectureWeek -> dtoToMap(lectureWeek)).toList();
 	 }
 	 
-
-	 
 	 public Map<String, Object> dtoToMap(LectureWeekDto lectureWeek){
-		 
-		 
 		 
 		 Map<String, Object> map = new HashMap<>();
 		 map.put("lectureWeekCode", lectureWeek.getLectureWeekCode());
@@ -76,6 +83,5 @@ public class LectureDto {
 		 
 		 return map;
 	 }
-	
 	
 }

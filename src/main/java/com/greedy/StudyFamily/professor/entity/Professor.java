@@ -1,20 +1,27 @@
 package com.greedy.StudyFamily.professor.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+//github.com/ytonads/Study-Family.git
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+//github.com/ytonads/Study-Family.git
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.subject.dto.DepartmentDto;
+//github.com/ytonads/Study-Family.git
 import com.greedy.StudyFamily.subject.entity.Department;
 
 import lombok.Getter;
@@ -64,10 +71,13 @@ public class Professor {
 	@ManyToOne
 	@JoinColumn(name="DEPARTMENT_CODE")
 	private Department department;
-
 	
-
+	@OneToMany(mappedBy="professor", fetch = FetchType.LAZY)
+	private List<Lecture> lecture;
 	
+	@OneToMany(mappedBy="professor", fetch = FetchType.LAZY)
+	private List<ProfessorHistory> professorHistory;
+
 	/* 교수정보 수정 용도 메소드 정의 */
 	public void update(String professorName, String professorPosition, String professorHireDate,
 			String professorRegistNum, String professorPhone, String professorAddress, String professorStatus,
@@ -81,6 +91,16 @@ public class Professor {
 		this.professorStatus = professorStatus;
 		this.professorEmail = professorEmail;
 		
+	}
+	
+	/* 태익 - [교수] 개인 정보 수정 메소드 */
+	public void update2(Long professorCode, String professorPhone,String professorAddress, 
+			String professorEmail) {
+		
+		this.professorCode = professorCode;
+		this.professorPhone = professorPhone;
+		this.professorAddress = professorAddress;
+		this.professorEmail = professorEmail;
 		
 	}
 
