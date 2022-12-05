@@ -1,5 +1,6 @@
 package com.greedy.StudyFamily.student.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -37,6 +38,7 @@ public class Student {
 	@Column(name = "STUDENT_NO")
 	private Long studentNo;
 	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STUDENT_SEQ_GENERATOR")
 	@Column(name = "STUDENT_CODE")
 	private String studentCode;
 	
@@ -77,10 +79,8 @@ public class Student {
 	@JoinColumn(name = "SCHOOL_STATUS_CODE")
 	private SchoolStatus schoolStatus;
 
-
 	@OneToMany(mappedBy = "student")
-	//@JoinColumn(name = "APP_CLASS_CODE")
-	 private List<AppClass> appClasses;
+	private List<AppClass> appClasses = new ArrayList<>();
 	 
     //== 수강 취소 ==//
     public void cancel(AppClass appClass) {

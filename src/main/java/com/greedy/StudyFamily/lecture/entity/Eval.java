@@ -36,10 +36,6 @@ public class Eval implements Serializable {
 	@Column(name = "EVAL_CODE")
 	private Long evalCode;
 	
-	@ManyToOne
-	@JoinColumn(name = "EVAL_STANDARD_CODE")
-	private EvalStandard evalStandard;
-	
 	@JoinColumn(name = "APP_CLASS_CODE")
 	@ManyToOne
 	private AppClass appClass;
@@ -61,6 +57,10 @@ public class Eval implements Serializable {
 	
 	@Column(name = "EVAL_ATTEND")
 	private Long evalAttend;
+	
+	@JoinColumn(name = "LECTURE_CODE")
+	@ManyToOne
+	private Lecture lecture;
 	
 	public void insertEval(Long evalCode, String evalGrade, Long evalResult, Long evalMiddle,
 			              Long evalFinal, Long evalTask, Long evalAttend) {

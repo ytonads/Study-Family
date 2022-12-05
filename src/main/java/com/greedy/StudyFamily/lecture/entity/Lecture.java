@@ -61,10 +61,18 @@ public class Lecture {
 	
 	@OneToMany(mappedBy = "lectures", cascade = CascadeType.ALL)
 	private List<LectureWeek> lectureWeeks = new ArrayList<>();
+	
+//	@OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL)
+//	private List<EvalStandard> evalStandard = new ArrayList<>();
 
 	//== 수강 취소 ==//
     public void cancel() {
         this.lecturePersonnel--;
     }
+    
+//    public void insertEval() {
+//    	
+//    	this.evalCode = evalCode;
+//    }
 
 }

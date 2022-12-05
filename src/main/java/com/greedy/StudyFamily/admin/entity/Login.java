@@ -47,7 +47,7 @@ public class Login implements Serializable{
 	@OneToOne
 	private Professor professor;
 	
-	@JoinColumn(name="STUDENT_CODE")
+	@JoinColumn(name="STUDENT_NO")
 	@OneToOne
 	private Student student;
 	

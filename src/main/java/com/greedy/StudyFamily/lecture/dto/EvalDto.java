@@ -18,13 +18,13 @@ import lombok.Setter;
 public class EvalDto {
 
 	private Long evalCode;
-	private EvalStandardDto evalStandard;
 	private String evalGrade;
 	private Long evalResult;
 	private Long evalMiddle;
 	private Long evalFinal;
 	private Long evalTask;
 	private Long evalAttend;
+	private LectureDto lecture;
 	
 	@JsonIgnore
 	private AppClassDto appClass;

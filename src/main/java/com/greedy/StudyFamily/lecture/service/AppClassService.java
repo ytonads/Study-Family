@@ -137,23 +137,17 @@ public class AppClassService {
 		}
 		
 		/* 태익 - [교수] 학생 리스트 페이지에서 강좌 평가 */
-//		@Transactional
-//		public AppClassDto insertLectureEval(AppClassDto appClassDto) {
-//		
-//			AppClass oriEval = appClassRepository.findByLectureCode(appClassDto)
-//					.orElseThrow( () -> new IllegalArgumentException("해당 평가가 없습니다."));
-//			
-//			oriEval.insertEval(appClassDto.getEval().getEvalCode(),
-//					           appClassDto.getEval().getEvalGrade(),
-//					           appClassDto.getEval().getEvalResult(),
-//					           appClassDto.getEval().getEvalMiddle(),
-//					           appClassDto.getEval().getEvalFinal(),
-//					           appClassDto.getEval().getEvalTask(),
-//					           appClassDto.getEval().getEvalAttend());
-//			
+		@Transactional
+		public LectureDto insertLectureEval(LectureDto lectureDto) {
+		
+			Lecture oriEval = lectureRepository.findByLectureCode(lectureDto)
+					.orElseThrow( () -> new IllegalArgumentException("해당 평가가 없습니다."));
+			
+//			oriEval.insertEval();
+			
 //			appClassRepository.save(oriEval);
-//			
-//			return appClassDto;
-//		}
+			
+			return lectureDto;
+		}
 	  
 }

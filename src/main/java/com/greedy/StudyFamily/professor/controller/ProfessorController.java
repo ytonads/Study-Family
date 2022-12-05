@@ -34,15 +34,15 @@ public class ProfessorController {
 		this.professorService = professorService;
 	}
 	
-	/* [교수] 내 정보 조회 */
-	@GetMapping("/professors/{professorCode}")
+	/* 태익 - [교수] 내 정보 조회 */
+	@GetMapping("/professor/mypage/{professorCode}")
 	public ResponseEntity<ResponseDto> selectMyProfessorCode(@PathVariable Long professorCode) {
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "내 정보 조회 성공", professorService.selectMyInfo(professorCode)));
 	}
 	
-	/* [교수] 내 정보 - 개인정보 수정 */
-	@PutMapping("/professors/{professorCode}")
+	/* 태익 - [교수] 내 정보 - 개인정보 수정 */
+	@PutMapping("/professor/mypage/{professorCode}")
 	public ResponseEntity<ResponseDto> updateProfessor(@ModelAttribute ProfessorDto professorDto) {
 		
 		return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "개인 정보 수정 성공", professorService.updateProfessor(professorDto)));

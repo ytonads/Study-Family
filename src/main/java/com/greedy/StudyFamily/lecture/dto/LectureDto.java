@@ -26,10 +26,36 @@ public class LectureDto {
 	private Long lectureCode;
 	private SubjectDto subject;
 	private Long capacity;
-	private ProfessorDto professor;
 	private String lectureName;
 	private Long lecturePersonnel;
 	private String openingDate;
+	private EvalStandardDto evalStandard;
+	
+//	@JsonIgnore
+//	private EvalStandardDto evalStandard;
+//	
+//	@JsonProperty("evalStandard")
+//	public Map<String, Object> getEvalStandard() {
+//		
+//		Map<String, Object> map = new HashMap<>();
+//		
+//		map.put("evalStandardCode", evalStandard.getEvalStandardCode());
+//		
+//		return map;
+//	}
+	
+	@JsonIgnore
+	private ProfessorDto professor;
+	
+	@JsonProperty("professor")
+	public Map<String, Object> getProfessor() {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("professorCode", professor.getProfessorCode());
+		
+		return map;
+	}
 	
 	@JsonIgnore
 	private List<LectureWeekDto> lectureWeeks;

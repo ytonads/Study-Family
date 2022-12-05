@@ -42,6 +42,12 @@ public class AppClass {
 	@JoinColumn(name = "LECTURE_CODE")
 	private Lecture lecture;
 
+	public void insertEval(Long evalCode, String evalGrade, Long evalResult, Long evalMiddle, Long evalFinal,
+			Long evalTask, Long evalAttend) {
+		
+		
+	}
+
 //	private Long evalCode;
 //	private String evalGrade;
 //	private Long evalResult;

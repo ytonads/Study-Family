@@ -98,10 +98,10 @@ public class AppClassController {
 		}
 		
 		/* 태익 - [교수] 학생 리스트 페이지에서 강좌 평가 */
-//		@PutMapping("/professor/studentlist/{lectureCode}")
-//		public ResponseEntity<ResponseDto> insertLectureEval(@PathVariable Long lectureCode, @ModelAttribute AppClassDto appClassDto) {
-//			
-//			return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "강좌 평가 성공", appClassService.insertLectureEval(appClassDto)));
-//		}
+		@PutMapping("/professor/studentlist/{lectureCode}")
+		public ResponseEntity<ResponseDto> insertLectureEval(@ModelAttribute LectureDto lectureDto) {
+			
+			return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "강좌 평가 성공", appClassService.insertLectureEval(lectureDto)));
+		}
 	 
 }

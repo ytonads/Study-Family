@@ -3,6 +3,8 @@ package com.greedy.StudyFamily.admin.service;
 
 import java.util.Arrays;
 
+import javax.transaction.Transactional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,6 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	
 	@Override
+	@Transactional
 	// 아이디 값을 전달 받아서 결과 값을 반환해주는 메서드
 	public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
 		log.info("[CustomUserDetailsService] loadUserByUsername Start ================");

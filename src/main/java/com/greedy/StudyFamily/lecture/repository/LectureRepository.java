@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.greedy.StudyFamily.admin.entity.Login;
+import com.greedy.StudyFamily.lecture.dto.LectureDto;
 import com.greedy.StudyFamily.lecture.entity.Lecture;
 import com.greedy.StudyFamily.professor.entity.Professor;
 import com.greedy.StudyFamily.student.entity.Student;
@@ -51,6 +52,9 @@ public interface LectureRepository extends JpaRepository<Lecture, Long>{
 	
 	//수강신청 리스트 조회
 	Page<Lecture> findAll(Pageable pageable);
+
+
+	Optional<Lecture> findByLectureCode(LectureDto lectureDto);
 
 
 
