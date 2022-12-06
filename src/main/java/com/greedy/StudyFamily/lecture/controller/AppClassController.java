@@ -99,15 +99,22 @@ public class AppClassController {
 			return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "동일 강좌 학생 리스트 조회 성공", appClassDtoList));
 		}
 		
+//		@GetMapping("/professor/studentlist")
+//		public ResponseEntity<ResponseDto> selectLecStuList(@PathVariable Long lectureCode,
+//				@RequestParam(name = "page", defaultValue = "1") int page) {
+//			
+//			AppClassDto appClassDto = new AppClassDto();
+//			appClassDto.set
+//			
+//			return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "평가용 학생 리스트 조회 성공", appClassDtoList));
+//		}
 		
 		/* 태익 - [교수] 학생 리스트 페이지에서 강좌 평가 */
 		@PutMapping("/professor/studentlist/{lectureCode}")
-		public ResponseEntity<ResponseDto> insertLectureEval(@AuthenticationPrincipal LoginDto loginStu, @RequestBody EvalDto evalDto, @PathVariable Long lectureCode) {
+		public ResponseEntity<ResponseDto> insertLectureEval(@RequestBody EvalDto evalDto) {
 			
-			return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "강좌 평가 성공", appClassService.insertLectureEval(evalDto, lectureCode)));
+			return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK, "강좌 평가 성공", appClassService.insertLectureEval(evalDto)));
 		}
-		
-		
 		
 	 
 }

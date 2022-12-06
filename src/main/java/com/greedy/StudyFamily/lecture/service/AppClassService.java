@@ -138,23 +138,62 @@ public class AppClassService {
 			return appClassDtoList;
 		}
 		
-		
-		
 		/* 태익 - [교수] 학생 리스트 페이지에서 강좌 평가 */
-		public EvalDto insertLectureEval(EvalDto evalDto, Long lectureCode) {
+		@Transactional
+		public EvalDto insertLectureEval(EvalDto evalDto) {
 		
-			Eval updateEval = evalRepository.findByEvalCodeAndLecture(lectureCode, evalDto.getEvalCode());
-
-			updateEval.setEvalCode(evalDto.getEvalCode());
-			updateEval.getLecture().setLectureCode(evalDto.getLecture().getLectureCode());
+			Eval updateEval = evalRepository.findById(evalDto.getEvalCode())
+					.orElseThrow(() -> new RuntimeException("존재하지 않는 평가입니다."));
+			
 			updateEval.setEvalMiddle(evalDto.getEvalMiddle());
 			updateEval.setEvalFinal(evalDto.getEvalFinal());
 			updateEval.setEvalTask(evalDto.getEvalTask());
 			updateEval.setEvalAttend(evalDto.getEvalAttend());
-//			updateEval.getLecture().getProfessor().setProfessorCode(evalDto.getLecture().getProfessor().getProfessorCode());
 			
+			long sum = 0;
+			sum = sum + evalDto.getEvalMiddle().longValue() + evalDto.getEvalFinal().longValue() + evalDto.getEvalTask().longValue() + evalDto.getEvalAttend().longValue();
+			updateEval.setEvalResult(sum);
 			evalRepository.save(updateEval);
 			
+			if(sum >= 90) {
+				updateEval.setEvalGrade("A");
+			} else if(sum < 90 && sum >= 80) {
+				updateEval.setEvalGrade("B");
+			} else if(sum < 80 && sum >= 70) {
+				updateEval.setEvalGrade("C");
+			} else if(sum < 70 && sum >= 60) {
+				updateEval.setEvalGrade("D");
+			} else {
+				updateEval.setEvalGrade("F");
+			}
+			
+//			if(sum >= 380) {
+//				updateEval.setEvalGrade("A+");
+//			} else if(sum < 380 && sum >= 360) {
+//				updateEval.setEvalGrade("A0");
+//			} else if(sum < 360 && sum >= 340) {
+//				updateEval.setEvalGrade("A-");
+//			} else if(sum < 340 && sum >= 320) {
+//				updateEval.setEvalGrade("B+");
+//			} else if(sum < 320 && sum >= 300) {
+//				updateEval.setEvalGrade("B0");
+//			} else if(sum < 300 && sum >= 280) {
+//				updateEval.setEvalGrade("B-");
+//			} else if(sum < 280 && sum >= 260) {
+//				updateEval.setEvalGrade("C+");
+//			} else if(sum < 260 && sum >= 240) {
+//				updateEval.setEvalGrade("C0");
+//			} else if(sum < 240 && sum >= 220) {
+//				updateEval.setEvalGrade("C-");
+//			} else if(sum < 220 && sum >= 200) {
+//				updateEval.setEvalGrade("D+");
+//			} else if(sum < 200 && sum >= 180) {
+//				updateEval.setEvalGrade("D0");
+//			} else if(sum < 180 && sum >= 160) {
+//				updateEval.setEvalGrade("D-");
+//			} else {
+//				updateEval.setEvalGrade("F");
+//			}
 			
 			return evalDto;
 		}

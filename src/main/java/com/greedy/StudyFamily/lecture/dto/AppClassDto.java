@@ -25,6 +25,30 @@ public class AppClassDto {
 	@JsonIgnore
 	private StudentDto student;
 	
+	@JsonIgnore
+	private List<EvalDto> eval;
+	
+	@JsonProperty
+	public List<Map<String, Object>> getEval() {
+		
+		return eval.stream().map(eval -> dtoToMap(eval)).toList();
+	}
+	
+	public Map<String, Object> dtoToMap(EvalDto eval) {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("evalCode", eval.getEvalCode());
+		map.put("evalGrade", eval.getEvalGrade());
+		map.put("evalResult", eval.getEvalResult());
+		map.put("evalMiddle", eval.getEvalMiddle());
+		map.put("evalFinal", eval.getEvalFinal());
+		map.put("evalTask", eval.getEvalTask());
+		map.put("evalAttend", eval.getEvalAttend());
+		
+		return map;
+	}
+	
 	@JsonProperty("lecture")
 	public Map<String, Object> getLecture() {
 		

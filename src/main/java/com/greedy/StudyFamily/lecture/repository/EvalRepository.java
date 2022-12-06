@@ -11,7 +11,7 @@ public interface EvalRepository extends JpaRepository<Eval, Long> {
 
 	
 	/* 학생 평가 등록하기 */
-	@EntityGraph(attributePaths= {"evalCode"})
+	@EntityGraph(attributePaths= {"evalCode", "lectureCode"})
 	@Query("SELECT e " +
 			"FROM Eval e " +
 			"WHERE e.evalCode =:evalCode " +
