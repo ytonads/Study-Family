@@ -84,6 +84,7 @@ public class ProfessorListService {
 				.orElseThrow(() -> new RuntimeException ("존재하지 않는 교수 입니다."));
 		
 		foundProfessor.update(
+				professorDto.getProfessorCode(),
 				professorDto.getProfessorName(),
 				professorDto.getProfessorPosition(),
 				professorDto.getProfessorHireDate(),

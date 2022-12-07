@@ -81,10 +81,11 @@ public class Professor {
 	private List<ProfessorHistory> professorHistory;
 
 	/* 교수정보 수정 용도 메소드 정의 */
-	public void update(String professorName, String professorPosition, String professorHireDate,
+	public void update(Long profeesorCode, String professorName, String professorPosition, String professorHireDate,
 			String professorRegistNum, String professorPhone, String professorAddress, String professorStatus,
 			String professorEmail, DepartmentDto department) {
 		
+		this.professorCode = professorCode;
 		this.professorName = professorName;
 		this.professorPosition = professorPosition;
 		this.professorRegistNum = professorRegistNum;
